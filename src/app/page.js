@@ -1,8 +1,11 @@
+"use client"
+
+import { useState } from "react"
+import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -14,8 +17,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import {
-  Users,
-  Building2,
   Zap,
   Shield,
   TrendingUp,
@@ -27,13 +28,63 @@ import { Footer } from "@/components/footer";
 import Link from "next/link";
 
 export default function ERPCompanyWebsite() {
+  const [hoveredIndustry, setHoveredIndustry] = useState(null)
+  const [hoveredProduct, setHoveredProduct] = useState(null)
+                                                                                        
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       <Navigation />
 
-      {/* Hero Section */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto text-center max-w-4xl">
+      {/* Hero Section with Bubbles */}
+      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+        {/* Blur Bubbles Container - Only in Hero */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+          <div className="absolute inset-0 md:-inset-4 lg:-inset-8 xl:-inset-12">
+            {/* Actual Blur Bubbles */}
+            {[
+              { size: 800, color: 'radial-gradient(circle, rgba(166, 41, 133, 0.8) 0%, rgba(166, 41, 133, 0.4) 15%, rgba(166, 41, 133, 0.15) 30%, rgba(166, 41, 133, 0.05) 50%, transparent 70%)', delay: 0, duration: 25, initialX: '5%', initialY: '10%' },
+              { size: 900, color: 'radial-gradient(circle, rgba(217, 176, 206, 0.7) 0%, rgba(217, 176, 206, 0.3) 15%, rgba(217, 176, 206, 0.1) 30%, rgba(217, 176, 206, 0.03) 50%, transparent 70%)', delay: 3, duration: 30, initialX: '85%', initialY: '15%' },
+              { size: 750, color: 'radial-gradient(circle, rgba(107, 44, 109, 0.75) 0%, rgba(107, 44, 109, 0.35) 15%, rgba(107, 44, 109, 0.12) 30%, rgba(107, 44, 109, 0.04) 50%, transparent 70%)', delay: 6, duration: 22, initialX: '50%', initialY: '80%' },
+              { size: 850, color: 'radial-gradient(circle, rgba(166, 41, 133, 0.65) 0%, rgba(166, 41, 133, 0.25) 15%, rgba(166, 41, 133, 0.08) 30%, rgba(166, 41, 133, 0.02) 50%, transparent 70%)', delay: 2, duration: 28, initialX: '20%', initialY: '85%' },
+              { size: 700, color: 'radial-gradient(circle, rgba(217, 176, 206, 0.7) 0%, rgba(217, 176, 206, 0.3) 15%, rgba(217, 176, 206, 0.1) 30%, rgba(217, 176, 206, 0.03) 50%, transparent 70%)', delay: 4, duration: 20, initialX: '95%', initialY: '70%' },
+              { size: 950, color: 'radial-gradient(circle, rgba(107, 44, 109, 0.6) 0%, rgba(107, 44, 109, 0.2) 15%, rgba(107, 44, 109, 0.06) 30%, rgba(107, 44, 109, 0.02) 50%, transparent 70%)', delay: 1, duration: 35, initialX: '10%', initialY: '60%' },
+              { size: 650, color: 'radial-gradient(circle, rgba(166, 41, 133, 0.75) 0%, rgba(166, 41, 133, 0.35) 15%, rgba(166, 41, 133, 0.12) 30%, rgba(166, 41, 133, 0.04) 50%, transparent 70%)', delay: 5, duration: 24, initialX: '75%', initialY: '5%' },
+              { size: 820, color: 'radial-gradient(circle, rgba(217, 176, 206, 0.65) 0%, rgba(217, 176, 206, 0.25) 15%, rgba(217, 176, 206, 0.08) 30%, rgba(217, 176, 206, 0.02) 50%, transparent 70%)', delay: 7, duration: 26, initialX: '40%', initialY: '40%' },
+              { size: 780, color: 'radial-gradient(circle, rgba(166, 41, 133, 0.7) 0%, rgba(166, 41, 133, 0.3) 15%, rgba(166, 41, 133, 0.1) 30%, rgba(166, 41, 133, 0.03) 50%, transparent 70%)', delay: 8, duration: 23, initialX: '60%', initialY: '25%' }
+            ].map((bubble, index) => (
+              <motion.div
+                key={index}
+                className="absolute rounded-full"
+                style={{
+                  width: bubble.size,
+                  height: bubble.size,
+                  background: bubble.color,
+                  left: bubble.initialX,
+                  top: bubble.initialY,
+                  zIndex: 5,
+                  filter: 'blur(120px)',
+                  opacity: 0.9,
+                }}
+                animate={{
+                  x: [0, 500, -400, 300, -200, 0],
+                  y: [0, -400, 500, -300, 200, 0],
+                  scale: [1, 1.5, 0.5, 1.3, 0.7, 1],
+                  rotate: [0, 90, 180, 270, 360],
+                }}
+                transition={{
+                  duration: bubble.duration,
+                  delay: bubble.delay,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  repeatType: "loop",
+                }}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative z-10 container text-center max-w-4xl bg-background/20 backdrop-blur-sm rounded-2xl p-8 border border-border/10 mx-4">
           <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
             Enterprise Resource Planning Solutions
           </Badge>
@@ -64,7 +115,7 @@ export default function ERPCompanyWebsite() {
       </section>
 
       {/* What We Solve Section */}
-      <section id="solutions" className="py-16 px-4 bg-muted/30">
+      <section id="solutions" className="py-16 px-4 bg-muted/10">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 font-heading">
@@ -76,37 +127,37 @@ export default function ERPCompanyWebsite() {
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card className="border-border/50 hover:shadow-lg transition-shadow">
+            <Card className="border-border/50 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:rotate-1 hover:bg-gradient-to-br hover:from-[#591E4F] hover:via-[#A62985] hover:to-[#D9B0CE] hover:text-white group relative overflow-hidden">
               <CardHeader>
-                <TrendingUp className="h-10 w-10 text-primary mb-2" />
-                <CardTitle>Fragmented Data</CardTitle>
+                <TrendingUp className="h-10 w-10 text-primary mb-2 group-hover:text-white transition-colors duration-500" />
+                <CardTitle className="group-hover:text-white transition-colors duration-500">Fragmented Data</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">
+                <p className="text-muted-foreground group-hover:text-white/90 transition-colors duration-500">
                   Unify all your business data in one centralized platform for
                   better decision-making and insights.
                 </p>
               </CardContent>
             </Card>
-            <Card className="border-border/50 hover:shadow-lg transition-shadow">
+            <Card className="border-border/50 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:rotate-1 hover:bg-gradient-to-br hover:from-[#591E4F] hover:via-[#A62985] hover:to-[#D9B0CE] hover:text-white group relative overflow-hidden">
               <CardHeader>
-                <Zap className="h-10 w-10 text-primary mb-2" />
-                <CardTitle>Manual Processes</CardTitle>
+                <Zap className="h-10 w-10 text-primary mb-2 group-hover:text-white transition-colors duration-500" />
+                <CardTitle className="group-hover:text-white transition-colors duration-500">Manual Processes</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">
+                <p className="text-muted-foreground group-hover:text-white/90 transition-colors duration-500">
                   Automate repetitive tasks and workflows to increase efficiency
                   and reduce human error.
                 </p>
               </CardContent>
             </Card>
-            <Card className="border-border/50 hover:shadow-lg transition-shadow">
+            <Card className="border-border/50 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:rotate-1 hover:bg-gradient-to-br hover:from-[#591E4F] hover:via-[#A62985] hover:to-[#D9B0CE] hover:text-white group relative overflow-hidden">
               <CardHeader>
-                <Shield className="h-10 w-10 text-primary mb-2" />
-                <CardTitle>Compliance Issues</CardTitle>
+                <Shield className="h-10 w-10 text-primary mb-2 group-hover:text-white transition-colors duration-500" />
+                <CardTitle className="group-hover:text-white transition-colors duration-500">Compliance Issues</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">
+                <p className="text-muted-foreground group-hover:text-white/90 transition-colors duration-500">
                   Ensure regulatory compliance with built-in controls and
                   automated reporting features.
                 </p>
@@ -171,7 +222,7 @@ export default function ERPCompanyWebsite() {
       </section>
 
       {/* Industries Section */}
-      <section id="industries" className="py-16 px-4 bg-muted/30">
+      <section id="industries" className="py-16 px-4 bg-muted/10">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -194,7 +245,13 @@ export default function ERPCompanyWebsite() {
             ].map((industry, index) => (
               <Card
                 key={index}
-                className="text-center p-6 border-border/50 hover:shadow-lg transition-shadow"
+                className={`text-center p-6 border-border/50 hover:shadow-lg transition-all duration-300 ${
+                  hoveredIndustry !== null && hoveredIndustry !== index 
+                    ? "opacity-30" 
+                    : "opacity-100"
+                }`}
+                onMouseEnter={() => setHoveredIndustry(index)}
+                onMouseLeave={() => setHoveredIndustry(null)}
               >
                 <CardContent className="p-0">
                   <h3 className="font-semibold">{industry}</h3>
@@ -253,7 +310,13 @@ export default function ERPCompanyWebsite() {
             ].map((product, index) => (
               <Card
                 key={index}
-                className="border-border/50 hover:shadow-lg transition-shadow"
+                className={`border-border/50 hover:shadow-lg transition-all duration-300 ${
+                  hoveredProduct !== null && hoveredProduct !== index 
+                    ? "opacity-30" 
+                    : "opacity-100"
+                }`}
+                onMouseEnter={() => setHoveredProduct(index)}
+                onMouseLeave={() => setHoveredProduct(null)}
               >
                 <CardHeader>
                   <CardTitle className="text-lg">{product.name}</CardTitle>
@@ -278,7 +341,7 @@ export default function ERPCompanyWebsite() {
       </section>
 
       {/* Advantages Section */}
-      <section id="advantages" className="py-16 px-4 bg-muted/30">
+      <section id="advantages" className="py-16 px-4 bg-muted/10">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -347,7 +410,7 @@ export default function ERPCompanyWebsite() {
 
 
       {/* FAQ Section */}
-      <section id="faq" className="py-16 px-4 bg-muted/30">
+      <section id="faq" className="py-16 px-4 bg-muted/10">
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">

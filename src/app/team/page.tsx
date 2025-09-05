@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Users, ArrowRight, ChevronDown, ChevronUp } from "lucide-react"
+import { Users, ChevronDown, ChevronUp } from "lucide-react"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 
@@ -153,20 +153,20 @@ export default function TeamPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredMembers.map((member, index) => (
-              <Card key={index} className="text-center border-border/50 hover:shadow-lg transition-shadow">
+              <Card key={index} className="text-center border-border/50 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:rotate-1 hover:bg-gradient-to-br hover:from-[#591E4F] hover:via-[#A62985] hover:to-[#D9B0CE] hover:text-white group relative overflow-hidden">
                 <CardHeader>
-                  <div className="w-20 h-20 bg-primary/10 rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <Users className="h-10 w-10 text-primary" />
+                  <div className="w-20 h-20 bg-primary/10 rounded-full mx-auto mb-4 flex items-center justify-center group-hover:bg-white/20 transition-colors duration-500">
+                    <Users className="h-10 w-10 text-primary group-hover:text-white transition-colors duration-500" />
                   </div>
-                  <CardTitle className="text-lg">{member.name}</CardTitle>
-                  <CardDescription className="text-secondary font-medium">{member.role}</CardDescription>
-                  <Badge variant="secondary" className="w-fit mx-auto">
+                  <CardTitle className="text-lg group-hover:text-white transition-colors duration-500">{member.name}</CardTitle>
+                  <CardDescription className="text-secondary font-medium group-hover:text-white/90 transition-colors duration-500">{member.role}</CardDescription>
+                  <Badge variant="secondary" className="w-fit mx-auto group-hover:bg-white/20 group-hover:text-white transition-colors duration-500">
                     {member.department}
                   </Badge>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground mb-2">{member.experience}</p>
-                  <p className="text-xs text-muted-foreground">{member.bio}</p>
+                  <p className="text-sm text-muted-foreground mb-2 group-hover:text-white/90 transition-colors duration-500">{member.experience}</p>
+                  <p className="text-xs text-muted-foreground group-hover:text-white/80 transition-colors duration-500">{member.bio}</p>
                 </CardContent>
               </Card>
             ))}

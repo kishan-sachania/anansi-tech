@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "ERPFlow - Enterprise Resource Planning Solutions",
+  title: "Anansi Tech - Enterprise Resource Planning Solutions",
   description:
     "Transform your business with our comprehensive ERP solutions designed for modern businesses. Streamline operations, boost productivity, and drive growth.",
   keywords: [
@@ -11,7 +11,12 @@ export const metadata: Metadata = {
     "Business Solutions",
     "Digital Transformation",
   ],
-  authors: [{ name: "ERPFlow Team" }],
+  authors: [{ name: "Anansi Tech Team" }],
+  icons: {
+    icon: "/anansi/Anansi-logo.png",
+    shortcut: "/anansi/Anansi-logo.png",
+    apple: "/anansi/Anansi-logo.png",
+  },
 };
 
 export const viewport = {
@@ -26,7 +31,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        {children}
+      </body>
     </html>
   );
 }

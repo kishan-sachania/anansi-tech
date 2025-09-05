@@ -186,4 +186,84 @@
   .text-lg.font-bold:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
     font-weight: 400 !important;
   }
+
+  /* Button hover effect - turn to fully rounded */
+  button:hover,
+  [role="button"]:hover,
+  .btn:hover {
+    border-radius: 9999px !important;
+    transition: border-radius 0.3s ease-in-out !important;
+  }
+
+  /* Enhanced transitions for various elements */
+  
+  /* Card hover transitions */
+  .card, [data-slot="card"] {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .card:hover, [data-slot="card"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Link hover transitions */
+  a {
+    transition: all 0.2s ease-in-out;
+  }
+  
+  a:hover {
+    transform: translateY(-1px);
+  }
+
+  /* Input and form element transitions */
+  input, textarea, select {
+    transition: all 0.2s ease-in-out;
+  }
+  
+  input:focus, textarea:focus, select:focus {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+
+  /* Icon transitions */
+  svg {
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .group:hover svg {
+    transform: scale(1.1);
+  }
+
+  /* Badge transitions */
+  [data-slot="badge"] {
+    transition: all 0.2s ease-in-out;
+  }
+  
+  [data-slot="badge"]:hover {
+    transform: scale(1.05);
+  }
+
+  /* Navigation link transitions */
+  nav a {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  nav a:hover {
+    transform: translateY(-1px);
+  }
+
+  /* Smooth page transitions */
+  * {
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  /* Image hover effects */
+  img {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  img:hover {
+    transform: scale(1.05);
+  }
 }

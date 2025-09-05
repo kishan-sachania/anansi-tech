@@ -121,23 +121,23 @@ export default function ProductsPage() {
             {filteredProducts.map((product, index) => {                                             
               const IconComponent = product.icon
               return (
-                <Card key={`${product.category}-${index}`} className="border-border/50 hover:shadow-lg transition-                                                                                                                                           duration-300">
+                <Card key={`${product.category}-${index}`} className="border-border/50 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:rotate-1 hover:bg-gradient-to-br hover:from-[#591E4F] hover:via-[#A62985] hover:to-[#D9B0CE] hover:text-white group relative overflow-hidden">
                   <CardHeader>
                     <div className="flex items-center justify-between mb-4">
-                      <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                        <IconComponent className="h-6 w-6 text-primary" />
+                      <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-colors duration-500">
+                        <IconComponent className="h-6 w-6 text-primary group-hover:text-white transition-colors duration-500" />
                       </div>
-                      <Badge variant="secondary">{product.category}</Badge>
+                      <Badge variant="secondary" className="group-hover:bg-white/20 group-hover:text-white transition-colors duration-500">{product.category}</Badge>
                     </div>
-                    <CardTitle className="text-xl">{product.name}</CardTitle>
-                    <CardDescription className="text-sm">{product.description}</CardDescription>
-                    <div className="text-sm font-semibold text-primary">{product.pricing}</div>
+                    <CardTitle className="text-xl group-hover:text-white transition-colors duration-500">{product.name}</CardTitle>
+                    <CardDescription className="text-sm group-hover:text-white/90 transition-colors duration-500">{product.description}</CardDescription>
+                    <div className="text-sm font-semibold text-primary group-hover:text-white transition-colors duration-500">{product.pricing}</div>
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-2 mb-6">
                       {product.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-center text-sm text-muted-foreground">
-                          <CheckCircle className="h-4 w-4 text-primary mr-2 flex-shrink-0" />
+                        <li key={idx} className="flex items-center text-sm text-muted-foreground group-hover:text-white/90 transition-colors duration-500">
+                          <CheckCircle className="h-4 w-4 text-primary mr-2 flex-shrink-0 group-hover:text-white transition-colors duration-500" />
                           {feature}
                         </li>
                       ))}

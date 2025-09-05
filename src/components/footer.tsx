@@ -1,4 +1,3 @@
-import { Building2 } from "lucide-react"
 import Link from "next/link"
 
 export function Footer() {
@@ -7,9 +6,12 @@ export function Footer() {
       <div className="container mx-auto max-w-6xl">
         <div className="grid md:grid-cols-4 gap-8">
           <div>
-            <div className="flex items-center space-x-2 mb-4">
-              <Building2 className="h-6 w-6 text-primary" />
-              <span className="text-lg font-bold">Anansi Tech.</span>
+            <div className="flex items-center mb-4">
+              <img 
+                src="/anansi/Anansi-full.png" 
+                alt="Anansi Tech" 
+                className="h-8 w-auto"
+              />
             </div>
             <p className="text-sm text-muted-foreground">
               Transforming businesses with intelligent ERP solutions since
@@ -117,7 +119,7 @@ export function Footer() {
           </div>
         </div>
         <div className="border-t border-border/50 mt-8 pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; 2024 ERPFlow. All rights reserved.</p>
+          <p>&copy; 2024 Anansi Tech. All rights reserved.</p>
         </div>
       </div>
     </footer>
