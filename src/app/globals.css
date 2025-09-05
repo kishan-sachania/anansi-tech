@@ -1,26 +1,189 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Custom Fonts */
+
+@font-face {
+  font-family: 'Megazine Poster';
+  src: url('/megazine-poster/MegazinePosterDEMO-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Updated color tokens to match ERP company brand colors */
+  --background: #fdfcfa; /* Cream background for a warm feel */
+  --foreground: #1f2937; /* Dark Gray for text */
+  --card: #ffffff; /* White for card backgrounds */
+  --card-foreground: #1f2937; /* Dark Gray for card text */
+  --popover: #ffffff; /* White for popovers */
+  --popover-foreground: #1f2937; /* Dark Gray for popover text */
+  --primary: #d9b0ce; /* Soft Pink for primary buttons and highlights */
+  --primary-foreground: #1f2937; /* Dark Gray for text on primary elements */
+  --secondary: #a62985; /* Deep Magenta for secondary buttons and accents */
+  --secondary-foreground: #ffffff; /* White for text on secondary elements */
+  --muted: #f8fafc; /* Light Gray for muted text */
+  --muted-foreground: #6b7280; /* Medium Gray for muted text */
+  --accent: #6b2c6d; /* Muted Magenta for accent elements */
+  --accent-foreground: #ffffff; /* White for text on accent elements */
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: #e0e0e0; /* Light Gray for borders */
+  --input: #ffffff; /* White for input fields */
+  --ring: #d9b0ce; /* Soft Pink for focus rings */
+  --chart-1: #a62985; /* Deep Magenta for charts */
+  --chart-2: #d9b0ce; /* Soft Pink for charts */
+  --chart-3: #6b2c6d; /* Muted Magenta for charts */
+  --chart-4: #f0f4f8; /* Light Gray for charts */
+  --chart-5: #c6c6c6; /* Gray for charts */
+  --radius: 0.5rem; /* Rounded corners for a friendly feel */
+  --sidebar: #ffffff; /* White for sidebar background */
+  --sidebar-foreground: #1f2937; /* Dark Gray for sidebar text */
+  --sidebar-primary: #d9b0ce; /* Soft Pink for sidebar accents */
+  --sidebar-primary-foreground: #1f2937; /* Dark Gray for sidebar text */
+  --sidebar-accent: #a62985; /* Deep Magenta for sidebar highlights */
+  --sidebar-accent-foreground: #ffffff; /* White for sidebar accent text */
+  --sidebar-border: #e0e0e0; /* Light Gray for sidebar borders */
+  --sidebar-ring: #d9b0ce; /* Soft Pink for sidebar focus rings */
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
 }
 
 @theme inline {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-heading: 'Megazine Poster', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+  
+  /* Custom font classes */
+  .font-heading {
+    font-family: 'Megazine Poster', ui-sans-serif, system-ui, sans-serif;
+  }
+  
+  .font-body {
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  }
+  
+  /* Apply heading font to all heading elements */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Megazine Poster', ui-sans-serif, system-ui, sans-serif;
+  }
+  
+  /* Reduce font weight for headings except h1 (landing page quote) */
+  h2, h3, h4, h5, h6 {
+    font-weight: 400; /* Normal weight for subheadings */
+  }
+  
+  /* Keep h1 bold for landing page quote */
+  h1 {
+    font-weight: 700;
+  }
+  
+  
+  /* Apply body font to all other text elements */
+  p, span, div, a, button, input, textarea, label {
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  }
+                                                                              
+  /* Remove bold styling from non-heading elements */
+  span.font-bold,
+  div.font-bold,
+  p.font-bold,
+  .font-semibold {
+    font-weight: 400 !important; /* Override bold/semibold classes for non-headings */
+  }
+  
+  /* Keep bold only for actual headings */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: inherit; /* Let individual heading styles control weight */
+  }
+  
+  /* Specific overrides for common bold elements that shouldn't be bold */
+  .text-4xl.font-bold:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6),
+  .text-3xl.font-bold:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6),
+  .text-2xl.font-bold:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6),
+  .text-xl.font-bold:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6),
+  .text-lg.font-bold:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
+    font-weight: 400 !important;
+  }
 }
