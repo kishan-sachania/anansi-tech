@@ -36,7 +36,7 @@ export default function ERPCompanyWebsite() {
       <Navigation />
 
       {/* Hero Section with Bubbles */}
-      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[100vh] flex items-center justify-center overflow-hidden">
         {/* Blur Bubbles Container - Only in Hero */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
           <div className="absolute inset-0 md:-inset-4 lg:-inset-8 xl:-inset-12">
