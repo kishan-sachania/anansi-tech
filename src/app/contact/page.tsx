@@ -37,16 +37,16 @@ export default function ContactPage() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="text-sm font-medium mb-2 block">First Name</label>
-                    <Input placeholder="John" />
+                    <Input placeholder="Mihir" />
                   </div>
                   <div>
                     <label className="text-sm font-medium mb-2 block">Last Name</label>
-                    <Input placeholder="Doe" />
+                    <Input placeholder="Mehta" />
                   </div>
                 </div>
                 <div>
                   <label className="text-sm font-medium mb-2 block">Email</label>
-                  <Input type="email" placeholder="john@company.com" />
+                  <Input type="email" placeholder="Mihir@company.com" />
                 </div>
                 <div>
                   <label className="text-sm font-medium mb-2 block">Company</label>
@@ -77,7 +77,7 @@ export default function ContactPage() {
                 <div className="space-y-4">
                   <div className="flex items-center space-x-3">
                     <Phone className="h-5 w-5 text-primary" />
-                    <span>+1 (555) 123-4567</span>
+                    <span>+91 9081045450</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <Mail className="h-5 w-5 text-primary" />
@@ -85,29 +85,20 @@ export default function ContactPage() {
                   </div>
                   <div className="flex items-center space-x-3">
                     <MapPin className="h-5 w-5 text-primary" />
-                    <span>123 Business Ave, Suite 100, Tech City, TC 12345</span>
+                    <span>905, RK Prime, Nana Mava Circle, 150 Feet Ring Road Rajkot Gujarat 360005 India</span>
                   </div>
                 </div>
               </div>
 
               <div>
-                <h3 className="text-xl font-semibold mb-6">Office Locations</h3>
+                <h3 className="text-xl font-semibold mb-6">OFFICE LOCATION</h3>
                 <div className="space-y-4">
                   <Card className="p-4 border-border/50">
                     <h4 className="font-medium">Headquarters</h4>
-                    <p className="text-sm text-muted-foreground">New York, NY</p>
-                    <p className="text-sm text-muted-foreground">123 Business Ave, Suite 100</p>
+                    <p className="text-sm text-muted-foreground">Rajkot Gujarat India</p>
+                    <p className="text-sm text-muted-foreground">RK Prime, Nana Mava Circle</p>
                   </Card>
-                  <Card className="p-4 border-border/50">
-                    <h4 className="font-medium">West Coast Office</h4>
-                    <p className="text-sm text-muted-foreground">San Francisco, CA</p>
-                    <p className="text-sm text-muted-foreground">456 Tech Street, Floor 5</p>
-                  </Card>
-                  <Card className="p-4 border-border/50">
-                    <h4 className="font-medium">International Office</h4>
-                    <p className="text-sm text-muted-foreground">London, UK</p>
-                    <p className="text-sm text-muted-foreground">789 Innovation Square</p>
-                  </Card>
+                  
                 </div>
               </div>
 
@@ -115,13 +106,10 @@ export default function ContactPage() {
                 <h3 className="text-xl font-semibold mb-6">Business Hours</h3>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span>Monday - Friday</span>
+                    <span>Monday - Saturday</span>
                     <span>9:00 AM - 6:00 PM EST</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Saturday</span>
-                    <span>10:00 AM - 4:00 PM EST</span>
-                  </div>
+                  
                   <div className="flex justify-between">
                     <span>Sunday</span>
                     <span>Closed</span>

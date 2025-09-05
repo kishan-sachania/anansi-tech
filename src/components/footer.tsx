@@ -15,7 +15,7 @@ export function Footer() {
             </div>
             <p className="text-sm text-muted-foreground">
               Transforming businesses with intelligent ERP solutions since
-              2010.
+              2023.
             </p>
           </div>
           <div>
