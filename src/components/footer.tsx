@@ -9,7 +9,7 @@ export function Footer() {
           <div>
             <div className="flex items-center space-x-2 mb-4">
               <Building2 className="h-6 w-6 text-primary" />
-              <span className="text-lg font-bold">ERPFlow</span>
+              <span className="text-lg font-bold">Anansi Tech.</span>
             </div>
             <p className="text-sm text-muted-foreground">
               Transforming businesses with intelligent ERP solutions since
