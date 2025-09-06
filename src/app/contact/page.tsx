@@ -17,8 +17,7 @@ import { useForm } from "react-hook-form";
 import { Form } from "@/components/ui/form";
 
 interface ContactForm {
-  firstName: string;
-  lastName: string;
+  name: string;
   email: string;
   company: string;
   phone: string;
@@ -29,8 +28,7 @@ interface ContactForm {
 export default function ContactPage() {
   const form = useForm<ContactForm>({
     defaultValues: {
-      firstName: "",
-      lastName: "",
+      name: "",
       email: "",
       company: "",
       phone: "",
@@ -39,7 +37,14 @@ export default function ContactPage() {
     },
   });
   const { register, handleSubmit } = form;
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: {
+    name: string;
+    email: string;
+    company: string;
+    phone: string;
+    subject: string;
+    message: string;
+  }) => {
     console.log(data);
     form.reset();
   };
@@ -76,19 +81,11 @@ export default function ContactPage() {
               <Form {...form}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <CardContent className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <label className="text-sm font-medium mb-2 block">
-                          First Name
-                        </label>
-                        <Input placeholder="Mihir" {...register("firstName")} />
-                      </div>
-                      <div>
-                        <label className="text-sm font-medium mb-2 block">
-                          Last Name
-                        </label>
-                        <Input placeholder="Mehta" {...register("lastName")} />
-                      </div>
+                    <div>
+                      <label className="text-sm font-medium mb-2 block">
+                        Full Name
+                      </label>
+                      <Input placeholder="Mihir Mehta" {...register("name")} />
                     </div>
                     <div>
                       <label className="text-sm font-medium mb-2 block">

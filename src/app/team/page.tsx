@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -109,20 +108,8 @@ const allTeamMembers = [
 
 export default function TeamPage() {
   const [showAll, setShowAll] = useState(false);
-  const [selectedDepartment, setSelectedDepartment] = useState("All");
-  const [imageErrors, setImageErrors] = useState(new Set());
 
-  const departments = [
-    "All",
-    ...Array.from(new Set(allTeamMembers.map((member) => member.department))),
-  ];
   const visibleMembers = showAll ? allTeamMembers : allTeamMembers.slice(0, 3);
-  const filteredMembers =
-    selectedDepartment === "All"
-      ? visibleMembers
-      : visibleMembers.filter(
-          (member) => member.department === selectedDepartment
-        );
 
   return (
     <div className="min-h-screen bg-background">
@@ -203,7 +190,7 @@ export default function TeamPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredMembers.map((member, index) => (
+            {visibleMembers.map((member, index) => (
               <Card
                 key={index}
                 className="text-center border-border/50 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:rotate-1 hover:bg-gradient-to-br hover:from-[#591E4F] hover:via-[#A62985] hover:to-[#D9B0CE] hover:text-white group relative overflow-hidden"

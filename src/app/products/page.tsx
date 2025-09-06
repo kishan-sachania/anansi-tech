@@ -13,10 +13,8 @@ import { Badge } from "@/components/ui/badge";
 import {
   CheckCircle,
   ArrowRight,
-  TrendingUp,
   Users,
   BarChart3,
-  Settings,
   Factory,
   ClipboardList,
   UserCheck,
