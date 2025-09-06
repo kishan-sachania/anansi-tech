@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useTheme } from "@/contexts/theme-context"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button";
 import {
@@ -30,7 +31,27 @@ import Link from "next/link";
 export default function ERPCompanyWebsite() {
   const [hoveredIndustry, setHoveredIndustry] = useState(null)
   const [hoveredProduct, setHoveredProduct] = useState(null)
-                                                                                        
+  const { theme } = useTheme()
+
+  // Dynamic bubble colors based on theme
+  const getBubbleColors = () => {
+    if (theme === "dark") {
+      return {
+        primary: 'rgba(217, 176, 206, 0.6)', // Softer pink for dark theme
+        secondary: 'rgba(166, 41, 133, 0.5)', // Softer magenta for dark theme
+        accent: 'rgba(107, 44, 109, 0.4)', // Softer accent for dark theme
+      }
+    } else {
+      return {
+        primary: 'rgba(166, 41, 133, 0.8)', // Bright magenta for light theme
+        secondary: 'rgba(217, 176, 206, 0.8)', // Bright pink for light theme
+        accent: 'rgba(107, 44, 109, 0.8)', // Bright accent for light theme
+      }
+    }
+  }
+
+  const colors = getBubbleColors()
+
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -40,19 +61,27 @@ export default function ERPCompanyWebsite() {
         {/* Blur Bubbles Container - Only in Hero */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
           <div className="absolute inset-0 md:-inset-4 lg:-inset-8 xl:-inset-12">
-            {/* Actual Blur Bubbles - Reduced for mobile performance */}
+            {/* Actual Blur Bubbles - More bubbles for desktop, optimized for mobile */}
             {[
-              // Desktop bubbles (6 bubbles)
-              { size: 600, color: 'radial-gradient(circle, rgba(166, 41, 133, 0.6) 0%, rgba(166, 41, 133, 0.3) 15%, rgba(166, 41, 133, 0.1) 30%, rgba(166, 41, 133, 0.03) 50%, transparent 70%)', delay: 0, duration: 20, initialX: '5%', initialY: '10%', showOnMobile: false },
-              { size: 700, color: 'radial-gradient(circle, rgba(217, 176, 206, 0.5) 0%, rgba(217, 176, 206, 0.2) 15%, rgba(217, 176, 206, 0.08) 30%, rgba(217, 176, 206, 0.02) 50%, transparent 70%)', delay: 3, duration: 25, initialX: '85%', initialY: '15%', showOnMobile: false },
-              { size: 550, color: 'radial-gradient(circle, rgba(107, 44, 109, 0.6) 0%, rgba(107, 44, 109, 0.25) 15%, rgba(107, 44, 109, 0.08) 30%, rgba(107, 44, 109, 0.03) 50%, transparent 70%)', delay: 6, duration: 18, initialX: '50%', initialY: '80%', showOnMobile: false },
-              { size: 650, color: 'radial-gradient(circle, rgba(166, 41, 133, 0.5) 0%, rgba(166, 41, 133, 0.2) 15%, rgba(166, 41, 133, 0.06) 30%, rgba(166, 41, 133, 0.02) 50%, transparent 70%)', delay: 2, duration: 22, initialX: '20%', initialY: '85%', showOnMobile: false },
-              { size: 500, color: 'radial-gradient(circle, rgba(217, 176, 206, 0.5) 0%, rgba(217, 176, 206, 0.2) 15%, rgba(217, 176, 206, 0.08) 30%, rgba(217, 176, 206, 0.02) 50%, transparent 70%)', delay: 4, duration: 16, initialX: '95%', initialY: '70%', showOnMobile: false },
-              { size: 750, color: 'radial-gradient(circle, rgba(107, 44, 109, 0.4) 0%, rgba(107, 44, 109, 0.15) 15%, rgba(107, 44, 109, 0.05) 30%, rgba(107, 44, 109, 0.01) 50%, transparent 70%)', delay: 1, duration: 28, initialX: '10%', initialY: '60%', showOnMobile: false },
-              // Mobile bubbles (3 smaller bubbles)
-              { size: 300, color: 'radial-gradient(circle, rgba(166, 41, 133, 0.4) 0%, rgba(166, 41, 133, 0.2) 15%, rgba(166, 41, 133, 0.08) 30%, rgba(166, 41, 133, 0.02) 50%, transparent 70%)', delay: 0, duration: 15, initialX: '20%', initialY: '20%', showOnMobile: true },
-              { size: 250, color: 'radial-gradient(circle, rgba(217, 176, 206, 0.3) 0%, rgba(217, 176, 206, 0.15) 15%, rgba(217, 176, 206, 0.05) 30%, rgba(217, 176, 206, 0.01) 50%, transparent 70%)', delay: 2, duration: 12, initialX: '70%', initialY: '60%', showOnMobile: true },
-              { size: 200, color: 'radial-gradient(circle, rgba(107, 44, 109, 0.3) 0%, rgba(107, 44, 109, 0.15) 15%, rgba(107, 44, 109, 0.05) 30%, rgba(107, 44, 109, 0.01) 50%, transparent 70%)', delay: 4, duration: 10, initialX: '50%', initialY: '80%', showOnMobile: true }
+              // Desktop bubbles (12 balanced bright bubbles for even distribution)
+              // Left side bubbles (6 bubbles)
+              { size: 600, color: `radial-gradient(circle, ${colors.primary} 0%, ${colors.primary.replace(/[\d.]+\)$/g, '0.5)')} 15%, ${colors.primary.replace(/[\d.]+\)$/g, '0.25)')} 30%, ${colors.primary.replace(/[\d.]+\)$/g, '0.08)')} 50%, transparent 70%)`, delay: 0, duration: 20, initialX: '10%', initialY: '15%', showOnMobile: false },
+              { size: 550, color: `radial-gradient(circle, ${colors.accent} 0%, ${colors.accent.replace(/[\d.]+\)$/g, '0.5)')} 15%, ${colors.accent.replace(/[\d.]+\)$/g, '0.25)')} 30%, ${colors.accent.replace(/[\d.]+\)$/g, '0.08)')} 50%, transparent 70%)`, delay: 6, duration: 18, initialX: '25%', initialY: '70%', showOnMobile: false },
+              { size: 650, color: `radial-gradient(circle, ${colors.primary} 0%, ${colors.primary.replace(/[\d.]+\)$/g, '0.4)')} 15%, ${colors.primary.replace(/[\d.]+\)$/g, '0.2)')} 30%, ${colors.primary.replace(/[\d.]+\)$/g, '0.06)')} 50%, transparent 70%)`, delay: 2, duration: 22, initialX: '15%', initialY: '85%', showOnMobile: false },
+              { size: 400, color: `radial-gradient(circle, ${colors.secondary} 0%, ${colors.secondary.replace(/[\d.]+\)$/g, '0.5)')} 15%, ${colors.secondary.replace(/[\d.]+\)$/g, '0.25)')} 30%, ${colors.secondary.replace(/[\d.]+\)$/g, '0.08)')} 50%, transparent 70%)`, delay: 8, duration: 14, initialX: '30%', initialY: '35%', showOnMobile: false },
+              { size: 500, color: `radial-gradient(circle, ${colors.accent} 0%, ${colors.accent.replace(/[\d.]+\)$/g, '0.4)')} 15%, ${colors.accent.replace(/[\d.]+\)$/g, '0.2)')} 30%, ${colors.accent.replace(/[\d.]+\)$/g, '0.06)')} 50%, transparent 70%)`, delay: 14, duration: 18, initialX: '20%', initialY: '50%', showOnMobile: false },
+              { size: 350, color: `radial-gradient(circle, ${colors.primary} 0%, ${colors.primary.replace(/[\d.]+\)$/g, '0.35)')} 15%, ${colors.primary.replace(/[\d.]+\)$/g, '0.15)')} 30%, ${colors.primary.replace(/[\d.]+\)$/g, '0.04)')} 50%, transparent 70%)`, delay: 12, duration: 12, initialX: '5%', initialY: '40%', showOnMobile: false },
+              // Right side bubbles (6 bubbles)
+              { size: 700, color: `radial-gradient(circle, ${colors.secondary} 0%, ${colors.secondary.replace(/[\d.]+\)$/g, '0.5)')} 15%, ${colors.secondary.replace(/[\d.]+\)$/g, '0.25)')} 30%, ${colors.secondary.replace(/[\d.]+\)$/g, '0.08)')} 50%, transparent 70%)`, delay: 3, duration: 25, initialX: '90%', initialY: '20%', showOnMobile: false },
+              { size: 500, color: `radial-gradient(circle, ${colors.accent} 0%, ${colors.accent.replace(/[\d.]+\)$/g, '0.5)')} 15%, ${colors.accent.replace(/[\d.]+\)$/g, '0.25)')} 30%, ${colors.accent.replace(/[\d.]+\)$/g, '0.08)')} 50%, transparent 70%)`, delay: 4, duration: 16, initialX: '85%', initialY: '75%', showOnMobile: false },
+              { size: 750, color: `radial-gradient(circle, ${colors.primary} 0%, ${colors.primary.replace(/[\d.]+\)$/g, '0.4)')} 15%, ${colors.primary.replace(/[\d.]+\)$/g, '0.2)')} 30%, ${colors.primary.replace(/[\d.]+\)$/g, '0.06)')} 50%, transparent 70%)`, delay: 1, duration: 28, initialX: '95%', initialY: '60%', showOnMobile: false },
+              { size: 450, color: `radial-gradient(circle, ${colors.secondary} 0%, ${colors.secondary.replace(/[\d.]+\)$/g, '0.5)')} 15%, ${colors.secondary.replace(/[\d.]+\)$/g, '0.25)')} 30%, ${colors.secondary.replace(/[\d.]+\)$/g, '0.08)')} 50%, transparent 70%)`, delay: 10, duration: 16, initialX: '75%', initialY: '45%', showOnMobile: false },
+              { size: 380, color: `radial-gradient(circle, ${colors.accent} 0%, ${colors.accent.replace(/[\d.]+\)$/g, '0.4)')} 15%, ${colors.accent.replace(/[\d.]+\)$/g, '0.2)')} 30%, ${colors.accent.replace(/[\d.]+\)$/g, '0.06)')} 50%, transparent 70%)`, delay: 16, duration: 14, initialX: '80%', initialY: '85%', showOnMobile: false },
+              { size: 420, color: `radial-gradient(circle, ${colors.primary} 0%, ${colors.primary.replace(/[\d.]+\)$/g, '0.35)')} 15%, ${colors.primary.replace(/[\d.]+\)$/g, '0.15)')} 30%, ${colors.primary.replace(/[\d.]+\)$/g, '0.04)')} 50%, transparent 70%)`, delay: 18, duration: 16, initialX: '70%', initialY: '10%', showOnMobile: false },
+              // Mobile bubbles (3 smaller bubbles for performance)
+              { size: 300, color: `radial-gradient(circle, ${colors.primary} 0%, ${colors.primary.replace(/[\d.]+\)$/g, '0.2)')} 15%, ${colors.primary.replace(/[\d.]+\)$/g, '0.08)')} 30%, ${colors.primary.replace(/[\d.]+\)$/g, '0.02)')} 50%, transparent 70%)`, delay: 0, duration: 15, initialX: '20%', initialY: '20%', showOnMobile: true },
+              { size: 250, color: `radial-gradient(circle, ${colors.secondary} 0%, ${colors.secondary.replace(/[\d.]+\)$/g, '0.15)')} 15%, ${colors.secondary.replace(/[\d.]+\)$/g, '0.05)')} 30%, ${colors.secondary.replace(/[\d.]+\)$/g, '0.01)')} 50%, transparent 70%)`, delay: 2, duration: 12, initialX: '70%', initialY: '60%', showOnMobile: true },
+              { size: 200, color: `radial-gradient(circle, ${colors.accent} 0%, ${colors.accent.replace(/[\d.]+\)$/g, '0.15)')} 15%, ${colors.accent.replace(/[\d.]+\)$/g, '0.05)')} 30%, ${colors.accent.replace(/[\d.]+\)$/g, '0.01)')} 50%, transparent 70%)`, delay: 4, duration: 10, initialX: '50%', initialY: '80%', showOnMobile: true }
             ].map((bubble, index) => (
               <motion.div
                 key={index}
@@ -65,7 +94,7 @@ export default function ERPCompanyWebsite() {
                   top: bubble.initialY,
                   zIndex: 5,
                   filter: 'blur(80px)',
-                  opacity: 0.7,
+                  opacity: 0.9,
                   willChange: 'transform',
                 }}
                 animate={{
@@ -350,7 +379,7 @@ export default function ERPCompanyWebsite() {
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Why Choose ERPFlow
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-primary-foreground max-w-2xl mx-auto">
               Experience the advantages that set us apart from the competition
             </p>
           </div>
@@ -372,7 +401,7 @@ export default function ERPCompanyWebsite() {
               ].map((advantage, index) => (
                 <div key={index} className="flex items-start space-x-4">
                   <div className="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                    <CheckCircle className="h-5 w-5 text-secondary" />
+                    <CheckCircle className="h-5 w-5 text-white" />
                   </div>
                   <div>
                     <h3 className=" mb-2">{advantage.title}</h3>
@@ -398,7 +427,7 @@ export default function ERPCompanyWebsite() {
               ].map((advantage, index) => (
                 <div key={index} className="flex items-start space-x-4">
                   <div className="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                    <CheckCircle className="h-5 w-5 text-secondary" />
+                    <CheckCircle className="h-5 w-5 text-white" />
                   </div>
                   <div>
                     <h3 className=" mb-2">{advantage.title}</h3>

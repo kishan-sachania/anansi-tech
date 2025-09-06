@@ -1,6 +1,8 @@
+import { useTheme } from "@/contexts/theme-context"
 import Link from "next/link"
 
 export function Footer() {
+  const { theme } = useTheme()
   return (
     <footer className="bg-card border-t py-12 px-4">
       <div className="container mx-auto max-w-6xl">
@@ -8,7 +10,7 @@ export function Footer() {
           <div>
             <div className="flex items-center mb-4">
               <img 
-                src="/anansi/Anansi-full.png" 
+                src={theme === "dark" ? "/anansi/anansi-light.png" : "/anansi/Anansi-full.png"} 
                 alt="Anansi Tech" 
                 className="h-8 w-auto"
               />

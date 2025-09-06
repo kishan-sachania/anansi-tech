@@ -25,6 +25,8 @@ import {
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import Link from "next/link";
+import { useTheme } from "@/contexts/theme-context";
+
 
 const products = [
   {
@@ -40,7 +42,6 @@ const products = [
     ],
     icon: BarChart3, // lucide-react
     category: "Finance",
-    
   },
   {
     name: "Supply Chain Management",
@@ -54,7 +55,6 @@ const products = [
     ],
     icon: Truck, // lucide-react
     category: "Operations",
-    
   },
   {
     name: "Human Resources",
@@ -68,7 +68,6 @@ const products = [
     ],
     icon: Users, // lucide-react
     category: "HR",
-    
   },
   {
     name: "Customer Relationship Management",
@@ -82,7 +81,6 @@ const products = [
     ],
     icon: UserCheck, // lucide-react
     category: "Sales & CRM",
-    
   },
   {
     name: "Project Management",
@@ -96,7 +94,6 @@ const products = [
     ],
     icon: ClipboardList, // lucide-react
     category: "Projects",
-    
   },
   {
     name: "Manufacturing",
@@ -110,7 +107,6 @@ const products = [
     ],
     icon: Factory, // lucide-react (or replace with Package if Factory not available)
     category: "Manufacturing",
-    
   },
   {
     name: "Business Intelligence",
@@ -124,22 +120,21 @@ const products = [
     ],
     icon: PieChart, // lucide-react
     category: "Analytics",
-    
   },
   {
     name: "IoT & Smart Operations",
-    description: "Connect devices, sensors, and machines directly with your ERP for real-time visibility and automation",
+    description:
+      "Connect devices, sensors, and machines directly with your ERP for real-time visibility and automation",
     features: [
       "Device & Sensor Integration",
       "Real-time Data Collection",
       "Predictive Maintenance",
       "Energy Monitoring",
-      "Automated Alerts & Workflows"
+      "Automated Alerts & Workflows",
     ],
     icon: Wifi, // lucide-react
     category: "Analytics",
-    
-  }
+  },
 ];
 
 const categories = [
@@ -154,6 +149,7 @@ const categories = [
 
 export default function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const { theme } = useTheme();
 
   const filteredProducts =
     selectedCategory === "All"
@@ -190,7 +186,7 @@ export default function ProductsPage() {
                 key={category}
                 variant={category === selectedCategory ? "default" : "outline"}
                 size="sm"
-                className="mb-2"
+                className={`mb-2 ${category === selectedCategory || theme === "dark" ? "text-white" : "text-black"}`}
                 onClick={() => setSelectedCategory(category)}
               >
                 {category}
@@ -236,7 +232,6 @@ export default function ProductsPage() {
                     <CardDescription className="text-sm group-hover:text-white/90 transition-colors duration-500">
                       {product.description}
                     </CardDescription>
-                   
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-2 mb-6">
@@ -359,7 +354,7 @@ export default function ProductsPage() {
                   </div>
                 </div>
 
-                <Button asChild className="w-full" size="lg">
+                <Button asChild className="w-full bg-secondary/80 text-primary" size="lg">
                   <Link href="/contact">
                     Contact for Inquiry
                     <ArrowRight className="ml-2 h-4 w-4" />

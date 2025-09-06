@@ -4,11 +4,14 @@ import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
+import { ThemeToggle } from "@/components/theme-toggle"
+import { useTheme } from "@/contexts/theme-context"
 import { Menu, X } from "lucide-react"
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
+  const { theme } = useTheme()
 
   // Helper function to check if a link is active
   const isActive = (href: string) => {
@@ -28,7 +31,7 @@ export function Navigation() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center transition-all duration-300 hover:scale-105">
           <img 
-            src="/anansi/Anansi-full.png" 
+            src={theme === "dark" ? "/anansi/anansi-light.png" : "/anansi/Anansi-full.png"} 
             alt="Anansi Tech" 
             className="h-12 w-auto transition-all duration-300"
           />
@@ -108,7 +111,8 @@ export function Navigation() {
         </nav>
 
         <div className="hidden md:flex items-center space-x-4">
-          <Button asChild>
+          <ThemeToggle />
+          <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90" asChild>
             <Link href="/contact">Get Started</Link>
           </Button>
         </div>
@@ -202,9 +206,12 @@ export function Navigation() {
               }`} />
             </Link>
             
-            <Button asChild className="w-full mt-4">
-              <Link href="/contact">Get Started</Link>
-            </Button>
+            <div className="flex items-center justify-center space-x-4 mt-4">
+              <ThemeToggle />
+              <Button asChild className="bg-secondary text-secondary-foreground hover:bg-secondary/90">
+                <Link href="/contact">Get Started</Link>
+              </Button>
+            </div>
           </div>
         </div>
       )}
