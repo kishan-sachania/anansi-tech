@@ -14,9 +14,12 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Anansi Tech Team" }],
   icons: {
-    icon: "/anansi/Anansi-logo.png",
-    shortcut: "/anansi/Anansi-logo.png",
-    apple: "/anansi/Anansi-logo.png",
+    icon: [
+      { url: "/anansi/Anansi-logo.png?v=2", sizes: "32x32", type: "image/png" },
+      { url: "/anansi/Anansi-logo.png?v=2", sizes: "16x16", type: "image/png" },
+    ],
+    shortcut: "/anansi/Anansi-logo.png?v=2",
+    apple: "/anansi/Anansi-logo.png?v=2",
   },
 };
 
@@ -32,6 +35,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/anansi/Anansi-logo.png?v=2" type="image/png" />
+        <link rel="shortcut icon" href="/anansi/Anansi-logo.png?v=2" type="image/png" />
+        <link rel="apple-touch-icon" href="/anansi/Anansi-logo.png?v=2" />
+      </head>
       <body className="antialiased">
         <ThemeProvider>
           {children}

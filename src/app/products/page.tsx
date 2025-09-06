@@ -212,7 +212,7 @@ export default function ProductsPage() {
               return (
                 <Card
                   key={`${product.category}-${index}`}
-                  className="border-border/50 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:rotate-1 hover:bg-gradient-to-br hover:from-[#591E4F] hover:via-[#A62985] hover:to-[#D9B0CE] hover:text-white group relative overflow-hidden"
+                  className="border-border/50 hover:shadow-lg transition-all duration-500 hover:scale-105  hover:bg-gradient-to-br hover:from-[#591E4F] hover:via-[#A62985] hover:to-[#D9B0CE] hover:text-white group relative overflow-hidden"
                 >
                   <CardHeader>
                     <div className="flex items-center justify-between mb-4">

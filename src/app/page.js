@@ -159,7 +159,7 @@ export default function ERPCompanyWebsite() {
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card className="border-border/50 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:rotate-1 hover:bg-gradient-to-br hover:from-[#591E4F] hover:via-[#A62985] hover:to-[#D9B0CE] hover:text-white group relative overflow-hidden">
+            <Card className="border-border/50 hover:shadow-lg transition-all duration-500 hover:scale-105  hover:bg-gradient-to-br hover:from-[#591E4F] hover:via-[#A62985] hover:to-[#D9B0CE] hover:text-white group relative overflow-hidden">
               <CardHeader>
                 <TrendingUp className="h-10 w-10 text-primary mb-2 group-hover:text-white transition-colors duration-500" />
                 <CardTitle className="group-hover:text-white transition-colors duration-500">Fragmented Data</CardTitle>
@@ -171,7 +171,7 @@ export default function ERPCompanyWebsite() {
                 </p>
               </CardContent>
             </Card>
-            <Card className="border-border/50 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:rotate-1 hover:bg-gradient-to-br hover:from-[#591E4F] hover:via-[#A62985] hover:to-[#D9B0CE] hover:text-white group relative overflow-hidden">
+            <Card className="border-border/50 hover:shadow-lg transition-all duration-500 hover:scale-105  hover:bg-gradient-to-br hover:from-[#591E4F] hover:via-[#A62985] hover:to-[#D9B0CE] hover:text-white group relative overflow-hidden">
               <CardHeader>
                 <Zap className="h-10 w-10 text-primary mb-2 group-hover:text-white transition-colors duration-500" />
                 <CardTitle className="group-hover:text-white transition-colors duration-500">Manual Processes</CardTitle>
@@ -183,7 +183,7 @@ export default function ERPCompanyWebsite() {
                 </p>
               </CardContent>
             </Card>
-            <Card className="border-border/50 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:rotate-1 hover:bg-gradient-to-br hover:from-[#591E4F] hover:via-[#A62985] hover:to-[#D9B0CE] hover:text-white group relative overflow-hidden">
+            <Card className="border-border/50 hover:shadow-lg transition-all duration-500 hover:scale-105  hover:bg-gradient-to-br hover:from-[#591E4F] hover:via-[#A62985] hover:to-[#D9B0CE] hover:text-white group relative overflow-hidden">
               <CardHeader>
                 <Shield className="h-10 w-10 text-primary mb-2 group-hover:text-white transition-colors duration-500" />
                 <CardTitle className="group-hover:text-white transition-colors duration-500">Compliance Issues</CardTitle>
@@ -242,7 +242,7 @@ export default function ERPCompanyWebsite() {
                 className="border-border/50 hover:shadow-lg transition-shadow"
               >
                 <CardHeader>
-                  <CardTitle className="text-lg">{service.title}</CardTitle>
+                  <CardTitle className="text-lg font-semibold">{service.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">{service.desc}</p>
@@ -351,7 +351,7 @@ export default function ERPCompanyWebsite() {
                 onMouseLeave={() => setHoveredProduct(null)}
               >
                 <CardHeader>
-                  <CardTitle className="text-lg">{product.name}</CardTitle>
+                  <CardTitle className="text-lg font-semibold">{product.name}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2">
@@ -531,11 +531,12 @@ export default function ERPCompanyWebsite() {
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline">
+            {/* <Button size="lg" variant="outline">
               Schedule Demo
-            </Button>
+            </Button> */}
           </div>
         </div>
+        
       </section>
 
       <Footer />
