@@ -40,21 +40,23 @@ export default function ERPCompanyWebsite() {
         {/* Blur Bubbles Container - Only in Hero */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
           <div className="absolute inset-0 md:-inset-4 lg:-inset-8 xl:-inset-12">
-            {/* Actual Blur Bubbles */}
+            {/* Actual Blur Bubbles - Reduced for mobile performance */}
             {[
-              { size: 800, color: 'radial-gradient(circle, rgba(166, 41, 133, 0.8) 0%, rgba(166, 41, 133, 0.4) 15%, rgba(166, 41, 133, 0.15) 30%, rgba(166, 41, 133, 0.05) 50%, transparent 70%)', delay: 0, duration: 25, initialX: '5%', initialY: '10%' },
-              { size: 900, color: 'radial-gradient(circle, rgba(217, 176, 206, 0.7) 0%, rgba(217, 176, 206, 0.3) 15%, rgba(217, 176, 206, 0.1) 30%, rgba(217, 176, 206, 0.03) 50%, transparent 70%)', delay: 3, duration: 30, initialX: '85%', initialY: '15%' },
-              { size: 750, color: 'radial-gradient(circle, rgba(107, 44, 109, 0.75) 0%, rgba(107, 44, 109, 0.35) 15%, rgba(107, 44, 109, 0.12) 30%, rgba(107, 44, 109, 0.04) 50%, transparent 70%)', delay: 6, duration: 22, initialX: '50%', initialY: '80%' },
-              { size: 850, color: 'radial-gradient(circle, rgba(166, 41, 133, 0.65) 0%, rgba(166, 41, 133, 0.25) 15%, rgba(166, 41, 133, 0.08) 30%, rgba(166, 41, 133, 0.02) 50%, transparent 70%)', delay: 2, duration: 28, initialX: '20%', initialY: '85%' },
-              { size: 700, color: 'radial-gradient(circle, rgba(217, 176, 206, 0.7) 0%, rgba(217, 176, 206, 0.3) 15%, rgba(217, 176, 206, 0.1) 30%, rgba(217, 176, 206, 0.03) 50%, transparent 70%)', delay: 4, duration: 20, initialX: '95%', initialY: '70%' },
-              { size: 950, color: 'radial-gradient(circle, rgba(107, 44, 109, 0.6) 0%, rgba(107, 44, 109, 0.2) 15%, rgba(107, 44, 109, 0.06) 30%, rgba(107, 44, 109, 0.02) 50%, transparent 70%)', delay: 1, duration: 35, initialX: '10%', initialY: '60%' },
-              { size: 650, color: 'radial-gradient(circle, rgba(166, 41, 133, 0.75) 0%, rgba(166, 41, 133, 0.35) 15%, rgba(166, 41, 133, 0.12) 30%, rgba(166, 41, 133, 0.04) 50%, transparent 70%)', delay: 5, duration: 24, initialX: '75%', initialY: '5%' },
-              { size: 820, color: 'radial-gradient(circle, rgba(217, 176, 206, 0.65) 0%, rgba(217, 176, 206, 0.25) 15%, rgba(217, 176, 206, 0.08) 30%, rgba(217, 176, 206, 0.02) 50%, transparent 70%)', delay: 7, duration: 26, initialX: '40%', initialY: '40%' },
-              { size: 780, color: 'radial-gradient(circle, rgba(166, 41, 133, 0.7) 0%, rgba(166, 41, 133, 0.3) 15%, rgba(166, 41, 133, 0.1) 30%, rgba(166, 41, 133, 0.03) 50%, transparent 70%)', delay: 8, duration: 23, initialX: '60%', initialY: '25%' }
+              // Desktop bubbles (6 bubbles)
+              { size: 600, color: 'radial-gradient(circle, rgba(166, 41, 133, 0.6) 0%, rgba(166, 41, 133, 0.3) 15%, rgba(166, 41, 133, 0.1) 30%, rgba(166, 41, 133, 0.03) 50%, transparent 70%)', delay: 0, duration: 20, initialX: '5%', initialY: '10%', showOnMobile: false },
+              { size: 700, color: 'radial-gradient(circle, rgba(217, 176, 206, 0.5) 0%, rgba(217, 176, 206, 0.2) 15%, rgba(217, 176, 206, 0.08) 30%, rgba(217, 176, 206, 0.02) 50%, transparent 70%)', delay: 3, duration: 25, initialX: '85%', initialY: '15%', showOnMobile: false },
+              { size: 550, color: 'radial-gradient(circle, rgba(107, 44, 109, 0.6) 0%, rgba(107, 44, 109, 0.25) 15%, rgba(107, 44, 109, 0.08) 30%, rgba(107, 44, 109, 0.03) 50%, transparent 70%)', delay: 6, duration: 18, initialX: '50%', initialY: '80%', showOnMobile: false },
+              { size: 650, color: 'radial-gradient(circle, rgba(166, 41, 133, 0.5) 0%, rgba(166, 41, 133, 0.2) 15%, rgba(166, 41, 133, 0.06) 30%, rgba(166, 41, 133, 0.02) 50%, transparent 70%)', delay: 2, duration: 22, initialX: '20%', initialY: '85%', showOnMobile: false },
+              { size: 500, color: 'radial-gradient(circle, rgba(217, 176, 206, 0.5) 0%, rgba(217, 176, 206, 0.2) 15%, rgba(217, 176, 206, 0.08) 30%, rgba(217, 176, 206, 0.02) 50%, transparent 70%)', delay: 4, duration: 16, initialX: '95%', initialY: '70%', showOnMobile: false },
+              { size: 750, color: 'radial-gradient(circle, rgba(107, 44, 109, 0.4) 0%, rgba(107, 44, 109, 0.15) 15%, rgba(107, 44, 109, 0.05) 30%, rgba(107, 44, 109, 0.01) 50%, transparent 70%)', delay: 1, duration: 28, initialX: '10%', initialY: '60%', showOnMobile: false },
+              // Mobile bubbles (3 smaller bubbles)
+              { size: 300, color: 'radial-gradient(circle, rgba(166, 41, 133, 0.4) 0%, rgba(166, 41, 133, 0.2) 15%, rgba(166, 41, 133, 0.08) 30%, rgba(166, 41, 133, 0.02) 50%, transparent 70%)', delay: 0, duration: 15, initialX: '20%', initialY: '20%', showOnMobile: true },
+              { size: 250, color: 'radial-gradient(circle, rgba(217, 176, 206, 0.3) 0%, rgba(217, 176, 206, 0.15) 15%, rgba(217, 176, 206, 0.05) 30%, rgba(217, 176, 206, 0.01) 50%, transparent 70%)', delay: 2, duration: 12, initialX: '70%', initialY: '60%', showOnMobile: true },
+              { size: 200, color: 'radial-gradient(circle, rgba(107, 44, 109, 0.3) 0%, rgba(107, 44, 109, 0.15) 15%, rgba(107, 44, 109, 0.05) 30%, rgba(107, 44, 109, 0.01) 50%, transparent 70%)', delay: 4, duration: 10, initialX: '50%', initialY: '80%', showOnMobile: true }
             ].map((bubble, index) => (
               <motion.div
                 key={index}
-                className="absolute rounded-full"
+                className={`absolute rounded-full ${bubble.showOnMobile ? 'block md:hidden' : 'hidden md:block'}`}
                 style={{
                   width: bubble.size,
                   height: bubble.size,
@@ -62,14 +64,15 @@ export default function ERPCompanyWebsite() {
                   left: bubble.initialX,
                   top: bubble.initialY,
                   zIndex: 5,
-                  filter: 'blur(120px)',
-                  opacity: 0.9,
+                  filter: 'blur(80px)',
+                  opacity: 0.7,
+                  willChange: 'transform',
                 }}
                 animate={{
-                  x: [0, 500, -400, 300, -200, 0],
-                  y: [0, -400, 500, -300, 200, 0],
-                  scale: [1, 1.5, 0.5, 1.3, 0.7, 1],
-                  rotate: [0, 90, 180, 270, 360],
+                  x: [0, 200, -150, 100, -50, 0],
+                  y: [0, -200, 150, -100, 50, 0],
+                  scale: [1, 1.2, 0.8, 1.1, 0.9, 1],
+                  rotate: [0, 45, 90, 135, 180, 0],
                 }}
                 transition={{
                   duration: bubble.duration,

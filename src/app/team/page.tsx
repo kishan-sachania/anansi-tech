@@ -44,11 +44,7 @@ const allTeamMembers = [
     role: "Software Developer",
     department: "Development",
   },
-  {
-    name: "Sagrika Dobariya",
-    role: "Software Developer",
-    department: "Development",
-  },
+
   {
     name: "Dhruvkumar Mashru",
     role: "Software Developer",
@@ -61,6 +57,16 @@ const allTeamMembers = [
   },
   {
     name: "Yashvi Kothiya",
+    role: "Software Developer",
+    department: "Development",
+  },
+  {
+    name: "Bhumika Siddhapura",
+    role: "Software Developer",
+    department: "Development",
+  },
+  {
+    name: "Sagrika Dobariya",
     role: "Software Developer",
     department: "Development",
   },
@@ -96,11 +102,6 @@ const allTeamMembers = [
   },
   {
     name: "Kishan Sachania",
-    role: "Software Developer",
-    department: "Development",
-  },
-  {
-    name: "Bhumika Siddhapura",
     role: "Software Developer",
     department: "Development",
   },
