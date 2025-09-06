@@ -14,10 +14,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Anansi Tech Team" }],
   icons: {
-    icon: [
-      { url: "/anansi/Anansi-logo.png", sizes: "32x32", type: "image/png" },
-      { url: "/anansi/Anansi-logo.png", sizes: "16x16", type: "image/png" },
-    ],
+    icon: "/anansi/Anansi-logo.png",
     shortcut: "/anansi/Anansi-logo.png",
     apple: "/anansi/Anansi-logo.png",
   },
