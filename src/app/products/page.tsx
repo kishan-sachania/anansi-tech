@@ -300,7 +300,7 @@ export default function ProductsPage() {
                 ].map((advantage, index) => (
                   <div key={index} className="flex items-start space-x-4">
                     <div className="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                      <CheckCircle className="h-5 w-5 text-primary-foreground" />
+                      <CheckCircle className="h-5 w-5 text-white" />
                     </div>
                     <div>
                       <h4 className="font-semibold mb-1">{advantage.title}</h4>
@@ -354,7 +354,7 @@ export default function ProductsPage() {
                   </div>
                 </div>
 
-                <Button asChild className="w-full bg-secondary/80 text-primary" size="lg">
+                <Button asChild className="w-full bg-secondary/80 text-white" size="lg">
                   <Link href="/contact">
                     Contact for Inquiry
                     <ArrowRight className="ml-2 h-4 w-4" />

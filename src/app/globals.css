@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 
@@ -132,7 +133,8 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground;
+    font-family: 'Nunito', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
   }
   
   /* Custom font classes */
@@ -141,12 +143,17 @@
   }
   
   .font-body {
-    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    font-family: 'Nunito', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
   }
   
   /* Apply heading font to all heading elements */
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Megazine Poster', ui-sans-serif, system-ui, sans-serif;
+  }
+  
+  /* Add letter spacing to h2 headings */
+  h2 {
+    letter-spacing: 0.05em;
   }
   
   /* Reduce font weight for headings except h1 (landing page quote) */
@@ -162,7 +169,7 @@
   
   /* Apply body font to all other text elements */
   p, span, div, a, button, input, textarea, label {
-    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    font-family: 'Nunito', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
   }
                                                                               
   /* Remove bold styling from non-heading elements */
