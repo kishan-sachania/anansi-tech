@@ -218,6 +218,7 @@ export default function ContactPage() {
             <Button
               size="lg"
               className="bg-secondary text-secondary-foreground hover:bg-secondary/90"
+              
             >
               Schedule Consultation
             </Button>

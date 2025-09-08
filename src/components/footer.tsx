@@ -24,22 +24,22 @@ export function Footer() {
             <h4 className="letter-spacing-wide mb-4">Solutions</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <a href="#" className="hover:text-primary transition-colors">
+                <a href="/product" className="hover:text-primary transition-colors">
                   Financial Management
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition-colors">
+                <a href="/products" className="hover:text-primary transition-colors">
                   Supply Chain
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition-colors">
+                <a href="/products" className="hover:text-primary transition-colors">
                   Human Resources
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition-colors">
+                <a href="/products" className="hover:text-primary transition-colors">
                   Customer Management
                 </a>
               </li>
@@ -50,7 +50,7 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
                 <Link
-                  href="/about"
+                  href="/team"
                   className="hover:text-primary transition-colors"
                 >
                   About Us
@@ -58,7 +58,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/careers"
+                  href="/contact"
                   className="hover:text-primary transition-colors"
                 >
                   Careers
@@ -66,7 +66,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/news"
+                  href="/products"
                   className="hover:text-primary transition-colors"
                 >
                   News
@@ -74,7 +74,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/partners"
+                  href="/products"
                   className="hover:text-primary transition-colors"
                 >
                   Partners
@@ -87,7 +87,7 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
                 <Link
-                  href="/docs"
+                  href="/products"
                   className="hover:text-primary transition-colors"
                 >
                   Documentation
@@ -95,7 +95,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/help"
+                  href="/contact"
                   className="hover:text-primary transition-colors"
                 >
                   Help Center
@@ -103,7 +103,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/contact"
+                  href="/products"
                   className="hover:text-primary transition-colors"
                 >
                   Contact Support
@@ -111,7 +111,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/status"
+                  href="/products"
                   className="hover:text-primary transition-colors"
                 >
                   System Status
