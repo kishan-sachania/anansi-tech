@@ -21,6 +21,12 @@ import {
   PieChart,
   Truck,
   Wifi,
+  Leaf,
+  Banknote,
+  Handshake,
+  ShoppingCart,
+  Package,
+  ShieldCheck,
 } from "lucide-react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
@@ -135,6 +141,114 @@ const products = [
     icon: Wifi, // lucide-react
     category: "Analytics",
   },
+  {
+    name: "Finance & Accounting",
+    description: "Automate financial operations and improve accuracy across accounting processes.",
+    features: [
+      "Faster invoice processing & monthly closing",
+      "Accurate GST/TDS filing & audit readiness",
+      "80% less manual work in reconciliations",
+      "Better cash flow forecasting & working capital efficiency",
+    ],
+    icon: Banknote,
+    category: "ERP",
+  },
+  {
+    name: "Sales & CRM",
+    description: "Boost sales effectiveness and customer engagement with integrated CRM.",
+    features: [
+      "25% higher lead conversion",
+      "60% faster quotation turnaround",
+      "20% shorter sales cycle",
+      "Improved retention & upsell opportunities",
+    ],
+    icon: Handshake,
+    category: "ERP",
+  },
+  {
+    name: "Purchase & Vendor Management",
+    description: "Streamline procurement cycles and strengthen supplier relationships.",
+    features: [
+      "40% shorter procurement cycle",
+      "30% faster approvals",
+      "Better cost savings via bidding",
+      "Higher vendor reliability & compliance",
+    ],
+    icon: ShoppingCart,
+    category: "ERP",
+  },
+  {
+    name: "Inventory & Warehouse",
+    description: "Enhance inventory visibility and reduce stock-related losses.",
+    features: [
+      "98% stock accuracy",
+      "30% lower dead stock value",
+      "15% lower carrying costs",
+      "50% fewer stock-out incidents",
+    ],
+    icon: Package,
+    category: "ERP",
+  },
+  {
+    name: "Manufacturing",
+    description: "Optimize production efficiency and resource utilization.",
+    features: [
+      "30% shorter production lead time",
+      "20% higher machine & labor productivity",
+      "15% less raw material wastage",
+      "25% fewer defects & reworks",
+    ],
+    icon: Factory,
+    category: "ERP",
+  },
+  {
+    name: "Human Resources",
+    description: "Simplify HR management and improve workforce satisfaction.",
+    features: [
+      "70% faster payroll processing",
+      "30% shorter recruitment cycle",
+      "Higher employee satisfaction & retention",
+      "50% faster leave approvals & service requests",
+    ],
+    icon: Users,
+    category: "ERP",
+  },
+  {
+    name: "Projects",
+    description: "Deliver projects on time and within budget with complete visibility.",
+    features: [
+      "35% fewer delivery delays",
+      "20% higher resource utilization",
+      "25% reduction in budget variance",
+      "More accurate timesheets & billing",
+    ],
+    icon: ClipboardList,
+    category: "ERP",
+  },
+  {
+    name: "Quality Control",
+    description: "Ensure consistent product quality and compliance across operations.",
+    features: [
+      "20% lower rejection rates",
+      "50% fewer complaints & repeat defects",
+      "100% inspection & audit compliance",
+      "Faster NCR resolution & improved FPY",
+    ],
+    icon: ShieldCheck,
+    category: "ERP",
+  },
+  {
+    name: "Agriculture & IoT",
+    description: "Leverage IoT and ERP for smarter farming, greenhouse, and agri-operations.",
+    features: [
+      "40% less water usage & 15% more fertilizer efficiency",
+      "25% higher crop yield per acre",
+      "20% faster farm-to-market logistics",
+      "100% traceability & compliance readiness",
+    ],
+    icon: Leaf,
+    category: "IoT + Agriculture ERP",
+  },  
 ];
 
 const categories = [
@@ -142,9 +256,11 @@ const categories = [
   "Finance",
   "Operations",
   "HR",
-  "Sales",
-  "Project",
   "Analytics",
+  "IoT + Agriculture ERP",
+  "ERP",
+  "Manufacturing",
+  "Projects",
 ];
 
 export default function ProductsPage() {
@@ -333,7 +449,7 @@ export default function ProductsPage() {
 
                 <div className="space-y-3">
                   <div className="flex justify-between">
-                    <span>All 6 Modules</span>
+                    <span>All {products.length} Modules</span>
                     <CheckCircle className="h-5 w-5 text-primary" />
                   </div>
                   <div className="flex justify-between">

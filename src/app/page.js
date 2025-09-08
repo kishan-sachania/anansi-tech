@@ -1,15 +1,10 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useTheme } from "@/contexts/theme-context"
-import { motion } from "framer-motion"
+import { useState, useMemo } from "react";
+import { useTheme } from "@/contexts/theme-context";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
   Accordion,
@@ -17,40 +12,34 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {
-  Zap,
-  Shield,
-  TrendingUp,
-  CheckCircle,
-  ArrowRight,
-} from "lucide-react";
+import { Zap, Shield, TrendingUp, CheckCircle, ArrowRight } from "lucide-react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
+import { Services } from "@/components/services";
 import Link from "next/link";
 
 export default function ERPCompanyWebsite() {
-  const [hoveredIndustry, setHoveredIndustry] = useState(null)
-  const [hoveredProduct, setHoveredProduct] = useState(null)
-  const { theme } = useTheme()
+  const [hoveredIndustry, setHoveredIndustry] = useState(null);
+  const [hoveredProduct, setHoveredProduct] = useState(null);
+  const { theme } = useTheme();
 
-  // Dynamic bubble colors based on theme
-  const getBubbleColors = () => {
+  // Memoized bubble colors based on theme
+  const colors = useMemo(() => {
     if (theme === "dark") {
       return {
-        primary: 'rgba(217, 176, 206, 0.6)', // Softer pink for dark theme
-        secondary: 'rgba(166, 41, 133, 0.5)', // Softer magenta for dark theme
-        accent: 'rgba(107, 44, 109, 0.4)', // Softer accent for dark theme
-      }
+        primary: "rgba(217, 176, 206, 0.6)", // Softer pink for dark theme
+        secondary: "rgba(166, 41, 133, 0.5)", // Softer magenta for dark theme
+        accent: "rgba(107, 44, 109, 0.4)", // Softer accent for dark theme
+      };
     } else {
       return {
-        primary: 'rgba(166, 41, 133, 0.8)', // Bright magenta for light theme
-        secondary: 'rgba(217, 176, 206, 0.8)', // Bright pink for light theme
-        accent: 'rgba(107, 44, 109, 0.8)', // Bright accent for light theme
-      }
+        primary: "rgba(166, 41, 133, 0.8)", // Bright magenta for light theme
+        secondary: "rgba(217, 176, 206, 0.8)", // Bright pink for light theme
+        accent: "rgba(107, 44, 109, 0.8)", // Bright accent for light theme
+      };
     }
-  }
+  }, [theme]);
 
-  const colors = getBubbleColors()
 
   return (
     <div className="min-h-screen">
@@ -65,27 +54,314 @@ export default function ERPCompanyWebsite() {
             {[
               // Desktop bubbles (12 balanced bright bubbles for even distribution)
               // Left side bubbles (6 bubbles)
-              { size: 600, color: `radial-gradient(circle, ${colors.primary} 0%, ${colors.primary.replace(/[\d.]+\)$/g, '0.5)')} 15%, ${colors.primary.replace(/[\d.]+\)$/g, '0.25)')} 30%, ${colors.primary.replace(/[\d.]+\)$/g, '0.08)')} 50%, transparent 70%)`, delay: 0, duration: 20, initialX: '10%', initialY: '15%', showOnMobile: false },
-              { size: 550, color: `radial-gradient(circle, ${colors.accent} 0%, ${colors.accent.replace(/[\d.]+\)$/g, '0.5)')} 15%, ${colors.accent.replace(/[\d.]+\)$/g, '0.25)')} 30%, ${colors.accent.replace(/[\d.]+\)$/g, '0.08)')} 50%, transparent 70%)`, delay: 6, duration: 18, initialX: '25%', initialY: '70%', showOnMobile: false },
-              { size: 650, color: `radial-gradient(circle, ${colors.primary} 0%, ${colors.primary.replace(/[\d.]+\)$/g, '0.4)')} 15%, ${colors.primary.replace(/[\d.]+\)$/g, '0.2)')} 30%, ${colors.primary.replace(/[\d.]+\)$/g, '0.06)')} 50%, transparent 70%)`, delay: 2, duration: 22, initialX: '15%', initialY: '85%', showOnMobile: false },
-              { size: 400, color: `radial-gradient(circle, ${colors.secondary} 0%, ${colors.secondary.replace(/[\d.]+\)$/g, '0.5)')} 15%, ${colors.secondary.replace(/[\d.]+\)$/g, '0.25)')} 30%, ${colors.secondary.replace(/[\d.]+\)$/g, '0.08)')} 50%, transparent 70%)`, delay: 8, duration: 14, initialX: '30%', initialY: '35%', showOnMobile: false },
-              { size: 500, color: `radial-gradient(circle, ${colors.accent} 0%, ${colors.accent.replace(/[\d.]+\)$/g, '0.4)')} 15%, ${colors.accent.replace(/[\d.]+\)$/g, '0.2)')} 30%, ${colors.accent.replace(/[\d.]+\)$/g, '0.06)')} 50%, transparent 70%)`, delay: 14, duration: 18, initialX: '20%', initialY: '50%', showOnMobile: false },
-              { size: 350, color: `radial-gradient(circle, ${colors.primary} 0%, ${colors.primary.replace(/[\d.]+\)$/g, '0.35)')} 15%, ${colors.primary.replace(/[\d.]+\)$/g, '0.15)')} 30%, ${colors.primary.replace(/[\d.]+\)$/g, '0.04)')} 50%, transparent 70%)`, delay: 12, duration: 12, initialX: '5%', initialY: '40%', showOnMobile: false },
+              {
+                size: 600,
+                color: `radial-gradient(circle, ${
+                  colors.primary
+                } 0%, ${colors.primary.replace(
+                  /[\d.]+\)$/g,
+                  "0.5)"
+                )} 15%, ${colors.primary.replace(
+                  /[\d.]+\)$/g,
+                  "0.25)"
+                )} 30%, ${colors.primary.replace(
+                  /[\d.]+\)$/g,
+                  "0.08)"
+                )} 50%, transparent 70%)`,
+                delay: 0,
+                duration: 20,
+                initialX: "10%",
+                initialY: "15%",
+                showOnMobile: false,
+              },
+              {
+                size: 550,
+                color: `radial-gradient(circle, ${
+                  colors.accent
+                } 0%, ${colors.accent.replace(
+                  /[\d.]+\)$/g,
+                  "0.5)"
+                )} 15%, ${colors.accent.replace(
+                  /[\d.]+\)$/g,
+                  "0.25)"
+                )} 30%, ${colors.accent.replace(
+                  /[\d.]+\)$/g,
+                  "0.08)"
+                )} 50%, transparent 70%)`,
+                delay: 6,
+                duration: 18,
+                initialX: "25%",
+                initialY: "70%",
+                showOnMobile: false,
+              },
+              {
+                size: 650,
+                color: `radial-gradient(circle, ${
+                  colors.primary
+                } 0%, ${colors.primary.replace(
+                  /[\d.]+\)$/g,
+                  "0.4)"
+                )} 15%, ${colors.primary.replace(
+                  /[\d.]+\)$/g,
+                  "0.2)"
+                )} 30%, ${colors.primary.replace(
+                  /[\d.]+\)$/g,
+                  "0.06)"
+                )} 50%, transparent 70%)`,
+                delay: 2,
+                duration: 22,
+                initialX: "15%",
+                initialY: "85%",
+                showOnMobile: false,
+              },
+              {
+                size: 400,
+                color: `radial-gradient(circle, ${
+                  colors.secondary
+                } 0%, ${colors.secondary.replace(
+                  /[\d.]+\)$/g,
+                  "0.5)"
+                )} 15%, ${colors.secondary.replace(
+                  /[\d.]+\)$/g,
+                  "0.25)"
+                )} 30%, ${colors.secondary.replace(
+                  /[\d.]+\)$/g,
+                  "0.08)"
+                )} 50%, transparent 70%)`,
+                delay: 8,
+                duration: 14,
+                initialX: "30%",
+                initialY: "35%",
+                showOnMobile: false,
+              },
+              {
+                size: 500,
+                color: `radial-gradient(circle, ${
+                  colors.accent
+                } 0%, ${colors.accent.replace(
+                  /[\d.]+\)$/g,
+                  "0.4)"
+                )} 15%, ${colors.accent.replace(
+                  /[\d.]+\)$/g,
+                  "0.2)"
+                )} 30%, ${colors.accent.replace(
+                  /[\d.]+\)$/g,
+                  "0.06)"
+                )} 50%, transparent 70%)`,
+                delay: 14,
+                duration: 18,
+                initialX: "20%",
+                initialY: "50%",
+                showOnMobile: false,
+              },
+              {
+                size: 350,
+                color: `radial-gradient(circle, ${
+                  colors.primary
+                } 0%, ${colors.primary.replace(
+                  /[\d.]+\)$/g,
+                  "0.35)"
+                )} 15%, ${colors.primary.replace(
+                  /[\d.]+\)$/g,
+                  "0.15)"
+                )} 30%, ${colors.primary.replace(
+                  /[\d.]+\)$/g,
+                  "0.04)"
+                )} 50%, transparent 70%)`,
+                delay: 12,
+                duration: 12,
+                initialX: "5%",
+                initialY: "40%",
+                showOnMobile: false,
+              },
               // Right side bubbles (6 bubbles)
-              { size: 700, color: `radial-gradient(circle, ${colors.secondary} 0%, ${colors.secondary.replace(/[\d.]+\)$/g, '0.5)')} 15%, ${colors.secondary.replace(/[\d.]+\)$/g, '0.25)')} 30%, ${colors.secondary.replace(/[\d.]+\)$/g, '0.08)')} 50%, transparent 70%)`, delay: 3, duration: 25, initialX: '90%', initialY: '20%', showOnMobile: false },
-              { size: 500, color: `radial-gradient(circle, ${colors.accent} 0%, ${colors.accent.replace(/[\d.]+\)$/g, '0.5)')} 15%, ${colors.accent.replace(/[\d.]+\)$/g, '0.25)')} 30%, ${colors.accent.replace(/[\d.]+\)$/g, '0.08)')} 50%, transparent 70%)`, delay: 4, duration: 16, initialX: '85%', initialY: '75%', showOnMobile: false },
-              { size: 750, color: `radial-gradient(circle, ${colors.primary} 0%, ${colors.primary.replace(/[\d.]+\)$/g, '0.4)')} 15%, ${colors.primary.replace(/[\d.]+\)$/g, '0.2)')} 30%, ${colors.primary.replace(/[\d.]+\)$/g, '0.06)')} 50%, transparent 70%)`, delay: 1, duration: 28, initialX: '95%', initialY: '60%', showOnMobile: false },
-              { size: 450, color: `radial-gradient(circle, ${colors.secondary} 0%, ${colors.secondary.replace(/[\d.]+\)$/g, '0.5)')} 15%, ${colors.secondary.replace(/[\d.]+\)$/g, '0.25)')} 30%, ${colors.secondary.replace(/[\d.]+\)$/g, '0.08)')} 50%, transparent 70%)`, delay: 10, duration: 16, initialX: '75%', initialY: '45%', showOnMobile: false },
-              { size: 380, color: `radial-gradient(circle, ${colors.accent} 0%, ${colors.accent.replace(/[\d.]+\)$/g, '0.4)')} 15%, ${colors.accent.replace(/[\d.]+\)$/g, '0.2)')} 30%, ${colors.accent.replace(/[\d.]+\)$/g, '0.06)')} 50%, transparent 70%)`, delay: 16, duration: 14, initialX: '80%', initialY: '85%', showOnMobile: false },
-              { size: 420, color: `radial-gradient(circle, ${colors.primary} 0%, ${colors.primary.replace(/[\d.]+\)$/g, '0.35)')} 15%, ${colors.primary.replace(/[\d.]+\)$/g, '0.15)')} 30%, ${colors.primary.replace(/[\d.]+\)$/g, '0.04)')} 50%, transparent 70%)`, delay: 18, duration: 16, initialX: '70%', initialY: '10%', showOnMobile: false },
+              {
+                size: 700,
+                color: `radial-gradient(circle, ${
+                  colors.secondary
+                } 0%, ${colors.secondary.replace(
+                  /[\d.]+\)$/g,
+                  "0.5)"
+                )} 15%, ${colors.secondary.replace(
+                  /[\d.]+\)$/g,
+                  "0.25)"
+                )} 30%, ${colors.secondary.replace(
+                  /[\d.]+\)$/g,
+                  "0.08)"
+                )} 50%, transparent 70%)`,
+                delay: 3,
+                duration: 25,
+                initialX: "90%",
+                initialY: "20%",
+                showOnMobile: false,
+              },
+              {
+                size: 500,
+                color: `radial-gradient(circle, ${
+                  colors.accent
+                } 0%, ${colors.accent.replace(
+                  /[\d.]+\)$/g,
+                  "0.5)"
+                )} 15%, ${colors.accent.replace(
+                  /[\d.]+\)$/g,
+                  "0.25)"
+                )} 30%, ${colors.accent.replace(
+                  /[\d.]+\)$/g,
+                  "0.08)"
+                )} 50%, transparent 70%)`,
+                delay: 4,
+                duration: 16,
+                initialX: "85%",
+                initialY: "75%",
+                showOnMobile: false,
+              },
+              {
+                size: 750,
+                color: `radial-gradient(circle, ${
+                  colors.primary
+                } 0%, ${colors.primary.replace(
+                  /[\d.]+\)$/g,
+                  "0.4)"
+                )} 15%, ${colors.primary.replace(
+                  /[\d.]+\)$/g,
+                  "0.2)"
+                )} 30%, ${colors.primary.replace(
+                  /[\d.]+\)$/g,
+                  "0.06)"
+                )} 50%, transparent 70%)`,
+                delay: 1,
+                duration: 28,
+                initialX: "95%",
+                initialY: "60%",
+                showOnMobile: false,
+              },
+              {
+                size: 450,
+                color: `radial-gradient(circle, ${
+                  colors.secondary
+                } 0%, ${colors.secondary.replace(
+                  /[\d.]+\)$/g,
+                  "0.5)"
+                )} 15%, ${colors.secondary.replace(
+                  /[\d.]+\)$/g,
+                  "0.25)"
+                )} 30%, ${colors.secondary.replace(
+                  /[\d.]+\)$/g,
+                  "0.08)"
+                )} 50%, transparent 70%)`,
+                delay: 10,
+                duration: 16,
+                initialX: "75%",
+                initialY: "45%",
+                showOnMobile: false,
+              },
+              {
+                size: 380,
+                color: `radial-gradient(circle, ${
+                  colors.accent
+                } 0%, ${colors.accent.replace(
+                  /[\d.]+\)$/g,
+                  "0.4)"
+                )} 15%, ${colors.accent.replace(
+                  /[\d.]+\)$/g,
+                  "0.2)"
+                )} 30%, ${colors.accent.replace(
+                  /[\d.]+\)$/g,
+                  "0.06)"
+                )} 50%, transparent 70%)`,
+                delay: 16,
+                duration: 14,
+                initialX: "80%",
+                initialY: "85%",
+                showOnMobile: false,
+              },
+              {
+                size: 420,
+                color: `radial-gradient(circle, ${
+                  colors.primary
+                } 0%, ${colors.primary.replace(
+                  /[\d.]+\)$/g,
+                  "0.35)"
+                )} 15%, ${colors.primary.replace(
+                  /[\d.]+\)$/g,
+                  "0.15)"
+                )} 30%, ${colors.primary.replace(
+                  /[\d.]+\)$/g,
+                  "0.04)"
+                )} 50%, transparent 70%)`,
+                delay: 18,
+                duration: 16,
+                initialX: "70%",
+                initialY: "10%",
+                showOnMobile: false,
+              },
               // Mobile bubbles (3 smaller bubbles for performance)
-              { size: 300, color: `radial-gradient(circle, ${colors.primary} 0%, ${colors.primary.replace(/[\d.]+\)$/g, '0.2)')} 15%, ${colors.primary.replace(/[\d.]+\)$/g, '0.08)')} 30%, ${colors.primary.replace(/[\d.]+\)$/g, '0.02)')} 50%, transparent 70%)`, delay: 0, duration: 15, initialX: '20%', initialY: '20%', showOnMobile: true },
-              { size: 250, color: `radial-gradient(circle, ${colors.secondary} 0%, ${colors.secondary.replace(/[\d.]+\)$/g, '0.15)')} 15%, ${colors.secondary.replace(/[\d.]+\)$/g, '0.05)')} 30%, ${colors.secondary.replace(/[\d.]+\)$/g, '0.01)')} 50%, transparent 70%)`, delay: 2, duration: 12, initialX: '70%', initialY: '60%', showOnMobile: true },
-              { size: 200, color: `radial-gradient(circle, ${colors.accent} 0%, ${colors.accent.replace(/[\d.]+\)$/g, '0.15)')} 15%, ${colors.accent.replace(/[\d.]+\)$/g, '0.05)')} 30%, ${colors.accent.replace(/[\d.]+\)$/g, '0.01)')} 50%, transparent 70%)`, delay: 4, duration: 10, initialX: '50%', initialY: '80%', showOnMobile: true }
+              {
+                size: 300,
+                color: `radial-gradient(circle, ${
+                  colors.primary
+                } 0%, ${colors.primary.replace(
+                  /[\d.]+\)$/g,
+                  "0.2)"
+                )} 15%, ${colors.primary.replace(
+                  /[\d.]+\)$/g,
+                  "0.08)"
+                )} 30%, ${colors.primary.replace(
+                  /[\d.]+\)$/g,
+                  "0.02)"
+                )} 50%, transparent 70%)`,
+                delay: 0,
+                duration: 15,
+                initialX: "20%",
+                initialY: "20%",
+                showOnMobile: true,
+              },
+              {
+                size: 250,
+                color: `radial-gradient(circle, ${
+                  colors.secondary
+                } 0%, ${colors.secondary.replace(
+                  /[\d.]+\)$/g,
+                  "0.15)"
+                )} 15%, ${colors.secondary.replace(
+                  /[\d.]+\)$/g,
+                  "0.05)"
+                )} 30%, ${colors.secondary.replace(
+                  /[\d.]+\)$/g,
+                  "0.01)"
+                )} 50%, transparent 70%)`,
+                delay: 2,
+                duration: 12,
+                initialX: "70%",
+                initialY: "60%",
+                showOnMobile: true,
+              },
+              {
+                size: 200,
+                color: `radial-gradient(circle, ${
+                  colors.accent
+                } 0%, ${colors.accent.replace(
+                  /[\d.]+\)$/g,
+                  "0.15)"
+                )} 15%, ${colors.accent.replace(
+                  /[\d.]+\)$/g,
+                  "0.05)"
+                )} 30%, ${colors.accent.replace(
+                  /[\d.]+\)$/g,
+                  "0.01)"
+                )} 50%, transparent 70%)`,
+                delay: 4,
+                duration: 10,
+                initialX: "50%",
+                initialY: "80%",
+                showOnMobile: true,
+              },
             ].map((bubble, index) => (
               <motion.div
                 key={index}
-                className={`absolute rounded-full ${bubble.showOnMobile ? 'block md:hidden' : 'hidden md:block'}`}
+                className={`absolute rounded-full ${
+                  bubble.showOnMobile ? "block md:hidden" : "hidden md:block"
+                }`}
                 style={{
                   width: bubble.size,
                   height: bubble.size,
@@ -93,9 +369,9 @@ export default function ERPCompanyWebsite() {
                   left: bubble.initialX,
                   top: bubble.initialY,
                   zIndex: 5,
-                  filter: 'blur(80px)',
+                  filter: "blur(80px)",
                   opacity: 0.9,
-                  willChange: 'transform',
+                  willChange: "transform",
                 }}
                 animate={{
                   x: [0, 200, -150, 100, -50, 0],
@@ -122,7 +398,7 @@ export default function ERPCompanyWebsite() {
           </Badge>
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-balance font-heading">
             Your business deserves more than tools
-            <span className="text-primary"> it deserves a partner.</span>
+            <span className="text-primary"> it deserves a companion.</span>
           </h1>
           <p className="text-xl text-muted-foreground mb-8 text-pretty max-w-2xl mx-auto font-body">
             Streamline operations, boost productivity, and drive growth with our
@@ -139,9 +415,9 @@ export default function ERPCompanyWebsite() {
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline">
+            {/* <Button size="lg" variant="outline">
               Watch Demo
-            </Button>
+            </Button> */}
           </div>
         </div>
       </section>
@@ -162,7 +438,9 @@ export default function ERPCompanyWebsite() {
             <Card className="border-border/50 hover:shadow-lg transition-all duration-500 hover:scale-105  hover:bg-gradient-to-br hover:from-[#591E4F] hover:via-[#A62985] hover:to-[#D9B0CE] hover:text-white group relative overflow-hidden">
               <CardHeader>
                 <TrendingUp className="h-10 w-10 text-primary mb-2 group-hover:text-white transition-colors duration-500" />
-                <CardTitle className="group-hover:text-white transition-colors duration-500">Fragmented Data</CardTitle>
+                <CardTitle className="group-hover:text-white transition-colors duration-500">
+                  Fragmented Data
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground group-hover:text-white/90 transition-colors duration-500">
@@ -174,7 +452,9 @@ export default function ERPCompanyWebsite() {
             <Card className="border-border/50 hover:shadow-lg transition-all duration-500 hover:scale-105  hover:bg-gradient-to-br hover:from-[#591E4F] hover:via-[#A62985] hover:to-[#D9B0CE] hover:text-white group relative overflow-hidden">
               <CardHeader>
                 <Zap className="h-10 w-10 text-primary mb-2 group-hover:text-white transition-colors duration-500" />
-                <CardTitle className="group-hover:text-white transition-colors duration-500">Manual Processes</CardTitle>
+                <CardTitle className="group-hover:text-white transition-colors duration-500">
+                  Manual Processes
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground group-hover:text-white/90 transition-colors duration-500">
@@ -186,7 +466,9 @@ export default function ERPCompanyWebsite() {
             <Card className="border-border/50 hover:shadow-lg transition-all duration-500 hover:scale-105  hover:bg-gradient-to-br hover:from-[#591E4F] hover:via-[#A62985] hover:to-[#D9B0CE] hover:text-white group relative overflow-hidden">
               <CardHeader>
                 <Shield className="h-10 w-10 text-primary mb-2 group-hover:text-white transition-colors duration-500" />
-                <CardTitle className="group-hover:text-white transition-colors duration-500">Compliance Issues</CardTitle>
+                <CardTitle className="group-hover:text-white transition-colors duration-500">
+                  Compliance Issues
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground group-hover:text-white/90 transition-colors duration-500">
@@ -200,58 +482,7 @@ export default function ERPCompanyWebsite() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-16 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Our Services
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Comprehensive ERP services tailored to your business needs
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                title: "ERP Implementation",
-                desc: "Full-scale ERP deployment with minimal disruption to your operations",
-              },
-              {
-                title: "System Integration",
-                desc: "Seamlessly connect your existing systems with our ERP platform",
-              },
-              {
-                title: "Custom Development",
-                desc: "Tailored modules and features to meet your unique requirements",
-              },
-              {
-                title: "Training & Support",
-                desc: "Comprehensive training programs and 24/7 technical support",
-              },
-              {
-                title: "Data Migration",
-                desc: "Secure and accurate transfer of your existing data to the new system",
-              },
-              {
-                title: "Maintenance",
-                desc: "Ongoing system maintenance and updates to ensure optimal performance",
-              },
-            ].map((service, index) => (
-              <Card
-                key={index}
-                className="border-border/50 hover:shadow-lg transition-shadow"
-              >
-                <CardHeader>
-                  <CardTitle className="text-lg font-semibold">{service.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">{service.desc}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Services />
 
       {/* Industries Section */}
       <section id="industries" className="py-16 px-4 bg-muted/10">
@@ -274,12 +505,14 @@ export default function ERPCompanyWebsite() {
               "Finance",
               "Logistics",
               "Real Estate",
+              "Technology & Services",
+              "Agriculture & Allied",
             ].map((industry, index) => (
               <Card
                 key={index}
-                className={`text-center p-6 border-border/50 hover:shadow-lg transition-all duration-300 ${
-                  hoveredIndustry !== null && hoveredIndustry !== index 
-                    ? "opacity-30" 
+                className={`text-center font-semibold p-6 border-border/50 hover:shadow-lg transition-all duration-300 ${
+                  hoveredIndustry !== null && hoveredIndustry !== index
+                    ? "opacity-30"
                     : "opacity-100"
                 }`}
                 onMouseEnter={() => setHoveredIndustry(index)}
@@ -343,15 +576,17 @@ export default function ERPCompanyWebsite() {
               <Card
                 key={index}
                 className={`border-border/50 hover:shadow-lg transition-all duration-300 ${
-                  hoveredProduct !== null && hoveredProduct !== index 
-                    ? "opacity-30" 
+                  hoveredProduct !== null && hoveredProduct !== index
+                    ? "opacity-30"
                     : "opacity-100"
                 }`}
                 onMouseEnter={() => setHoveredProduct(index)}
                 onMouseLeave={() => setHoveredProduct(null)}
               >
                 <CardHeader>
-                  <CardTitle className="text-lg font-semibold">{product.name}</CardTitle>
+                  <CardTitle className="text-lg font-semibold">
+                    {product.name}
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2">
@@ -368,6 +603,19 @@ export default function ERPCompanyWebsite() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+          <div className="text-center mt-12">
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+            >
+              <Link href="/products">
+                Explore More
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -440,7 +688,6 @@ export default function ERPCompanyWebsite() {
         </div>
       </section>
 
-
       {/* FAQ Section */}
       <section id="faq" className="py-16 px-4 bg-muted/10">
         <div className="container mx-auto max-w-4xl">
@@ -452,59 +699,58 @@ export default function ERPCompanyWebsite() {
               Get answers to common questions about our ERP solutions
             </p>
           </div>
+
           <Accordion type="single" collapsible className="space-y-4">
-            <AccordionItem
-              value="item-1"
-              className="bg-card border border-border/50 rounded-lg px-6"
-            >
-              <AccordionTrigger className="text-left">
-                How long does ERP implementation take?
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
-                Implementation time varies based on company size and complexity,
-                but typically ranges from 3-6 months for small to medium
-                businesses and 6-12 months for larger enterprises.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem
-              value="item-2"
-              className="bg-card border border-border/50 rounded-lg px-6"
-            >
-              <AccordionTrigger className="text-left">
-                Is training included in the package?
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
-                Yes, we provide comprehensive training for all users, including
-                administrators and end-users. Training includes online sessions,
-                documentation, and ongoing support.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem
-              value="item-3"
-              className="bg-card border border-border/50 rounded-lg px-6"
-            >
-              <AccordionTrigger className="text-left">
-                Can the system integrate with existing software?
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
-                Absolutely. Our ERP solution offers robust integration
-                capabilities with popular business applications, accounting
-                software, and third-party systems through APIs and connectors.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem
-              value="item-4"
-              className="bg-card border border-border/50 rounded-lg px-6"
-            >
-              <AccordionTrigger className="text-left">
-                What kind of support do you provide?
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
-                We offer 24/7 technical support, regular system updates,
-                maintenance, and dedicated customer success managers to ensure
-                your ERP system runs smoothly.
-              </AccordionContent>
-            </AccordionItem>
+            {[
+              {
+                question: "How long does ERP implementation take?",
+                answer:
+                  "With our config-first approach, most businesses go live in 4–8 weeks. Larger, multi-location setups may take longer, but we ensure measurable progress from week one.",
+              },
+              {
+                question: "Is training included in the package?",
+                answer:
+                  "Yes. We provide role-based training for your team, along with simple guides and video sessions. Our aim is to make ERP adoption zero-confusion for daily users.",
+              },
+              {
+                question: "Can the system integrate with existing software?",
+                answer:
+                  "Absolutely. Our ERP connects with accounting tools, WhatsApp, payment gateways, IoT devices, and custom apps through APIs and middleware. We focus on smooth transitions, not forcing replacements.",
+              },
+              {
+                question: "What kind of support do you provide?",
+                answer:
+                  "We offer continuous companionship — WhatsApp support, remote assistance, and on-site visits (if needed). Our job doesn’t end at go-live; we evolve the system with your business.",
+              },
+              {
+                question: "Is ERP suitable for MSMEs?",
+                answer:
+                  "Yes. Our solutions are MSME-first, with affordable pricing, simple interfaces, and compliance (GST, e-invoicing, DPDP Act) built in.",
+              },
+              {
+                question: "Will my data be secure?",
+                answer:
+                  "Yes. We ensure enterprise-grade security with cloud backups, role-based access, and data encryption — the same standards used by large enterprises.",
+              },
+              {
+                question: "Do you provide industry-specific modules?",
+                answer:
+                  "Yes. We offer Agriculture, Manufacturing, Trading, and Service-focused ERP modules, with KPIs tailored to each sector.",
+              },
+            ].map((faq, index) => (
+              <AccordionItem
+                key={index}
+                value={`item-${index + 1}`}
+                className="bg-card border border-border/50 rounded-lg px-6"
+              >
+                <AccordionTrigger className="text-left">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
           </Accordion>
         </div>
       </section>
@@ -536,7 +782,6 @@ export default function ERPCompanyWebsite() {
             </Button> */}
           </div>
         </div>
-        
       </section>
 
       <Footer />

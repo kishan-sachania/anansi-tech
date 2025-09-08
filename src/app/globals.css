@@ -158,12 +158,12 @@
   
   /* Reduce font weight for headings except h1 (landing page quote) */
   h2, h3, h4, h5, h6 {
-    font-weight: 400; /* Normal weight for subheadings */
+    font-weight: 200; /* Normal weight for subheadings */
   }
   
   /* Keep h1 bold for landing page quote */
   h1 {
-    font-weight: 700;
+    font-weight: 400;
   }
   
   
@@ -177,7 +177,7 @@
   div.font-bold,
   p.font-bold,
   .font-semibold {
-    font-weight: 400 !important; /* Override bold/semibold classes for non-headings */
+    font-weight: 300 !important; /* Override bold/semibold classes for non-headings */
   }
   
   /* Keep bold only for actual headings */
@@ -194,13 +194,6 @@
     font-weight: 400 !important;
   }
 
-  /* Button hover effect - turn to fully rounded */
-  button:hover,
-  [role="button"]:hover,
-  .btn:hover {
-    border-radius: 9999px !important;
-    transition: border-radius 0.3s ease-in-out !important;
-  }
 
   /* Enhanced transitions for various elements */
   
