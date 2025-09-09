@@ -396,7 +396,7 @@ export default function ERPCompanyWebsite() {
           <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
             Enterprise Resource Planning Solutions
           </Badge>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-balance font-heading">
+          <h1 className="text-4xl md:text-6xl font-semibold mb-6 text-balance font-heading">
             Your business deserves more than tools
             <span className="text-primary"> it deserves a companion.</span>
           </h1>
@@ -426,7 +426,7 @@ export default function ERPCompanyWebsite() {
       <section id="solutions" className="py-16 px-4 bg-muted/10">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 font-heading">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4 font-heading">
               What We Solve as ERP
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -488,7 +488,7 @@ export default function ERPCompanyWebsite() {
       <section id="industries" className="py-16 px-4 bg-muted/10">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4">
               Industries We Serve
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -531,7 +531,7 @@ export default function ERPCompanyWebsite() {
       <section id="products" className="py-16 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4">
               Our Products
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -624,7 +624,7 @@ export default function ERPCompanyWebsite() {
       <section id="advantages" className="py-16 px-4 bg-muted/10">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4">
               Why Choose ERPFlow
             </h2>
             <p className="text-lg text-primary-foreground max-w-2xl mx-auto">
@@ -692,7 +692,7 @@ export default function ERPCompanyWebsite() {
       <section id="faq" className="py-16 px-4 bg-muted/10">
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4">
               Frequently Asked Questions
             </h2>
             <p className="text-lg text-muted-foreground">
@@ -758,7 +758,7 @@ export default function ERPCompanyWebsite() {
       {/* Contact CTA Section */}
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-semibold mb-4">
             Ready to Get Started?
           </h2>
           <p className="text-lg text-muted-foreground mb-8">

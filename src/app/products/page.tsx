@@ -282,7 +282,7 @@ export default function ProductsPage() {
           <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
             Our Products
           </Badge>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-balance">
+          <h1 className="text-4xl md:text-6xl font-semibold mb-6 text-balance">
             Powerful ERP <span className="text-primary">Modules</span>
           </h1>
           <p className="text-xl text-muted-foreground mb-8 text-pretty max-w-2xl mx-auto">
@@ -373,7 +373,7 @@ export default function ProductsPage() {
       <section className="py-16 px-4 bg-muted/30">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4">
               Complete Enterprise Solution
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -384,7 +384,7 @@ export default function ProductsPage() {
 
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h3 className="text-2xl font-bold mb-6">
+              <h3 className="text-2xl font-semibold mb-6">
                 Why Choose Our Complete Suite?
               </h3>
               <div className="space-y-4">
@@ -431,14 +431,14 @@ export default function ProductsPage() {
 
             <Card className="border-border/50">
               <CardHeader>
-                <CardTitle className="text-2xl">Enterprise Suite</CardTitle>
+                <CardTitle className="text-2xl font-semibold">Enterprise Suite</CardTitle>
                 <CardDescription>
                   Complete ERP solution with all modules
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary mb-2">
+                  <div className="text-2xl font-semibold text-primary mb-2">
                     Profitable Package
                   </div>
 

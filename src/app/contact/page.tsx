@@ -55,7 +55,7 @@ export default function ContactPage() {
       {/* Hero Section */}
       <section className="py-20 px-4">
         <div className="container mx-auto text-center max-w-4xl">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-balance">
+          <h1 className="text-4xl md:text-6xl font-semibold mb-6 text-balance">
             Get In <span className="text-primary">Touch</span>
           </h1>
           <p className="text-xl text-muted-foreground mb-8 text-pretty max-w-2xl mx-auto">
@@ -207,7 +207,7 @@ export default function ContactPage() {
       {/* CTA Section */}
       <section className="py-16 px-4 bg-muted/30">
         <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-semibold mb-4">
             Ready to Get Started?
           </h2>
           <p className="text-lg text-muted-foreground mb-8">
