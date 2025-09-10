@@ -117,6 +117,14 @@ export function Footer() {
                   System Status
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/privacy-policy"
+                  className="hover:text-primary transition-colors"
+                >
+                Privacy Policy
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
