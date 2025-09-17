@@ -24,7 +24,6 @@ import { Footer } from "@/components/footer";
 //     image: "https://drive.google.com/thumbnail?id=1M9Oqw7sLfeQs-cdAQ6Yo1kPQZhcFz3-i",
 //   },
 
-
 // ];
 
 const allTeamMembers = [
@@ -41,26 +40,30 @@ const allTeamMembers = [
     name: "Krishna Kachhad",
     role: "Software Developer",
     department: "Odoo, ERPnext",
-    image: "https://drive.google.com/thumbnail?id=1i1uWV9qLJiRIGh94JYAaTmOcNaJFimDl"
+    image:
+      "https://drive.google.com/thumbnail?id=1i1uWV9qLJiRIGh94JYAaTmOcNaJFimDl",
   },
 
   {
     name: "Dhruvkumar Mashru",
     role: "Software Developer",
     department: "Odoo, ERPnext",
-    image:  "https://drive.google.com/thumbnail?id=1M-CiH6Ipdfy41m8AG_T4bMO2ViQ4lWp5"
+    image:
+      "https://drive.google.com/thumbnail?id=1M-CiH6Ipdfy41m8AG_T4bMO2ViQ4lWp5",
   },
   {
     name: "Meet Tank",
     role: "Software Developer",
     department: "Odoo, ERPnext",
-     image: "https://drive.google.com/thumbnail?id=1t4bpbwR6NO91CvcXvuMiAl9KHl2dZ2QG"
+    image:
+      "https://drive.google.com/thumbnail?id=1t4bpbwR6NO91CvcXvuMiAl9KHl2dZ2QG",
   },
   {
     name: "Yashvi Kothiya",
     role: "Software Developer",
     department: "Odoo, ERPnext",
-    image: "https://drive.google.com/thumbnail?id=1JcZyW4wc0cwRdMP3DTqSR12ulnwBWeqs"
+    image:
+      "https://drive.google.com/thumbnail?id=1JcZyW4wc0cwRdMP3DTqSR12ulnwBWeqs",
   },
   {
     name: "Bhumika Siddhapura",
@@ -71,25 +74,29 @@ const allTeamMembers = [
     name: "Sagrika Dobariya",
     role: "Software Developer",
     department: "Odoo, ERPnext",
-    image: "https://drive.google.com/thumbnail?id=1Tg6UREb1IbucC1pcV50uzciiVvJqI7Gj"
+    image:
+      "https://drive.google.com/thumbnail?id=1Tg6UREb1IbucC1pcV50uzciiVvJqI7Gj",
   },
   {
     name: "Prashant Panchani",
     role: "Software Developer",
     department: "Odoo, ERPnext",
-    image:"https://drive.google.com/thumbnail?id=1M9Oqw7sLfeQs-cdAQ6Yo1kPQZhcFz3-i"
+    image:
+      "https://drive.google.com/thumbnail?id=1M9Oqw7sLfeQs-cdAQ6Yo1kPQZhcFz3-i",
   },
   {
     name: "Mihir Mehta",
     role: "Software Developer",
     department: "Odoo, ERPnext",
-     image: "https://drive.google.com/thumbnail?id=1AzkADLpVJeVr5S4WAlhdjz8uIDULu4Su"
+    image:
+      "https://drive.google.com/thumbnail?id=1AzkADLpVJeVr5S4WAlhdjz8uIDULu4Su",
   },
   {
     name: "Dhruvil Chovatiya",
     role: "Software Developer",
     department: "Odoo, ERPnext",
-    image: "https://drive.google.com/thumbnail?id=1wyNYa6P7GZ52nOLq9M08Jbf_xOARJjtl"
+    image:
+      "https://drive.google.com/thumbnail?id=1wyNYa6P7GZ52nOLq9M08Jbf_xOARJjtl",
   },
   {
     name: "Prince Senjaliya",
@@ -100,17 +107,22 @@ const allTeamMembers = [
     name: "Saloni Parmar",
     role: "Software Developer",
     department: "Full Stack Developer",
+    image:
+      "https://drive.google.com/thumbnail?id=1JbX5dtxX_94T14BarFSPYEsDcRu4kwxr",
   },
   {
     name: "Krishna Hothi",
     role: "Software Developer",
     department: "Full Stack Developer",
+    image:
+      "https://drive.google.com/thumbnail?id=19FblYMVBu2BPG4GK2zPa4pXY3GdcGLQp",
   },
   {
     name: "Kishan Sachania",
     role: "Software Developer",
     department: "Full Stack Developer",
-    image:"https://drive.google.com/thumbnail?id=12dx7nZdfdUFoxl8yRxT8M6EBQNo25I40"
+    image:
+      "https://drive.google.com/thumbnail?id=12dx7nZdfdUFoxl8yRxT8M6EBQNo25I40",
   },
 ];
 
