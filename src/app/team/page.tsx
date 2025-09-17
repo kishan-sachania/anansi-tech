@@ -126,11 +126,64 @@ const allTeamMembers = [
   },
 ];
 
+const whyChooseCards = [
+  {
+    title: "Embedded Approach",
+    description: "You don't act like an external vendor. You integrate closely and work like part of the client's own team."
+  },
+  {
+    title: "MSME-First Solutions", 
+    description: "Your offerings are designed with small & medium businesses in mind, especially in India where their needs differ from large enterprises."
+  },
+  {
+    title: "KPI-Driven Results",
+    description: "You tie every module or feature to measurable outcomes (performance, efficiency, cost reduction)."
+  },
+  {
+    title: "End-to-End Expertise",
+    description: "You cover a wide spectrum: ERP, IoT, automation, fintech — so clients don't need multiple vendors."
+  },
+  {
+    title: "Rapid Implementation",
+    description: "Config-first deployments — setup in weeks instead of months (faster time to value)."
+  },
+  {
+    title: "Scalable & Flexible",
+    description: "Start small (single unit) and expand (multi-branch, multi-location) without disruption."
+  },
+  {
+    title: "Always Accessible",
+    description: "Accessible on mobile, web, and even WhatsApp — so users can engage anytime, anywhere."
+  },
+  {
+    title: "Domain Knowledge",
+    description: "You bring specialized understanding of sectors like agriculture, manufacturing, and trade."
+  },
+  {
+    title: "Proven Tech Stack",
+    description: "You build on trusted open-source and modern technologies: ERPNext, Odoo, Node-RED, React, Flutter."
+  },
+  {
+    title: "Continuous Companionship",
+    description: "You don't just \"go live and leave\" — you provide ongoing partnership to ensure long-term success."
+  }
+];
+
 export default function TeamPage() {
   const [showAll, setShowAll] = useState(false);
   const [imageErrors, setImageErrors] = useState(new Set<string>());
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   const visibleMembers = showAll ? allTeamMembers : allTeamMembers.slice(0, 3);
+
+  // Hover handling functions for Why Choose cards
+  const handleCardMouseEnter = (index: number) => {
+    setHoveredCard(index);
+  };
+
+  const handleCardMouseLeave = () => {
+    setHoveredCard(null);
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -179,6 +232,60 @@ export default function TeamPage() {
                 Client Satisfaction
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+
+      {/* Why Choose Our ERP Section */}
+      <section id="why-choose" className="py-16 px-4 bg-muted/10">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4">
+              Why Choose Our ERP?
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Discover what makes our ERP solutions stand out in the market
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {whyChooseCards.map((card, index) => (
+              <div
+                key={index}
+                className={`transition-all duration-300 flex ${
+                  hoveredCard === index
+                    ? 'z-10'
+                    : hoveredCard !== null
+                      ? 'blur-[1px]'
+                      : ''
+                }`}
+                onMouseEnter={() => handleCardMouseEnter(index)}
+                onMouseLeave={handleCardMouseLeave}
+              >
+                <Card
+                  className={`border-border/50 transition-all duration-300 flex flex-col h-full ${
+                    hoveredCard === index
+                      ? 'scale-105 shadow-2xl ring-2 ring-primary/50 bg-primary/5 z-10'
+                      : 'hover:scale-102'
+                  }`}
+                >
+                  <CardHeader className="flex-shrink-0">
+                    <CardTitle className={`text-lg font-semibold transition-colors duration-300 ${
+                      hoveredCard === index ? 'text-primary' : ''
+                    }`}>
+                      {card.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex-grow flex flex-col">
+                    <p className={`transition-colors duration-300 flex-grow ${
+                      hoveredCard === index ? 'text-foreground' : 'text-muted-foreground'
+                    }`}>
+                      {card.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
           </div>
         </div>
       </section>

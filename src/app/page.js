@@ -49,7 +49,6 @@ export default function ERPCompanyWebsite() {
     setHoveredProduct(null);
   }, []);
 
-
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -493,6 +492,7 @@ export default function ERPCompanyWebsite() {
       {/* Services Section */}
       <Services />
 
+
       {/* Industries Section
       <section id="industries" className="py-16 px-4 bg-muted/10">
         <div className="container mx-auto max-w-6xl">
@@ -550,54 +550,86 @@ export default function ERPCompanyWebsite() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
-                name: "Financial Management",
-                features: ["Accounting", "Budgeting", "Financial Reporting"],
+                name: "Finance & Accounting",
+                features: [
+                  "Invoice processing in 1 day",
+                  "GST/TDS filing with 90% fewer errors",
+                  "Bank reconciliation automation",
+                  "Faster monthly closing",
+                  "Expense tracking with +30% visibility",
+                ],
               },
               {
-                name: "Supply Chain",
-                features: ["Inventory", "Procurement", "Vendor Management"],
+                name: "Sales & CRM",
+                features: [
+                  "Lead conversion growth +25%",
+                  "Faster quotation turnaround (60%)",
+                  "Shorter sales cycle (20%)",
+                  "Faster customer response (40%)",
+                  "Lower customer acquisition cost (15%)",
+                ],
+              },
+              {
+                name: "Manufacturing",
+                features: [
+                  "Bill of Materials (BOM)",
+                  "Work Orders",
+                  "Production Planning",
+                  "Shop Floor Control",
+                  "Quality Management",
+                  "Shorter production lead time (30%)",
+                ],
               },
               {
                 name: "Human Resources",
+
                 features: [
-                  "Payroll",
                   "Employee Records",
-                  "Performance Management",
+                  "Improved employee satisfaction (+15%)",
+                  "Faster leave approval (50%)",
+                  "100% appraisal completion",
+                  "Lower overtime cost (10%)",  
                 ],
               },
               {
-                name: "Customer Management",
-                features: ["CRM", "Sales Tracking", "Customer Support"],
-              },
-              {
-                name: "Project Management",
+                name: "Projects",
                 features: [
-                  "Task Tracking",
-                  "Resource Planning",
-                  "Time Management",
+                  "Task Management",
+                  "Gantt Charts",
+                  "Resource Allocation",
+                  "Fewer project delivery delays (35%)",
+                  "Better resource utilization (+20%)",
                 ],
               },
               {
-                name: "Business Intelligence",
-                features: ["Analytics", "Dashboards", "Reporting"],
+                name: "Quality Control",
+                features: [
+                  "Lower rejection rate (20%)",
+                  "Fewer customer complaints (50%)",
+                  "100% inspection compliance",
+                  "Faster NCR resolution (40%)",
+                  "Fewer repeat defects (50%)",
+                ],
               },
             ].map((product, index) => (
               <Card
                 key={index}
                 className={`border-border/50 transition-all duration-200 flex flex-col h-full cursor-pointer ${
                   hoveredProduct === index
-                    ? 'scale-105 shadow-2xl ring-2 ring-primary/50 bg-primary/5 z-10'
+                    ? "scale-105 shadow-2xl ring-2 ring-primary/50 bg-primary/5 z-10"
                     : hoveredProduct !== null
-                      ? 'blur-[1px]'
-                      : 'hover:scale-102 hover:shadow-lg'
+                    ? "blur-[1px]"
+                    : "hover:scale-102 hover:shadow-lg"
                 }`}
                 onMouseEnter={() => handleProductMouseEnter(index)}
                 onMouseLeave={handleProductMouseLeave}
               >
                 <CardHeader className="flex-shrink-0">
-                  <CardTitle className={`text-lg font-semibold transition-colors duration-200 ${
-                    hoveredProduct === index ? 'text-primary' : ''
-                  }`}>
+                  <CardTitle
+                    className={`text-lg font-semibold transition-colors duration-200 ${
+                      hoveredProduct === index ? "text-primary" : ""
+                    }`}
+                  >
                     {product.name}
                   </CardTitle>
                 </CardHeader>
@@ -607,12 +639,18 @@ export default function ERPCompanyWebsite() {
                       <li
                         key={idx}
                         className={`flex items-center text-sm transition-colors duration-200 ${
-                          hoveredProduct === index ? 'text-foreground' : 'text-muted-foreground'
+                          hoveredProduct === index
+                            ? "text-foreground"
+                            : "text-muted-foreground"
                         }`}
                       >
-                        <CheckCircle className={`h-4 w-4 mr-2 transition-colors duration-200 ${
-                          hoveredProduct === index ? 'text-primary' : 'text-primary'
-                        }`} />
+                        <CheckCircle
+                          className={`h-4 w-4 mr-2 transition-colors duration-200 ${
+                            hoveredProduct === index
+                              ? "text-primary"
+                              : "text-primary"
+                          }`}
+                        />
                         {feature}
                       </li>
                     ))}
