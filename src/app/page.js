@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { useTheme } from "@/contexts/theme-context";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -39,6 +39,15 @@ export default function ERPCompanyWebsite() {
       };
     }
   }, [theme]);
+
+  // Hover handling functions for products - simplified like services
+  const handleProductMouseEnter = useCallback((index) => {
+    setHoveredProduct(index);
+  }, []);
+
+  const handleProductMouseLeave = useCallback(() => {
+    setHoveredProduct(null);
+  }, []);
 
 
   return (
@@ -484,7 +493,7 @@ export default function ERPCompanyWebsite() {
       {/* Services Section */}
       <Services />
 
-      {/* Industries Section */}
+      {/* Industries Section
       <section id="industries" className="py-16 px-4 bg-muted/10">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
@@ -525,7 +534,7 @@ export default function ERPCompanyWebsite() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Products Section */}
       <section id="products" className="py-16 px-4">
@@ -575,27 +584,35 @@ export default function ERPCompanyWebsite() {
             ].map((product, index) => (
               <Card
                 key={index}
-                className={`border-border/50 hover:shadow-lg transition-all duration-300 ${
-                  hoveredProduct !== null && hoveredProduct !== index
-                    ? "opacity-30"
-                    : "opacity-100"
+                className={`border-border/50 transition-all duration-200 flex flex-col h-full cursor-pointer ${
+                  hoveredProduct === index
+                    ? 'scale-105 shadow-2xl ring-2 ring-primary/50 bg-primary/5 z-10'
+                    : hoveredProduct !== null
+                      ? 'blur-[1px]'
+                      : 'hover:scale-102 hover:shadow-lg'
                 }`}
-                onMouseEnter={() => setHoveredProduct(index)}
-                onMouseLeave={() => setHoveredProduct(null)}
+                onMouseEnter={() => handleProductMouseEnter(index)}
+                onMouseLeave={handleProductMouseLeave}
               >
-                <CardHeader>
-                  <CardTitle className="text-lg font-semibold">
+                <CardHeader className="flex-shrink-0">
+                  <CardTitle className={`text-lg font-semibold transition-colors duration-200 ${
+                    hoveredProduct === index ? 'text-primary' : ''
+                  }`}>
                     {product.name}
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
+                <CardContent className="flex-grow flex flex-col">
+                  <ul className="space-y-2 flex-grow">
                     {product.features.map((feature, idx) => (
                       <li
                         key={idx}
-                        className="flex items-center text-sm text-muted-foreground"
+                        className={`flex items-center text-sm transition-colors duration-200 ${
+                          hoveredProduct === index ? 'text-foreground' : 'text-muted-foreground'
+                        }`}
                       >
-                        <CheckCircle className="h-4 w-4 text-primary mr-2" />
+                        <CheckCircle className={`h-4 w-4 mr-2 transition-colors duration-200 ${
+                          hoveredProduct === index ? 'text-primary' : 'text-primary'
+                        }`} />
                         {feature}
                       </li>
                     ))}
@@ -609,7 +626,7 @@ export default function ERPCompanyWebsite() {
               asChild
               size="lg"
               variant="outline"
-              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+              className="border-primary text-primary bg-tranhover:bg-primary  hover:text-white"
             >
               <Link href="/products">
                 Explore More

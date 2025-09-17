@@ -14,41 +14,24 @@ import {
   CheckCircle,
   ArrowRight,
   Users,
-  BarChart3,
-  Factory,
   ClipboardList,
   UserCheck,
   PieChart,
   Truck,
   Wifi,
   Leaf,
-  Banknote,
-  Handshake,
-  ShoppingCart,
-  Package,
   ShieldCheck,
+  HardHat,
+  Archive,
+  PackageCheck,
+  CreditCard,
 } from "lucide-react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import Link from "next/link";
 import { useTheme } from "@/contexts/theme-context";
 
-
 const products = [
-  {
-    name: "Financial Management",
-    description:
-      "Comprehensive financial tools for accounting, budgeting, and reporting",
-    features: [
-      "General Ledger",
-      "Accounts Payable/Receivable",
-      "Budget Planning",
-      "Financial Reporting",
-      "Tax Management",
-    ],
-    icon: BarChart3, // lucide-react
-    category: "Finance",
-  },
   {
     name: "Supply Chain Management",
     description: "Optimize procurement, inventory, and vendor relationships",
@@ -62,19 +45,7 @@ const products = [
     icon: Truck, // lucide-react
     category: "Operations",
   },
-  {
-    name: "Human Resources",
-    description: "Manage your workforce with ease and transparency",
-    features: [
-      "Employee Records",
-      "Payroll Processing",
-      "Leave & Attendance",
-      "Performance Reviews",
-      "Recruitment Management",
-    ],
-    icon: Users, // lucide-react
-    category: "HR",
-  },
+
   {
     name: "Customer Relationship Management",
     description: "Streamline customer interactions and sales processes",
@@ -86,34 +57,9 @@ const products = [
       "Contact Management",
     ],
     icon: UserCheck, // lucide-react
-    category: "Sales & CRM",
+    category: "Operations",
   },
-  {
-    name: "Project Management",
-    description: "Plan, track, and deliver projects efficiently",
-    features: [
-      "Task Management",
-      "Gantt Charts",
-      "Resource Allocation",
-      "Time Tracking",
-      "Collaboration Tools",
-    ],
-    icon: ClipboardList, // lucide-react
-    category: "Projects",
-  },
-  {
-    name: "Manufacturing",
-    description: "End-to-end production management for manufacturers",
-    features: [
-      "Bill of Materials (BOM)",
-      "Work Orders",
-      "Production Planning",
-      "Shop Floor Control",
-      "Quality Management",
-    ],
-    icon: Factory, // lucide-react (or replace with Package if Factory not available)
-    category: "Manufacturing",
-  },
+
   {
     name: "Business Intelligence",
     description: "Turn raw data into actionable insights",
@@ -143,103 +89,165 @@ const products = [
   },
   {
     name: "Finance & Accounting",
-    description: "Automate financial operations and improve accuracy across accounting processes.",
+    description: "Manage invoices, expenses, cash flow, and audits efficiently",
     features: [
-      "Faster invoice processing & monthly closing",
-      "Accurate GST/TDS filing & audit readiness",
-      "80% less manual work in reconciliations",
-      "Better cash flow forecasting & working capital efficiency",
+      "Invoice processing in 1 day",
+      "GST/TDS filing with 90% fewer errors",
+      "Bank reconciliation automation",
+      "Faster monthly closing",
+      "Expense tracking with +30% visibility",
+      "Accurate cash flow forecasting (+25%)",
+      "Reduced budget variance (15%)",
+      "Faster audit preparation (25%)",
+      "Duplicate payment prevention",
+      "Improved working capital efficiency (+20%)",
     ],
-    icon: Banknote,
-    category: "ERP",
+    icon: CreditCard,
+    category: "Finance",
   },
   {
     name: "Sales & CRM",
-    description: "Boost sales effectiveness and customer engagement with integrated CRM.",
+    description: "Enhance customer relationships and sales performance",
     features: [
-      "25% higher lead conversion",
-      "60% faster quotation turnaround",
-      "20% shorter sales cycle",
-      "Improved retention & upsell opportunities",
+      "Lead conversion growth +25%",
+      "Faster quotation turnaround (60%)",
+      "Shorter sales cycle (20%)",
+      "Faster customer response (40%)",
+      "Lower customer acquisition cost (15%)",
+      "Upsell/cross-sell ratio +15%",
+      "Average deal size growth +10%",
+      "Improved customer retention (+12%)",
+      "Sales forecast accuracy +20%",
+      "Better win/loss ratio (+18%)",
     ],
-    icon: Handshake,
-    category: "ERP",
+    icon: UserCheck,
+    category: "Finance",
   },
   {
     name: "Purchase & Vendor Management",
-    description: "Streamline procurement cycles and strengthen supplier relationships.",
+    description: "Streamline procurement and vendor relationships",
     features: [
-      "40% shorter procurement cycle",
-      "30% faster approvals",
-      "Better cost savings via bidding",
-      "Higher vendor reliability & compliance",
+      "Shorter procurement cycle (40%)",
+      "Improved vendor on-time delivery (+25%)",
+      "Faster purchase order approvals (30%)",
+      "Cost savings via vendor bidding (10–15%)",
+      "Reduced bill/payment mismatches (20%)",
+      "Higher supplier satisfaction (+15%)",
+      "Reduced emergency purchases (30%)",
+      "Lower supplier rejection rate (20%)",
+      "Lower purchase price variance (12%)",
+      "Full contract compliance",
     ],
-    icon: ShoppingCart,
-    category: "ERP",
+    icon: PackageCheck,
+    category: "Manufacturing",
   },
   {
     name: "Inventory & Warehouse",
-    description: "Enhance inventory visibility and reduce stock-related losses.",
+    description: "Optimize inventory, warehouse space, and stock accuracy",
     features: [
-      "98% stock accuracy",
-      "30% lower dead stock value",
-      "15% lower carrying costs",
-      "50% fewer stock-out incidents",
+      "High stock accuracy (98%)",
+      "Reduced dead stock value (30%)",
+      "Order fulfillment accuracy (99%)",
+      "Better warehouse space utilization (+20%)",
+      "Lower inventory carrying cost (15%)",
+      "Fewer stock-out incidents (50%)",
+      "Reduced shrinkage/theft (25%)",
+      "Improved inventory turnover (+15%)",
+      "Accurate reorder levels (+20%)",
+      "Cycle count variance <2%",
     ],
-    icon: Package,
-    category: "ERP",
+    icon: Archive,
+    category: "Manufacturing",
   },
   {
     name: "Manufacturing",
-    description: "Optimize production efficiency and resource utilization.",
+    description: "Increase production efficiency and reduce waste",
     features: [
-      "30% shorter production lead time",
-      "20% higher machine & labor productivity",
-      "15% less raw material wastage",
-      "25% fewer defects & reworks",
+      "Bill of Materials (BOM)",
+      "Work Orders",
+      "Production Planning",
+      "Shop Floor Control",
+      "Quality Management",
+      "Shorter production lead time (30%)",
+      "Higher machine utilization (+20%)",
+      "Reduced raw material wastage (15%)",
+      "Faster work order completion (+25%)",
+      "Higher on-time delivery (+18%)",
+      "Lower cost per unit (10%)",
+      "Improved labor productivity (+15%)",
+      "Higher capacity utilization (+20%)",
+      "Fewer rework/rejection defects (25%)",
+      "Reduced downtime hours (30%)",
     ],
-    icon: Factory,
-    category: "ERP",
+    icon: HardHat,
+    category: "Manufacturing",
   },
   {
     name: "Human Resources",
-    description: "Simplify HR management and improve workforce satisfaction.",
+    description:
+      "Manage payroll, attendance, recruitment, and employee satisfaction",
     features: [
-      "70% faster payroll processing",
-      "30% shorter recruitment cycle",
-      "Higher employee satisfaction & retention",
-      "50% faster leave approvals & service requests",
+      "Employee Records",
+
+      "Faster payroll processing (+70%)",
+      "Attendance accuracy (95%)",
+      "Shorter recruitment cycle (30%)",
+      "Lower employee turnover (10%)",
+      "Higher training participation (+20%)",
+      "Improved employee satisfaction (+15%)",
+      "Faster leave approval (50%)",
+      "100% appraisal completion",
+      "Lower overtime cost (10%)",
+      "Faster HR service ticket resolution (40%)",
     ],
     icon: Users,
-    category: "ERP",
+    category: "HR",
   },
   {
     name: "Projects",
-    description: "Deliver projects on time and within budget with complete visibility.",
+    description: "Plan, track, and deliver projects efficiently",
     features: [
-      "35% fewer delivery delays",
-      "20% higher resource utilization",
-      "25% reduction in budget variance",
-      "More accurate timesheets & billing",
+      "Task Management",
+      "Gantt Charts",
+      "Resource Allocation",
+      "Time Tracking",
+      "Collaboration Tools",
+      "Fewer project delivery delays (35%)",
+      "Better resource utilization (+20%)",
+      "Lower budget variance (25%)",
+      "Improved timesheet accuracy (+30%)",
+      "Higher billing accuracy (+25%)",
+      "Better milestone achievement (+15%)",
+      "Higher project profitability (+12%)",
+      "Shorter project cycle (20%)",
+      "Improved client satisfaction (+10%)",
+      "Faster change request handling (20%)",
     ],
     icon: ClipboardList,
-    category: "ERP",
+    category: "Projects",
   },
   {
     name: "Quality Control",
-    description: "Ensure consistent product quality and compliance across operations.",
+    description: "Ensure product quality and compliance with standards",
     features: [
-      "20% lower rejection rates",
-      "50% fewer complaints & repeat defects",
-      "100% inspection & audit compliance",
-      "Faster NCR resolution & improved FPY",
+      "Lower rejection rate (20%)",
+      "Fewer customer complaints (50%)",
+      "100% inspection compliance",
+      "Faster NCR resolution (40%)",
+      "Fewer repeat defects (50%)",
+      "100% compliant quarantine stock handling",
+      "100% quality audit success",
+      "Lower supplier defect rate (20%)",
+      "Higher first pass yield (+15%)",
+      "Fewer warranty claims (25%)",
     ],
     icon: ShieldCheck,
-    category: "ERP",
+    category: "Manufacturing",
   },
   {
     name: "Agriculture & IoT",
-    description: "Leverage IoT and ERP for smarter farming, greenhouse, and agri-operations.",
+    description:
+      "Leverage IoT and ERP for smarter farming, greenhouse, and agri-operations.",
     features: [
       "40% less water usage & 15% more fertilizer efficiency",
       "25% higher crop yield per acre",
@@ -248,7 +256,7 @@ const products = [
     ],
     icon: Leaf,
     category: "IoT + Agriculture ERP",
-  },  
+  },
 ];
 
 const categories = [
@@ -258,14 +266,24 @@ const categories = [
   "HR",
   "Analytics",
   "IoT + Agriculture ERP",
-  "ERP",
   "Manufacturing",
   "Projects",
 ];
 
 export default function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [expandedCards, setExpandedCards] = useState<Set<number>>(new Set());
   const { theme } = useTheme();
+
+  const toggleCardExpansion = (index: number) => {
+    const newExpandedCards = new Set(expandedCards);
+    if (newExpandedCards.has(index)) {
+      newExpandedCards.delete(index);
+    } else {
+      newExpandedCards.add(index);
+    }
+    setExpandedCards(newExpandedCards);
+  };
 
   const filteredProducts =
     selectedCategory === "All"
@@ -302,7 +320,11 @@ export default function ProductsPage() {
                 key={category}
                 variant={category === selectedCategory ? "default" : "outline"}
                 size="sm"
-                className={`mb-2 ${category === selectedCategory || theme === "dark" ? "text-white" : "text-black"}`}
+                className={`mb-2 ${
+                  category === selectedCategory || theme === "dark"
+                    ? "text-white"
+                    : "text-black"
+                }`}
                 onClick={() => setSelectedCategory(category)}
               >
                 {category}
@@ -325,12 +347,20 @@ export default function ProductsPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredProducts.map((product, index) => {
               const IconComponent = product.icon;
+              const isExpanded = expandedCards.has(index);
+              const initialFeaturesCount = 5;
+              const displayedFeatures = isExpanded
+                ? product.features
+                : product.features.slice(0, initialFeaturesCount);
+              const hasMoreFeatures =
+                product.features.length > initialFeaturesCount;
+
               return (
                 <Card
                   key={`${product.category}-${index}`}
-                  className="border-border/50 hover:shadow-lg transition-all duration-500 hover:scale-105  hover:bg-gradient-to-br hover:from-[#591E4F] hover:via-[#A62985] hover:to-[#D9B0CE] hover:text-white group relative overflow-hidden"
+                  className="border-border/50 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:bg-gradient-to-br hover:from-[#591E4F] hover:via-[#A62985] hover:to-[#D9B0CE] hover:text-white group relative overflow-hidden flex flex-col h-full"
                 >
-                  <CardHeader>
+                  <CardHeader className="flex-shrink-0">
                     <div className="flex items-center justify-between mb-4">
                       <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-colors duration-500">
                         <IconComponent className="h-6 w-6 text-primary group-hover:text-white transition-colors duration-500" />
@@ -349,9 +379,9 @@ export default function ProductsPage() {
                       {product.description}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2 mb-6">
-                      {product.features.map((feature, idx) => (
+                  <CardContent className="flex flex-col flex-grow">
+                    <ul className="space-y-2 mb-4 flex-grow">
+                      {displayedFeatures.map((feature, idx) => (
                         <li
                           key={idx}
                           className="flex items-center text-sm text-muted-foreground group-hover:text-white/90 transition-colors duration-500"
@@ -361,6 +391,20 @@ export default function ProductsPage() {
                         </li>
                       ))}
                     </ul>
+                    {hasMoreFeatures && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => toggleCardExpansion(index)}
+                        className="w-full mt-auto group-hover:bg-white/20 group-hover:text-white transition-colors duration-500"
+                      >
+                        {isExpanded
+                          ? "See Less"
+                          : `See More (${
+                              product.features.length - initialFeaturesCount
+                            } more)`}
+                      </Button>
+                    )}
                   </CardContent>
                 </Card>
               );
@@ -431,7 +475,9 @@ export default function ProductsPage() {
 
             <Card className="border-border/50">
               <CardHeader>
-                <CardTitle className="text-2xl font-semibold">Enterprise Suite</CardTitle>
+                <CardTitle className="text-2xl font-semibold">
+                  Enterprise Suite
+                </CardTitle>
                 <CardDescription>
                   Complete ERP solution with all modules
                 </CardDescription>
@@ -470,7 +516,11 @@ export default function ProductsPage() {
                   </div>
                 </div>
 
-                <Button asChild className="w-full bg-secondary/80 text-white" size="lg">
+                <Button
+                  asChild
+                  className="w-full bg-secondary/80 text-white"
+                  size="lg"
+                >
                   <Link href="/contact">
                     Contact for Inquiry
                     <ArrowRight className="ml-2 h-4 w-4" />

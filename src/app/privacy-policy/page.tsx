@@ -12,7 +12,7 @@ const PrivacyPolicy: React.FC = () => {
                     <p className="mb-6 font-semibold">Effective Date: 26/03/2024</p>
                     
                     <p className="mb-6">
-                        Anansi Tech Private Limited ("Company", "we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and protect your personal data when you visit or interact with our website (https://anansitech.in), in accordance with the Digital Personal Data Protection Act, 2023 (DPDP Act), the General Data Protection Regulation (GDPR), and the California Consumer Privacy Act (CCPA/CPRA).
+                        Anansi Tech Private Limited (&quot;Company&quot;, &quot;we&quot;, &quot;our&quot;, or &quot;us&quot;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and protect your personal data when you visit or interact with our website (https://anansitech.in), in accordance with the Digital Personal Data Protection Act, 2023 (DPDP Act), the General Data Protection Regulation (GDPR), and the California Consumer Privacy Act (CCPA/CPRA).
                     </p>
                     <p className="mb-6">
                         Note: Where there is a conflict between these laws, the DPDP Act shall prevail for Indian data principals and processing within India. Where GDPR or CCPA/CPRA imposes additional requirements not found in the DPDP Act, such clauses are included herein to ensure compliance for international users.

@@ -21,8 +21,9 @@ import { Footer } from "@/components/footer";
 //     experience: "1+",
 //     department: "Development ",
 //     bio: "",
-//     image: "https://drive.google.com/thumbnail?id=1leD0AeSKhj0yZFEBz5Fx0guzSliKFH0n",
+//     image: "https://drive.google.com/thumbnail?id=1M9Oqw7sLfeQs-cdAQ6Yo1kPQZhcFz3-i",
 //   },
+
 
 // ];
 
@@ -30,84 +31,92 @@ const allTeamMembers = [
   {
     name: "Jaydeep Vachhani",
     role: "Chief Technology Officer",
-    department: "Development",
   },
 
   {
     name: "Mayurkumar Pansheriya",
     role: "Managing Director",
-    department: "Development",
   },
   {
     name: "Krishna Kachhad",
     role: "Software Developer",
-    department: "Development",
+    department: "Odoo, ERPnext",
+    image: "https://drive.google.com/thumbnail?id=1i1uWV9qLJiRIGh94JYAaTmOcNaJFimDl"
   },
 
   {
     name: "Dhruvkumar Mashru",
     role: "Software Developer",
-    department: "Development",
+    department: "Odoo, ERPnext",
+    image:  "https://drive.google.com/thumbnail?id=1M-CiH6Ipdfy41m8AG_T4bMO2ViQ4lWp5"
   },
   {
     name: "Meet Tank",
     role: "Software Developer",
-    department: "Development",
+    department: "Odoo, ERPnext",
+     image: "https://drive.google.com/thumbnail?id=1t4bpbwR6NO91CvcXvuMiAl9KHl2dZ2QG"
   },
   {
     name: "Yashvi Kothiya",
     role: "Software Developer",
-    department: "Development",
+    department: "Odoo, ERPnext",
+    image: "https://drive.google.com/thumbnail?id=1JcZyW4wc0cwRdMP3DTqSR12ulnwBWeqs"
   },
   {
     name: "Bhumika Siddhapura",
     role: "Software Developer",
-    department: "Development",
+    department: "Odoo, ERPnext",
   },
   {
     name: "Sagrika Dobariya",
     role: "Software Developer",
-    department: "Development",
+    department: "Odoo, ERPnext",
+    image: "https://drive.google.com/thumbnail?id=1Tg6UREb1IbucC1pcV50uzciiVvJqI7Gj"
   },
   {
     name: "Prashant Panchani",
     role: "Software Developer",
-    department: "Development",
+    department: "Odoo, ERPnext",
+    image:"https://drive.google.com/thumbnail?id=1M9Oqw7sLfeQs-cdAQ6Yo1kPQZhcFz3-i"
   },
   {
     name: "Mihir Mehta",
     role: "Software Developer",
-    department: "Development",
+    department: "Odoo, ERPnext",
+     image: "https://drive.google.com/thumbnail?id=1AzkADLpVJeVr5S4WAlhdjz8uIDULu4Su"
   },
   {
     name: "Dhruvil Chovatiya",
     role: "Software Developer",
-    department: "Development",
+    department: "Odoo, ERPnext",
+    image: "https://drive.google.com/thumbnail?id=1wyNYa6P7GZ52nOLq9M08Jbf_xOARJjtl"
   },
   {
     name: "Prince Senjaliya",
     role: "Software Developer",
-    department: "Development",
+    department: "Odoo, ERPnext",
   },
   {
     name: "Saloni Parmar",
     role: "Software Developer",
-    department: "Development",
+    department: "Full Stack Developer",
   },
   {
     name: "Krishna Hothi",
     role: "Software Developer",
-    department: "Development",
+    department: "Full Stack Developer",
   },
   {
     name: "Kishan Sachania",
     role: "Software Developer",
-    department: "Development",
+    department: "Full Stack Developer",
+    image:"https://drive.google.com/thumbnail?id=12dx7nZdfdUFoxl8yRxT8M6EBQNo25I40"
   },
 ];
 
 export default function TeamPage() {
   const [showAll, setShowAll] = useState(false);
+  const [imageErrors, setImageErrors] = useState(new Set<string>());
 
   const visibleMembers = showAll ? allTeamMembers : allTeamMembers.slice(0, 3);
 
@@ -197,11 +206,11 @@ export default function TeamPage() {
               >
                 <CardHeader>
                   <div className="w-20 h-20 bg-primary/10 rounded-full mx-auto mb-4 flex items-center justify-center group-hover:bg-white/20 transition-colors duration-500 overflow-hidden">
-                    {/* {member?.image && !imageErrors.has(member.name) ? (
+                    {member?.image && !imageErrors.has(member.name) ? (
                       <img
-                        src={member?.image}
+                        src={member.image}
                         alt={member.name}
-                        className="w-full h-full object-contain rounded-full "
+                        className="w-full h-full object-cover rounded-full object-top"
                         onError={() => {
                           console.log("Image failed to load:", member?.image);
                           setImageErrors((prev) =>
@@ -217,8 +226,8 @@ export default function TeamPage() {
                       />
                     ) : (
                       <Users className="h-10 w-10 text-primary group-hover:text-white transition-colors duration-500" />
-                    )} */}
-                    <Users className="h-10 w-10 text-primary group-hover:text-white transition-colors duration-500" />
+                    )}
+                    {/* <Users className="h-10 w-10 text-primary group-hover:text-white transition-colors duration-500" /> */}
                   </div>
                   <CardTitle className="text-lg group-hover:text-white transition-colors duration-500">
                     {member.name}
