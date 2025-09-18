@@ -810,7 +810,7 @@ export default function ERPCompanyWebsite() {
                    <CardHeader className="pb-4">
                      <div className="flex items-center space-x-3 mb-4">
                        <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-500">
-                         <IconComponent className="h-6 w-6 text-gray-300 group-hover:text-primary transition-colors duration-500" />
+                         <IconComponent className="h-6 w-6 text-gray-500 group-hover:text-primary transition-colors duration-500" />
                        </div>
                        <CardTitle className="text-xl font-semibold group-hover:text-primary transition-colors">
                          {product.name}

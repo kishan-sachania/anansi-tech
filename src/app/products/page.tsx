@@ -365,11 +365,11 @@ export default function ProductsPage() {
                   <CardHeader className="pb-4">
                     <div className="flex items-center justify-between mb-4">
                       <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-500">
-                        <IconComponent className="h-6 w-6 text-gray-300 group-hover:text-primary transition-colors duration-500" />
+                        <IconComponent className="h-6 w-6 text-gray-500 group-hover:text-primary transition-colors duration-500" />
                       </div>
                       <Badge
                         variant="default"
-                        className="group-hover:bg-primary/20 group-hover:text-primary transition-colors duration-500"
+                        className="group-hover:bg-primary/20 text-white group-hover:text-primary transition-colors duration-500 "
                       >
                         {product.category}
                       </Badge>
