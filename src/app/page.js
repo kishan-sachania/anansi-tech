@@ -16,6 +16,7 @@ import { Zap, Shield, TrendingUp, CheckCircle, ArrowRight } from "lucide-react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { Services } from "@/components/services";
+import { AnimatedFeature } from "@/components/animated-feature";
 import Link from "next/link";
 
 export default function ERPCompanyWebsite() {
@@ -557,28 +558,28 @@ export default function ERPCompanyWebsite() {
                   "GST/TDS filing with 90% fewer errors",
                   "Bank reconciliation automation",
                   "Faster monthly closing",
-                  "Expense tracking with +30% visibility",
+                  "Expense tracking with 30% visibility",
                 ],
               },
               {
                 name: "Sales & CRM",
                 features: [
-                  "Lead conversion growth +25%",
-                  "Faster quotation turnaround (60%)",
-                  "Shorter sales cycle (20%)",
-                  "Faster customer response (40%)",
-                  "Lower customer acquisition cost (15%)",
+                  "Lead conversion growth 25%",
+                  "Faster quotation turnaround 60%",
+                  "Shorter sales cycle 20%",
+                  "Faster customer response 40%",
+                  "Lower customer acquisition cost 15%",
                 ],
               },
               {
                 name: "Manufacturing",
                 features: [
-                  "Bill of Materials (BOM)",
+                  "appraisal completion 100% ",
                   "Work Orders",
                   "Production Planning",
                   "Shop Floor Control",
                   "Quality Management",
-                  "Shorter production lead time (30%)",
+                  "Shorter production lead time 30%",
                 ],
               },
               {
@@ -586,30 +587,30 @@ export default function ERPCompanyWebsite() {
 
                 features: [
                   "Employee Records",
-                  "Improved employee satisfaction (+15%)",
-                  "Faster leave approval (50%)",
-                  "100% appraisal completion",
-                  "Lower overtime cost (10%)",  
+                  "appraisal completion 100% ",
+                  "Improved employee satisfaction 15%",
+                  "Faster leave approval 50%",
+                  "Lower overtime cost 10%",  
                 ],
               },
               {
                 name: "Projects",
                 features: [
-                  "Task Management",
+                  "appraisal completion 100% ",
                   "Gantt Charts",
                   "Resource Allocation",
-                  "Fewer project delivery delays (35%)",
-                  "Better resource utilization (+20%)",
+                  "Fewer project delivery delays 35%",
+                  "Better resource utilization 20%",
                 ],
               },
               {
                 name: "Quality Control",
                 features: [
-                  "Lower rejection rate (20%)",
-                  "Fewer customer complaints (50%)",
-                  "100% inspection compliance",
-                  "Faster NCR resolution (40%)",
-                  "Fewer repeat defects (50%)",
+                  "Lower rejection rate 20%",
+                  "Fewer customer complaints 50%",
+                  "inspection compliance 100% ",
+                  "Faster NCR resolution 40%",
+                  "Fewer repeat defects 50%",
                 ],
               },
             ].map((product, index) => (
@@ -637,23 +638,16 @@ export default function ERPCompanyWebsite() {
                 <CardContent className="flex-grow flex flex-col">
                   <ul className="space-y-2 flex-grow">
                     {product.features.map((feature, idx) => (
-                      <li
+                      <AnimatedFeature
                         key={idx}
-                        className={`flex items-center text-sm transition-colors duration-200 ${
+                        feature={feature}
+                        isHovered={hoveredProduct === index}
+                        className={`transition-colors duration-200 ${
                           hoveredProduct === index
                             ? "text-foreground"
                             : "text-muted-foreground"
                         }`}
-                      >
-                        <CheckCircle
-                          className={`h-4 w-4 mr-2 transition-colors duration-200 ${
-                            hoveredProduct === index
-                              ? "text-primary"
-                              : "text-primary"
-                          }`}
-                        />
-                        {feature}
-                      </li>
+                      />
                     ))}
                   </ul>
                 </CardContent>
