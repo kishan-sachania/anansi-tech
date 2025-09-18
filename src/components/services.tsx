@@ -694,33 +694,61 @@ export function Services() {
   const [animationPhase, setAnimationPhase] = useState('idle'); // 'idle', 'out', 'in'
   const [isPaused, setIsPaused] = useState(false);
   const [manualSwitch, setManualSwitch] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Get current category cards
   const currentCategoryCards = categoryWiseServices[activeCategory].cards;
 
-  // Auto-advance logic
+  // Track screen size changes
   useEffect(() => {
-    if (isPaused || manualSwitch) return; // Don't advance if paused or manually switched
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
     
-    const timer = setInterval(() => {
-      // Start slide out animation
-      setAnimationPhase('out');
-      
-      setTimeout(() => {
-        // Change to next category
-        setActiveCategory((prev) => (prev + 1) % categoryWiseServices.length);
+    // Check initial screen size
+    checkScreenSize();
+    
+    // Add resize listener
+    window.addEventListener('resize', checkScreenSize);
+    
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
+  // Auto-advance logic - disabled on mobile/small screens
+  useEffect(() => {
+    let timer: NodeJS.Timeout | null = null;
+    
+    // Only start auto-advance on desktop screens when not paused or manually switched
+    if (!isPaused && !manualSwitch && !isMobile) {
+      timer = setInterval(() => {
+        // Double-check screen size before advancing
+        if (window.innerWidth < 640) return;
         
-        // Start slide in animation
-        setAnimationPhase('in');
+        // Start slide out animation
+        setAnimationPhase('out');
         
         setTimeout(() => {
-          // Reset to idle state
-          setAnimationPhase('idle');
+          // Change to next category
+          setActiveCategory((prev) => (prev + 1) % categoryWiseServices.length);
+          
+          // Start slide in animation
+          setAnimationPhase('in');
+          
+          setTimeout(() => {
+            // Reset to idle state
+            setAnimationPhase('idle');
+          }, 500);
         }, 500);
-      }, 500);
-    }, 8000); // 8 sec per category
-    return () => clearInterval(timer);
-  }, [activeCategory, isPaused, manualSwitch]);
+      }, 8000); // 8 sec per category
+    }
+    
+    return () => {
+      if (timer) {
+        clearInterval(timer);
+      }
+    };
+  }, [activeCategory, isPaused, manualSwitch, isMobile]);
+
 
   // Reset manual switch flag after delay
   useEffect(() => {

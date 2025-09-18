@@ -73,6 +73,8 @@ const allTeamMembers = [
     name: "Bhumika Siddhapura",
     role: "Software Developer",
     department: "Odoo, ERPnext",
+    image:
+      "https://drive.google.com/thumbnail?id=1JcZyW4wc0cwRdMP3DTqSR12ulnwBWeqs",
   },
   {
     name: "Sagrika Dobariya",

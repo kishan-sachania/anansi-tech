@@ -406,7 +406,8 @@ export default function ERPCompanyWebsite() {
           </Badge>
           <h1 className="text-4xl md:text-6xl font-semibold mb-6 text-balance font-heading">
             Your business deserves more than tools
-            <span className="text-primary"> it deserves a companion.</span>
+            <p className="text-primary"> it deserves a </p>
+            <p className="text-primary font-black text-4xl md:text-6xl">companion.</p>
           </h1>
           <p className="text-xl text-muted-foreground mb-8 text-pretty max-w-2xl mx-auto font-body">
             Streamline operations, boost productivity, and drive growth with our
