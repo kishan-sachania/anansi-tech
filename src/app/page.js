@@ -12,11 +12,23 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Zap, Shield, TrendingUp, CheckCircle, ArrowRight } from "lucide-react";
+import {
+  Zap,
+  Shield,
+  TrendingUp,
+  CheckCircle,
+  ArrowRight,
+  CreditCard,
+  UserCheck,
+  HardHat,
+  Users,
+  ClipboardList,
+  ShieldCheck,
+} from "lucide-react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { Services } from "@/components/services";
-import { AnimatedFeature } from "@/components/animated-feature";
+import { AnimatedMetric } from "@/components/animated-metric";
 import Link from "next/link";
 
 export default function ERPCompanyWebsite() {
@@ -408,7 +420,9 @@ export default function ERPCompanyWebsite() {
           <h1 className="text-4xl md:text-6xl font-semibold mb-6 text-balance font-heading">
             Your business deserves more than tools
             <p className="text-primary"> it deserves a </p>
-            <p className="text-primary font-black text-4xl md:text-6xl">companion.</p>
+            <p className="text-primary font-black text-4xl md:text-6xl">
+              companion.
+            </p>
           </h1>
           <p className="text-xl text-muted-foreground mb-8 text-pretty max-w-2xl mx-auto font-body">
             Streamline operations, boost productivity, and drive growth with our
@@ -494,7 +508,6 @@ export default function ERPCompanyWebsite() {
       {/* Services Section */}
       <Services />
 
-
       {/* Industries Section
       <section id="industries" className="py-16 px-4 bg-muted/10">
         <div className="container mx-auto max-w-6xl">
@@ -553,106 +566,335 @@ export default function ERPCompanyWebsite() {
             {[
               {
                 name: "Finance & Accounting",
+                description:
+                  "Streamline your financial operations with automated processes",
+                icon: CreditCard,
                 features: [
-                  "Invoice processing in 1 day",
-                  "GST/TDS filing with 90% fewer errors",
-                  "Bank reconciliation automation",
-                  "Faster monthly closing",
-                  "Expense tracking with 30% visibility",
+                  {
+                    name: "Invoice processing time",
+                    oldValue: 7,
+                    newValue: 1,
+                    improvement: 85,
+                  },
+                  {
+                    name: "GST/TDS filing accuracy",
+                    oldValue: 75,
+                    newValue: 98,
+                    improvement: 23,
+                  },
+                  {
+                    name: "Bank reconciliation speed",
+                    oldValue: 40,
+                    newValue: 90,
+                    improvement: 50,
+                  },
+                  {
+                    name: "Monthly closing time",
+                    oldValue: 15,
+                    newValue: 3,
+                    improvement: 80,
+                  },
+                  {
+                    name: "Expense tracking visibility",
+                    oldValue: 30,
+                    newValue: 95,
+                    improvement: 65,
+                  },
                 ],
+                hasMetrics: true,
               },
               {
                 name: "Sales & CRM",
+                description:
+                  "Boost your sales performance with intelligent customer management",
+                icon: UserCheck,
                 features: [
-                  "Lead conversion growth 25%",
-                  "Faster quotation turnaround 60%",
-                  "Shorter sales cycle 20%",
-                  "Faster customer response 40%",
-                  "Lower customer acquisition cost 15%",
+                  {
+                    name: "Lead conversion growth",
+                    oldValue: 15,
+                    newValue: 43,
+                    improvement: 28,
+                  },
+                  {
+                    name: "Faster quotation turnaround",
+                    oldValue: 20,
+                    newValue: 80,
+                    improvement: 60,
+                  },
+                  {
+                    name: "Shorter sales cycle",
+                    oldValue: 45,
+                    newValue: 65,
+                    improvement: 20,
+                  },
+                  {
+                    name: "Faster customer response",
+                    oldValue: 30,
+                    newValue: 75,
+                    improvement: 45,
+                  },
+                  {
+                    name: "Lower customer acquisition cost",
+                    oldValue: 70,
+                    newValue: 85,
+                    improvement: 15,
+                  },
                 ],
+                hasMetrics: true,
               },
               {
                 name: "Manufacturing",
+                description:
+                  "Optimize production processes and quality control",
+                icon: HardHat,
                 features: [
-                  "appraisal completion 100% ",
-                  "Work Orders",
-                  "Production Planning",
-                  "Shop Floor Control",
-                  "Quality Management",
-                  "Shorter production lead time 30%",
+                  {
+                    name: "Production efficiency",
+                    oldValue: 65,
+                    newValue: 88,
+                    improvement: 23,
+                  },
+                  {
+                    name: "Work order completion",
+                    oldValue: 70,
+                    newValue: 95,
+                    improvement: 25,
+                  },
+                  {
+                    name: "Production planning accuracy",
+                    oldValue: 55,
+                    newValue: 85,
+                    improvement: 30,
+                  },
+                  {
+                    name: "Shop floor visibility",
+                    oldValue: 40,
+                    newValue: 90,
+                    improvement: 50,
+                  },
+                  {
+                    name: "Quality management score",
+                    oldValue: 75,
+                    newValue: 96,
+                    improvement: 21,
+                  },
                 ],
+                hasMetrics: true,
               },
               {
                 name: "Human Resources",
-
+                description:
+                  "Manage your workforce efficiently with automated HR processes",
+                icon: Users,
                 features: [
-                  "Employee Records",
-                  "appraisal completion 100% ",
-                  "Improved employee satisfaction 15%",
-                  "Faster leave approval 50%",
-                  "Lower overtime cost 10%",  
+                  {
+                    name: "Employee record accuracy",
+                    oldValue: 70,
+                    newValue: 98,
+                    improvement: 28,
+                  },
+                  {
+                    name: "Appraisal completion rate",
+                    oldValue: 60,
+                    newValue: 95,
+                    improvement: 35,
+                  },
+                  {
+                    name: "Employee satisfaction",
+                    oldValue: 65,
+                    newValue: 88,
+                    improvement: 23,
+                  },
+                  {
+                    name: "Leave approval speed",
+                    oldValue: 48,
+                    newValue: 2,
+                    improvement: 96,
+                  },
+                  {
+                    name: "Overtime cost reduction",
+                    oldValue: 25,
+                    newValue: 75,
+                    improvement: 50,
+                  },
                 ],
+                hasMetrics: true,
               },
               {
                 name: "Projects",
+                description:
+                  "Deliver projects on time with better resource management",
+                icon: ClipboardList,
                 features: [
-                  "appraisal completion 100% ",
-                  "Gantt Charts",
-                  "Resource Allocation",
-                  "Fewer project delivery delays 35%",
-                  "Better resource utilization 20%",
+                  {
+                    name: "Project completion rate",
+                    oldValue: 70,
+                    newValue: 92,
+                    improvement: 22,
+                  },
+                  {
+                    name: "Resource allocation efficiency",
+                    oldValue: 55,
+                    newValue: 85,
+                    improvement: 30,
+                  },
+                  {
+                    name: "Project delivery timeline",
+                    oldValue: 60,
+                    newValue: 88,
+                    improvement: 28,
+                  },
+                  {
+                    name: "Resource utilization",
+                    oldValue: 65,
+                    newValue: 90,
+                    improvement: 25,
+                  },
+                  {
+                    name: "Budget adherence",
+                    oldValue: 75,
+                    newValue: 94,
+                    improvement: 19,
+                  },
                 ],
+                hasMetrics: true,
               },
               {
                 name: "Quality Control",
+                description:
+                  "Maintain high standards with comprehensive quality management",
+                icon: ShieldCheck,
                 features: [
-                  "Lower rejection rate 20%",
-                  "Fewer customer complaints 50%",
-                  "inspection compliance 100% ",
-                  "Faster NCR resolution 40%",
-                  "Fewer repeat defects 50%",
+                  {
+                    name: "Rejection rate reduction",
+                    oldValue: 15,
+                    newValue: 3,
+                    improvement: 80,
+                  },
+                  {
+                    name: "Customer complaint reduction",
+                    oldValue: 25,
+                    newValue: 5,
+                    improvement: 80,
+                  },
+                  {
+                    name: "Inspection compliance",
+                    oldValue: 80,
+                    newValue: 98,
+                    improvement: 18,
+                  },
+                  {
+                    name: "NCR resolution speed",
+                    oldValue: 40,
+                    newValue: 85,
+                    improvement: 45,
+                  },
+                  {
+                    name: "Defect prevention",
+                    oldValue: 60,
+                    newValue: 92,
+                    improvement: 32,
+                  },
                 ],
+                hasMetrics: true,
               },
-            ].map((product, index) => (
-              <Card
-                key={index}
-                className={`border-border/50 transition-all duration-200 flex flex-col h-full cursor-pointer ${
-                  hoveredProduct === index
-                    ? "scale-105 shadow-2xl ring-2 ring-primary/50 bg-primary/5 z-10"
-                    : hoveredProduct !== null
-                    ? "blur-[1px]"
-                    : "hover:scale-102 hover:shadow-lg"
-                }`}
-                onMouseEnter={() => handleProductMouseEnter(index)}
-                onMouseLeave={handleProductMouseLeave}
-              >
-                <CardHeader className="flex-shrink-0">
-                  <CardTitle
-                    className={`text-lg font-semibold transition-colors duration-200 ${
-                      hoveredProduct === index ? "text-primary" : ""
-                    }`}
-                  >
-                    {product.name}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="flex-grow flex flex-col">
-                  <ul className="space-y-2 flex-grow">
-                    {product.features.map((feature, idx) => (
-                      <AnimatedFeature
-                        key={idx}
-                        feature={feature}
-                        isHovered={hoveredProduct === index}
-                        className={`transition-colors duration-200 ${
-                          hoveredProduct === index
-                            ? "text-foreground"
-                            : "text-muted-foreground"
-                        }`}
-                      />
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
+            ].map((product, index) => {
+              const IconComponent = product.icon;
+              return (
+                <Card
+                  key={index}
+                  className="group hover:shadow-lg transition-all duration-500 border border-primary/20 hover:border-primary hover:scale-105 bg-card/50 backdrop-blur overflow-hidden relative"
+                  onMouseEnter={() => setHoveredProduct(index)}
+                  onMouseLeave={() => setHoveredProduct(null)}
+                >
+                   <CardHeader className="pb-4">
+                     <div className="flex items-center space-x-3 mb-4">
+                       <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-500">
+                         <IconComponent className="h-6 w-6 text-gray-300 group-hover:text-primary transition-colors duration-500" />
+                       </div>
+                       <CardTitle className="text-xl font-semibold group-hover:text-primary transition-colors">
+                         {product.name}
+                       </CardTitle>
+                     </div>
+                     <p className="text-sm text-muted-foreground leading-relaxed">
+                       {product.description}
+                     </p>
+                   </CardHeader>
+                  <CardContent className="pt-0">
+                    {product.hasMetrics ? (
+                      <div className="relative min-h-[280px]">
+                        {/* Default state - simple features list */}
+                        <div className="absolute inset-0 opacity-100 group-hover:opacity-0 transition-opacity duration-300">
+                          <div className="space-y-3">
+                            {product.features
+                              .slice(0, 5)
+                              .map((feature, featureIndex) => (
+                                <div
+                                  key={featureIndex}
+                                  className="flex items-center space-x-3"
+                                >
+                                  <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
+                                  <span className="text-sm text-muted-foreground">
+                                    {typeof feature === "object"
+                                      ? feature.name
+                                      : feature}
+                                  </span>
+                                </div>
+                              ))}
+                            {product.features.length > 5 && (
+                              <div className="text-xs text-muted-foreground/60 italic">
+                                +{product.features.length - 5} more metrics...
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Hover state - detailed metrics with animations and scroll */}
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                          <div className="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent pr-2">
+                            <div className="space-y-4 pb-2">
+                              {product.features.map((feature, featureIndex) => (
+                                <div key={featureIndex}>
+                                  {typeof feature === "object" ? (
+                                    <AnimatedMetric
+                                      feature={feature}
+                                      isHovered={hoveredProduct === index}
+                                    />
+                                  ) : (
+                                    <div className="flex items-center space-x-3">
+                                      <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
+                                      <span className="text-sm text-muted-foreground">
+                                        {feature}
+                                      </span>
+                                    </div>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="space-y-3">
+                        {product.features.map((feature, featureIndex) => (
+                          <div
+                            key={featureIndex}
+                            className="flex items-center space-x-3"
+                          >
+                            <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
+                            <span className="text-sm text-muted-foreground">
+                              {typeof feature === "string"
+                                ? feature
+                                : feature.name}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
           <div className="text-center mt-12">
             <Button

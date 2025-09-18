@@ -338,4 +338,35 @@
   .animate-slide-out-left {
     animation: slide-out-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   }
+
+  /* Added custom scrollbar styles for card content */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-thumb-muted {
+    scrollbar-color: #979797 transparent;
+  }
+
+  .scrollbar-track-transparent {
+    scrollbar-track-color: transparent;
+  }
+
+  /* Webkit scrollbar styles for better browser support */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 1px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+  }
 }

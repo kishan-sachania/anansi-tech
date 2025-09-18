@@ -50,21 +50,21 @@ export function AnimatedFeature({
 
   return (
     <li
-      className={`flex items-center text-sm text-white group-hover:text-white transition-colors duration-500 ${className}`}
+      className={`flex items-center text-sm text-foreground group-hover:text-foreground transition-colors duration-500 ${className}`}
     >
       <CheckCircle className="h-4 w-4 text-primary mr-2 flex-shrink-0 group-hover:text-white transition-colors duration-500" />
       <span>
         {textBefore}
         {percentageData !== null ? (
           isHovered ? (
-            <span className="font-semibold text-white group-hover:text-white transition-colors duration-500">
+            <span className="font-semibold text-primary group-hover:text-primary transition-colors duration-500">
               {percentageData.sign}
               <CountUp
                 end={percentageData.value}
                 duration={1500}
                 start={0}
                 suffix="%"
-                className="font-semibold text-white group-hover:text-white transition-colors duration-500"
+                className="font-semibold text-primary group-hover:text-primary transition-colors duration-500"
               />
             </span>
           ) : (

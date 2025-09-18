@@ -28,7 +28,7 @@ import {
 } from "lucide-react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
-import { AnimatedFeature } from "@/components/animated-feature";
+import { AnimatedMetric } from "@/components/animated-metric";
 import Link from "next/link";
 import { useTheme } from "@/contexts/theme-context";
 
@@ -92,15 +92,15 @@ const products = [
     name: "Finance & Accounting",
     description: "Manage invoices, expenses, cash flow, and audits efficiently",
     features: [
-      "Invoice processing in 1 day",
+      // "Invoice processing in 1 day",
       "GST/TDS filing with fewer errors 90%",
-      "Bank reconciliation automation",
-      "Faster monthly closing",
+      // "Bank reconciliation automation",
+      // "Faster monthly closing",
       "Expense tracking with visibility 30%",
       "Accurate cash flow forecasting 25%",
       "Reduced budget variance 15%",
       "Faster audit preparation 25%",
-      "Duplicate payment prevention",
+      // "Duplicate payment prevention",
       "Improved working capital efficiency 20%",
     ],
     icon: CreditCard,
@@ -164,11 +164,11 @@ const products = [
     name: "Manufacturing",
     description: "Increase production efficiency and reduce waste",
     features: [
-      "Bill of Materials (BOM)",
-      "Work Orders",
-      "Production Planning",
-      "Shop Floor Control",
-      "Quality Management",
+      // "Bill of Materials (BOM)",
+      // "Work Orders",
+      // "Production Planning",
+      // "Shop Floor Control",
+      // "Quality Management",
       "Shorter production lead time 30%",
       "Higher machine utilization 20%",
       "Reduced raw material wastage 15%",
@@ -188,8 +188,6 @@ const products = [
     description:
       "Manage payroll, attendance, recruitment, and employee satisfaction",
     features: [
-      "Employee Records",
-
       "Faster payroll processing 70%",
       "Attendance accuracy 95%",
       "Shorter recruitment cycle 30%",
@@ -208,11 +206,6 @@ const products = [
     name: "Projects",
     description: "Plan, track, and deliver projects efficiently",
     features: [
-      "Task Management",
-      "Gantt Charts",
-      "Resource Allocation",
-      "Time Tracking",
-      "Collaboration Tools",
       "Fewer project delivery delays 35%",
       "Better resource utilization 20%",
       "Lower budget variance 25%",
@@ -260,6 +253,27 @@ const products = [
   },
 ];
 
+// Function to extract percentage and calculate metrics
+const extractMetricsFromFeatures = (features: string[]) => {
+  return features.map(feature => {
+    // Extract percentage from feature text
+    const percentageMatch = feature.match(/(\d+)%/);
+    if (percentageMatch) {
+      const newValue = parseInt(percentageMatch[1]);
+      const oldValue = Math.round(newValue * (0.5 + Math.random() * 0.1)); // 50-60% of new value
+      const improvement = Math.round(((newValue - oldValue) / oldValue) * 100);
+      
+      return {
+        name: feature.replace(/\s*\d+%/, '').trim(),
+        oldValue,
+        newValue,
+        improvement: Math.max(improvement, 1) // Ensure positive growth
+      };
+    }
+    return feature; // Return as string if no percentage found
+  });
+};
+
 const categories = [
   "All",
   "Finance",
@@ -273,19 +287,8 @@ const categories = [
 
 export default function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [expandedCards, setExpandedCards] = useState<Set<number>>(new Set());
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const { theme } = useTheme();
-
-  const toggleCardExpansion = (index: number) => {
-    const newExpandedCards = new Set(expandedCards);
-    if (newExpandedCards.has(index)) {
-      newExpandedCards.delete(index);
-    } else {
-      newExpandedCards.add(index);
-    }
-    setExpandedCards(newExpandedCards);
-  };
 
   const filteredProducts =
     selectedCategory === "All"
@@ -349,64 +352,88 @@ export default function ProductsPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredProducts.map((product, index) => {
               const IconComponent = product.icon;
-              const isExpanded = expandedCards.has(index);
-              const initialFeaturesCount = 5;
-              const displayedFeatures = isExpanded
-                ? product.features
-                : product.features.slice(0, initialFeaturesCount);
-              const hasMoreFeatures =
-                product.features.length > initialFeaturesCount;
+              const processedFeatures = extractMetricsFromFeatures(product.features);
+              const hasMetrics = processedFeatures.some(feature => typeof feature === 'object');
 
               return (
                 <Card
                   key={`${product.category}-${index}`}
-                  className="border-border/50 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:bg-gradient-to-br hover:from-[#591E4F] hover:via-[#A62985] hover:to-[#D9B0CE] hover:text-white group relative overflow-hidden flex flex-col h-full"
+                  className="group hover:shadow-lg transition-all duration-500 border border-primary/20 hover:border-primary hover:scale-105 bg-card/50 backdrop-blur overflow-hidden relative"
                   onMouseEnter={() => setHoveredCard(index)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
-                  <CardHeader className="flex-shrink-0">
+                  <CardHeader className="pb-4">
                     <div className="flex items-center justify-between mb-4">
-                      <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-colors duration-500">
-                        <IconComponent className="h-6 w-6 text-primary group-hover:text-white transition-colors duration-500" />
+                      <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-500">
+                        <IconComponent className="h-6 w-6 text-gray-300 group-hover:text-primary transition-colors duration-500" />
                       </div>
                       <Badge
-                        variant="secondary"
-                        className="group-hover:bg-white/20 group-hover:text-white transition-colors duration-500"
+                        variant="default"
+                        className="group-hover:bg-primary/20 group-hover:text-primary transition-colors duration-500"
                       >
                         {product.category}
                       </Badge>
                     </div>
-                    <CardTitle className="text-xl group-hover:text-white transition-colors duration-500">
+                    <CardTitle className="text-xl font-semibold group-hover:text-primary transition-colors">
                       {product.name}
                     </CardTitle>
-                    <CardDescription className="text-sm group-hover:text-white/90 transition-colors duration-500">
+                    <CardDescription className="text-sm text-muted-foreground leading-relaxed group-hover:text-muted-foreground transition-colors duration-500">
                       {product.description}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="flex flex-col flex-grow">
-                    <ul className="space-y-2 mb-4 flex-grow">
-                      {displayedFeatures.map((feature, idx) => (
-                        <AnimatedFeature
-                          key={idx}
-                          feature={feature}
-                          isHovered={hoveredCard === index}
-                          className="group-hover:text-white/90 transition-colors duration-500"
-                        />
-                      ))}
-                    </ul>
-                    {hasMoreFeatures && (
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => toggleCardExpansion(index)}
-                        className="w-full mt-auto group-hover:bg-white/20 group-hover:text-white transition-colors duration-500"
-                      >
-                        {isExpanded
-                          ? "See Less"
-                          : `See More (${
-                              product.features.length - initialFeaturesCount
-                            } more)`}
-                      </Button>
+                  <CardContent className="pt-0">
+                    {hasMetrics ? (
+                      <div className="relative min-h-[280px]">
+                        {/* Default state - simple features list */}
+                        <div className="absolute inset-0 opacity-100 group-hover:opacity-0 transition-opacity duration-300">
+                          <div className="space-y-3">
+                            {processedFeatures.slice(0, 8).map((feature, featureIndex) => (
+                              <div key={featureIndex} className="flex items-center space-x-3">
+                                <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
+                                <span className="text-sm text-muted-foreground">
+                                  {typeof feature === "object" ? feature.name : feature}
+                                </span>
+                              </div>
+                            ))}
+                            {processedFeatures.length > 8 && (
+                              <div className="text-xs text-muted-foreground/60 italic">
+                                +{processedFeatures.length - 8} more metrics...
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Hover state - detailed metrics with animations and scroll */}
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                          <div className="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent pr-2">
+                            <div className="space-y-4 pb-2">
+                              {processedFeatures.map((feature, featureIndex) => (
+                                <div key={featureIndex}>
+                                  {typeof feature === "object" ? (
+                                    <AnimatedMetric feature={feature} isHovered={hoveredCard === index} />
+                                  ) : (
+                                    <div className="flex items-center space-x-3">
+                                      <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
+                                      <span className="text-sm text-muted-foreground">{feature}</span>
+                                    </div>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="space-y-3">
+                        {processedFeatures.map((feature, featureIndex) => (
+                          <div key={featureIndex} className="flex items-center space-x-3">
+                            <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
+                            <span className="text-sm text-muted-foreground">
+                              {typeof feature === "string" ? feature : feature.name}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
                     )}
                   </CardContent>
                 </Card>
