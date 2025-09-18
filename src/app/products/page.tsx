@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
+import { AnimatedFeature } from "@/components/animated-feature";
 import Link from "next/link";
 import { useTheme } from "@/contexts/theme-context";
 
@@ -92,15 +93,15 @@ const products = [
     description: "Manage invoices, expenses, cash flow, and audits efficiently",
     features: [
       "Invoice processing in 1 day",
-      "GST/TDS filing with 90% fewer errors",
+      "GST/TDS filing with fewer errors 90%",
       "Bank reconciliation automation",
       "Faster monthly closing",
-      "Expense tracking with +30% visibility",
-      "Accurate cash flow forecasting (+25%)",
-      "Reduced budget variance (15%)",
-      "Faster audit preparation (25%)",
+      "Expense tracking with visibility 30%",
+      "Accurate cash flow forecasting 25%",
+      "Reduced budget variance 15%",
+      "Faster audit preparation 25%",
       "Duplicate payment prevention",
-      "Improved working capital efficiency (+20%)",
+      "Improved working capital efficiency 20%",
     ],
     icon: CreditCard,
     category: "Finance",
@@ -109,16 +110,16 @@ const products = [
     name: "Sales & CRM",
     description: "Enhance customer relationships and sales performance",
     features: [
-      "Lead conversion growth +25%",
-      "Faster quotation turnaround (60%)",
-      "Shorter sales cycle (20%)",
-      "Faster customer response (40%)",
-      "Lower customer acquisition cost (15%)",
-      "Upsell/cross-sell ratio +15%",
-      "Average deal size growth +10%",
-      "Improved customer retention (+12%)",
-      "Sales forecast accuracy +20%",
-      "Better win/loss ratio (+18%)",
+      "Lead conversion growth 25%",
+      "Faster quotation turnaround 60%",
+      "Shorter sales cycle 20%",
+      "Faster customer response 40%",
+      "Lower customer acquisition cost 15%",
+      "Upsell/cross-sell ratio 15%",
+      "Average deal size growth 10%",
+      "Improved customer retention 12%",
+      "Sales forecast accuracy 20%",
+      "Better win/loss ratio 18%",
     ],
     icon: UserCheck,
     category: "Finance",
@@ -127,15 +128,15 @@ const products = [
     name: "Purchase & Vendor Management",
     description: "Streamline procurement and vendor relationships",
     features: [
-      "Shorter procurement cycle (40%)",
-      "Improved vendor on-time delivery (+25%)",
-      "Faster purchase order approvals (30%)",
-      "Cost savings via vendor bidding (10–15%)",
-      "Reduced bill/payment mismatches (20%)",
-      "Higher supplier satisfaction (+15%)",
-      "Reduced emergency purchases (30%)",
-      "Lower supplier rejection rate (20%)",
-      "Lower purchase price variance (12%)",
+      "Shorter procurement cycle 40%",
+      "Improved vendor on-time delivery 25%",
+      "Faster purchase order approvals 30%",
+      "Cost savings via vendor bidding 15%",
+      "Reduced bill/payment mismatches 20%",
+      "Higher supplier satisfaction 15%",
+      "Reduced emergency purchases 30%",
+      "Lower supplier rejection rate 20%",
+      "Lower purchase price variance 12%",
       "Full contract compliance",
     ],
     icon: PackageCheck,
@@ -145,15 +146,15 @@ const products = [
     name: "Inventory & Warehouse",
     description: "Optimize inventory, warehouse space, and stock accuracy",
     features: [
-      "High stock accuracy (98%)",
-      "Reduced dead stock value (30%)",
-      "Order fulfillment accuracy (99%)",
-      "Better warehouse space utilization (+20%)",
-      "Lower inventory carrying cost (15%)",
-      "Fewer stock-out incidents (50%)",
-      "Reduced shrinkage/theft (25%)",
-      "Improved inventory turnover (+15%)",
-      "Accurate reorder levels (+20%)",
+      "High stock accuracy 98%",
+      "Reduced dead stock value 30%",
+      "Order fulfillment accuracy 99%",
+      "Better warehouse space utilization 20%",
+      "Lower inventory carrying cost 15%",
+      "Fewer stock-out incidents 50%",
+      "Reduced shrinkage/theft 25%",
+      "Improved inventory turnover 15%",
+      "Accurate reorder levels 20%",
       "Cycle count variance <2%",
     ],
     icon: Archive,
@@ -168,16 +169,16 @@ const products = [
       "Production Planning",
       "Shop Floor Control",
       "Quality Management",
-      "Shorter production lead time (30%)",
-      "Higher machine utilization (+20%)",
-      "Reduced raw material wastage (15%)",
-      "Faster work order completion (+25%)",
-      "Higher on-time delivery (+18%)",
-      "Lower cost per unit (10%)",
-      "Improved labor productivity (+15%)",
-      "Higher capacity utilization (+20%)",
-      "Fewer rework/rejection defects (25%)",
-      "Reduced downtime hours (30%)",
+      "Shorter production lead time 30%",
+      "Higher machine utilization 20%",
+      "Reduced raw material wastage 15%",
+      "Faster work order completion 25%",
+      "Higher on-time delivery 18%",
+      "Lower cost per unit 10%",
+      "Improved labor productivity 15%",
+      "Higher capacity utilization 20%",
+      "Fewer rework/rejection defects 25%",
+      "Reduced downtime hours 30%",
     ],
     icon: HardHat,
     category: "Manufacturing",
@@ -189,16 +190,16 @@ const products = [
     features: [
       "Employee Records",
 
-      "Faster payroll processing (+70%)",
-      "Attendance accuracy (95%)",
-      "Shorter recruitment cycle (30%)",
-      "Lower employee turnover (10%)",
-      "Higher training participation (+20%)",
-      "Improved employee satisfaction (+15%)",
-      "Faster leave approval (50%)",
+      "Faster payroll processing 70%",
+      "Attendance accuracy 95%",
+      "Shorter recruitment cycle 30%",
+      "Lower employee turnover 10%",
+      "Higher training participation 20%",
+      "Improved employee satisfaction 15%",
+      "Faster leave approval 50%",
       "100% appraisal completion",
-      "Lower overtime cost (10%)",
-      "Faster HR service ticket resolution (40%)",
+      "Lower overtime cost 10%",
+      "Faster HR service ticket resolution 40%",
     ],
     icon: Users,
     category: "HR",
@@ -212,16 +213,16 @@ const products = [
       "Resource Allocation",
       "Time Tracking",
       "Collaboration Tools",
-      "Fewer project delivery delays (35%)",
-      "Better resource utilization (+20%)",
-      "Lower budget variance (25%)",
-      "Improved timesheet accuracy (+30%)",
-      "Higher billing accuracy (+25%)",
-      "Better milestone achievement (+15%)",
-      "Higher project profitability (+12%)",
-      "Shorter project cycle (20%)",
-      "Improved client satisfaction (+10%)",
-      "Faster change request handling (20%)",
+      "Fewer project delivery delays 35%",
+      "Better resource utilization 20%",
+      "Lower budget variance 25%",
+      "Improved timesheet accuracy 30%",
+      "Higher billing accuracy 25%",
+      "Better milestone achievement 15%",
+      "Higher project profitability 12%",
+      "Shorter project cycle 20%",
+      "Improved client satisfaction 10%",
+      "Faster change request handling 20%",
     ],
     icon: ClipboardList,
     category: "Projects",
@@ -230,16 +231,16 @@ const products = [
     name: "Quality Control",
     description: "Ensure product quality and compliance with standards",
     features: [
-      "Lower rejection rate (20%)",
-      "Fewer customer complaints (50%)",
+      "Lower rejection rate 20%",
+      "Fewer customer complaints 50%",
       "100% inspection compliance",
-      "Faster NCR resolution (40%)",
-      "Fewer repeat defects (50%)",
+      "Faster NCR resolution 40%",
+      "Fewer repeat defects 50%",
       "100% compliant quarantine stock handling",
       "100% quality audit success",
-      "Lower supplier defect rate (20%)",
-      "Higher first pass yield (+15%)",
-      "Fewer warranty claims (25%)",
+      "Lower supplier defect rate 20%",
+      "Higher first pass yield 15%",
+      "Fewer warranty claims 25%",
     ],
     icon: ShieldCheck,
     category: "Manufacturing",
@@ -249,10 +250,10 @@ const products = [
     description:
       "Leverage IoT and ERP for smarter farming, greenhouse, and agri-operations.",
     features: [
-      "40% less water usage & 15% more fertilizer efficiency",
-      "25% higher crop yield per acre",
-      "20% faster farm-to-market logistics",
-      "100% traceability & compliance readiness",
+      "Less water usage & more fertilizer efficiency 40%",
+      "Higher crop yield per acre 25%",
+      "Faster farm-to-market logistics 20%",
+      "traceability & compliance readiness 100% ",
     ],
     icon: Leaf,
     category: "IoT + Agriculture ERP",
@@ -273,6 +274,7 @@ const categories = [
 export default function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [expandedCards, setExpandedCards] = useState<Set<number>>(new Set());
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const { theme } = useTheme();
 
   const toggleCardExpansion = (index: number) => {
@@ -359,6 +361,8 @@ export default function ProductsPage() {
                 <Card
                   key={`${product.category}-${index}`}
                   className="border-border/50 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:bg-gradient-to-br hover:from-[#591E4F] hover:via-[#A62985] hover:to-[#D9B0CE] hover:text-white group relative overflow-hidden flex flex-col h-full"
+                  onMouseEnter={() => setHoveredCard(index)}
+                  onMouseLeave={() => setHoveredCard(null)}
                 >
                   <CardHeader className="flex-shrink-0">
                     <div className="flex items-center justify-between mb-4">
@@ -382,13 +386,12 @@ export default function ProductsPage() {
                   <CardContent className="flex flex-col flex-grow">
                     <ul className="space-y-2 mb-4 flex-grow">
                       {displayedFeatures.map((feature, idx) => (
-                        <li
+                        <AnimatedFeature
                           key={idx}
-                          className="flex items-center text-sm text-muted-foreground group-hover:text-white/90 transition-colors duration-500"
-                        >
-                          <CheckCircle className="h-4 w-4 text-primary mr-2 flex-shrink-0 group-hover:text-white transition-colors duration-500" />
-                          {feature}
-                        </li>
+                          feature={feature}
+                          isHovered={hoveredCard === index}
+                          className="group-hover:text-white/90 transition-colors duration-500"
+                        />
                       ))}
                     </ul>
                     {hasMoreFeatures && (
