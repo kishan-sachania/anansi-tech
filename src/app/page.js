@@ -589,7 +589,7 @@ export default function ERPCompanyWebsite() {
                     improvement: 50,
                   },
                   {
-                    name: "Monthly closing time",
+                    name: "Monthly closing time reduced",
                     oldValue: 15,
                     newValue: 3,
                     improvement: 80,
@@ -707,8 +707,8 @@ export default function ERPCompanyWebsite() {
                   },
                   {
                     name: "Leave approval speed",
-                    oldValue: 48,
-                    newValue: 2,
+                    oldValue: 2,
+                    newValue: 48,
                     improvement: 96,
                   },
                   {
@@ -820,78 +820,102 @@ export default function ERPCompanyWebsite() {
                        {product.description}
                      </p>
                    </CardHeader>
-                  <CardContent className="pt-0">
-                    {product.hasMetrics ? (
-                      <div className="relative min-h-[280px]">
-                        {/* Default state - simple features list */}
-                        <div className="absolute inset-0 opacity-100 group-hover:opacity-0 transition-opacity duration-300">
-                          <div className="space-y-3">
-                            {product.features
-                              .slice(0, 5)
-                              .map((feature, featureIndex) => (
-                                <div
-                                  key={featureIndex}
-                                  className="flex items-center space-x-3"
-                                >
-                                  <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
-                                  <span className="text-sm text-muted-foreground">
-                                    {typeof feature === "object"
-                                      ? feature.name
-                                      : feature}
-                                  </span>
-                                </div>
-                              ))}
-                            {product.features.length > 5 && (
-                              <div className="text-xs text-muted-foreground/60 italic">
-                                +{product.features.length - 5} more metrics...
-                              </div>
-                            )}
-                          </div>
-                        </div>
+                   <CardContent className="pt-0">
+                     {product.hasMetrics ? (
+                       <div className="space-y-4">
+                         {/* Mobile: Always show all details */}
+                         <div className="block md:hidden">
+                           {product.features.map((feature, featureIndex) => (
+                             <div key={featureIndex}>
+                               {typeof feature === "object" ? (
+                                 <AnimatedMetric
+                                   feature={feature}
+                                   isHovered={true}
+                                 />
+                               ) : (
+                                 <div className="flex items-center space-x-3">
+                                   <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
+                                   <span className="text-sm text-muted-foreground">
+                                     {feature}
+                                   </span>
+                                 </div>
+                               )}
+                             </div>
+                           ))}
+                         </div>
 
-                        {/* Hover state - detailed metrics with animations and scroll */}
-                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                          <div className="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent pr-2">
-                            <div className="space-y-4 pb-2">
-                              {product.features.map((feature, featureIndex) => (
-                                <div key={featureIndex}>
-                                  {typeof feature === "object" ? (
-                                    <AnimatedMetric
-                                      feature={feature}
-                                      isHovered={hoveredProduct === index}
-                                    />
-                                  ) : (
-                                    <div className="flex items-center space-x-3">
-                                      <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
-                                      <span className="text-sm text-muted-foreground">
-                                        {feature}
-                                      </span>
-                                    </div>
-                                  )}
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="space-y-3">
-                        {product.features.map((feature, featureIndex) => (
-                          <div
-                            key={featureIndex}
-                            className="flex items-center space-x-3"
-                          >
-                            <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
-                            <span className="text-sm text-muted-foreground">
-                              {typeof feature === "string"
-                                ? feature
-                                : feature.name}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </CardContent>
+                         {/* Desktop: Hover-based display */}
+                         <div className="hidden md:block relative min-h-[280px]">
+                           {/* Default state - simple features list */}
+                           <div className="absolute inset-0 opacity-100 group-hover:opacity-0 transition-opacity duration-300">
+                             <div className="space-y-3">
+                               {product.features
+                                 .slice(0, 5)
+                                 .map((feature, featureIndex) => (
+                                   <div
+                                     key={featureIndex}
+                                     className="flex items-center space-x-3"
+                                   >
+                                     <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
+                                     <span className="text-sm text-muted-foreground">
+                                       {typeof feature === "object"
+                                         ? feature.name
+                                         : feature}
+                                     </span>
+                                   </div>
+                                 ))}
+                               {product.features.length > 5 && (
+                                 <div className="text-xs text-muted-foreground/60 italic">
+                                   +{product.features.length - 5} more metrics...
+                                 </div>
+                               )}
+                             </div>
+                           </div>
+
+                           {/* Hover state - detailed metrics with animations and scroll */}
+                           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                             <div className="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent pr-2">
+                               <div className="space-y-4 pb-2">
+                                 {product.features.map((feature, featureIndex) => (
+                                   <div key={featureIndex}>
+                                     {typeof feature === "object" ? (
+                                       <AnimatedMetric
+                                         feature={feature}
+                                         isHovered={hoveredProduct === index}
+                                       />
+                                     ) : (
+                                       <div className="flex items-center space-x-3">
+                                         <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
+                                         <span className="text-sm text-muted-foreground">
+                                           {feature}
+                                         </span>
+                                       </div>
+                                     )}
+                                   </div>
+                                 ))}
+                               </div>
+                             </div>
+                           </div>
+                         </div>
+                       </div>
+                     ) : (
+                       <div className="space-y-3">
+                         {product.features.map((feature, featureIndex) => (
+                           <div
+                             key={featureIndex}
+                             className="flex items-center space-x-3"
+                           >
+                             <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
+                             <span className="text-sm text-muted-foreground">
+                               {typeof feature === "string"
+                                 ? feature
+                                 : feature.name}
+                             </span>
+                           </div>
+                         ))}
+                       </div>
+                     )}
+                   </CardContent>
                 </Card>
               );
             })}

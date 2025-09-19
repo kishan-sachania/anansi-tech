@@ -739,7 +739,7 @@ export function Services() {
             setAnimationPhase('idle');
           }, 500);
         }, 500);
-      }, 8000); // 8 sec per category
+      }, 4000); // 4 sec per category
     }
     
     return () => {
@@ -755,7 +755,7 @@ export function Services() {
     if (manualSwitch) {
       const timer = setTimeout(() => {
         setManualSwitch(false);
-      }, 10000); // Resume auto-advance after 10 seconds
+      }, 6000); // Resume auto-advance after 6 seconds
       return () => clearTimeout(timer);
     }
   }, [manualSwitch]);
