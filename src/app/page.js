@@ -29,6 +29,7 @@ import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { Services } from "@/components/services";
 import { AnimatedMetric } from "@/components/animated-metric";
+import Typewriter from "typewriter-effect";
 import Link from "next/link";
 
 export default function ERPCompanyWebsite() {
@@ -421,7 +422,18 @@ export default function ERPCompanyWebsite() {
             Your business deserves more than tools
             <p className="text-primary"> it deserves a </p>
             <p className="text-primary font-black text-4xl md:text-6xl">
-              companion.
+              <Typewriter
+                options={{
+                  strings: ['strategy','Foundation','companion.'],
+                  autoStart: true,
+                  loop: false,
+                  delay: 150,
+                  deleteSpeed: 50,
+                  cursor: '|',
+                  wrapperClassName: 'text-primary font-black text-5xl md:text-7xl',
+                  cursorClassName: 'text-primary font-black text-5xl md:text-7xl'
+                }}
+              />
             </p>
           </h1>
           <p className="text-xl text-muted-foreground mb-8 text-pretty max-w-2xl mx-auto font-body">
