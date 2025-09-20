@@ -1,29 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { AnimatedMetric } from "@/components/animated-metric";
-import { Button } from "@/components/ui/button";
-import { CheckCircle } from "lucide-react";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import {
-  CreditCard,
-  UserCheck,
-  HardHat,
-  Users,
-  ClipboardList,
-  ShieldCheck,
-} from "lucide-react";
-import { products } from "./schema/product";
+"use client"
+
+import { useState } from "react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { AnimatedMetric } from "@/components/animated-metric"
+import { Button } from "@/components/ui/button"
+import { CheckCircle } from "lucide-react"
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
+import { products } from "@/components/schema/product"
 
 interface ProductProps {
-  activeCategory: number;
-  animationPhase: string;
-  hoveredCard: number | null;
-  handleMouseEnter: (index: number) => void;
-  handleMouseLeave: () => void;
-  setActiveCategory: (category: number) => void;
-  setManualSwitch: (manualSwitch: boolean) => void;
-  setAnimationPhase: (animationPhase: string) => void;
+  activeCategory: number
+  animationPhase: string
+  hoveredCard: number | null
+  handleMouseEnter: (index: number) => void
+  handleMouseLeave: () => void
+  setActiveCategory: (category: number) => void
+  setManualSwitch: (manualSwitch: boolean) => void
+  setAnimationPhase: (animationPhase: string) => void
 }
 
 const Product = ({
@@ -36,28 +30,17 @@ const Product = ({
   setManualSwitch,
   setAnimationPhase,
 }: ProductProps) => {
-  const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
-  const [isPaused, setIsPaused] = useState(false);
+  const [hoveredProduct, setHoveredProduct] = useState<number | null>(null)
 
-  const totalProducts = products.length;
-  const prevIndex = (activeCategory - 1 + totalProducts) % totalProducts;
-  const currentIndex = activeCategory;
-  const nextIndex = (activeCategory + 1) % totalProducts;
+  const totalProducts = products.length
+  const prevIndex = (activeCategory - 1 + totalProducts) % totalProducts
+  const currentIndex = activeCategory
+  const nextIndex = (activeCategory + 1) % totalProducts
 
-  const prevProduct = products[prevIndex];
-  const currentProduct = products[currentIndex];
-  const nextProduct = products[nextIndex];
+  const prevProduct = products[prevIndex]
+  const currentProduct = products[currentIndex]
+  const nextProduct = products[nextIndex]
 
-  // Auto-loop functionality
-  useEffect(() => {
-    if (isPaused) return;
-
-    const interval = setInterval(() => {
-      setActiveCategory((activeCategory + 1) % products.length);
-    }, 4000); // Change slide every 4 seconds
-
-    return () => clearInterval(interval);
-  }, [isPaused, products.length, activeCategory, setActiveCategory]);
   return (
     <>
       <section id="products" className="pb-10 px-4">
@@ -72,10 +55,8 @@ const Product = ({
               <Card
                 className="group h-[350px] transition-all duration-500 border border-primary/10 bg-card/30 backdrop-blur overflow-hidden relative cursor-pointer"
                 onClick={() => {
-                  setIsPaused(true);
-                  setActiveCategory(prevIndex);
-                  setManualSwitch(true);
-                  setTimeout(() => setIsPaused(false), 6000);
+                  setActiveCategory(prevIndex)
+                  setManualSwitch(true)
                 }}
               >
                 <CardHeader className="pb-4">
@@ -108,14 +89,12 @@ const Product = ({
                 key={currentIndex}
                 className="group h-[350px] hover:h-[600px] hover:shadow-lg transition-all duration-500 border border-primary/20 hover:border-primary hover:scale-105 bg-card/50 backdrop-blur overflow-hidden relative"
                 onMouseEnter={() => {
-                  setIsPaused(true);
-                  setHoveredProduct(currentIndex);
-                  handleMouseEnter(currentIndex);
+                  setHoveredProduct(currentIndex)
+                  handleMouseEnter(currentIndex)
                 }}
                 onMouseLeave={() => {
-                  setIsPaused(false);
-                  setHoveredProduct(null);
-                  handleMouseLeave();
+                  setHoveredProduct(null)
+                  handleMouseLeave()
                 }}
               >
                 <CardHeader className="pb-4">
@@ -215,10 +194,8 @@ const Product = ({
               <Card
                 className="group h-[350px] transition-all duration-500 border border-primary/10 bg-card/30 backdrop-blur overflow-hidden relative cursor-pointer"
                 onClick={() => {
-                  setIsPaused(true);
-                  setActiveCategory(nextIndex);
-                  setManualSwitch(true);
-                  setTimeout(() => setIsPaused(false), 6000);
+                  setActiveCategory(nextIndex)
+                  setManualSwitch(true)
                 }}
               >
                 <CardHeader className="pb-4">
@@ -235,6 +212,7 @@ const Product = ({
               </Card>
             </div>
           </div>
+
           <div className="text-center mt-12">
             <Button
               asChild
@@ -251,7 +229,7 @@ const Product = ({
         </div>
       </section>
     </>
-  );
-};
+  )
+}
 
-export default Product;
+export default Product

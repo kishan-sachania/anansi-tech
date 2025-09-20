@@ -32,8 +32,7 @@ import { AnimatedMetric } from "@/components/animated-metric";
 import Typewriter from "typewriter-effect";
 import Link from "next/link";
 import { categoryWiseServices } from "@/components/schema/service";
-import Product from "@/components/product";
-import { products } from "@/components/schema/product";
+import ProductCarousel from "@/components/product-carousel";
 
 export default function ERPCompanyWebsite() {
   const [hoveredIndustry, setHoveredIndustry] = useState(null);
@@ -586,7 +585,7 @@ export default function ERPCompanyWebsite() {
       </section> */}
 
       {/* Products Section */}
-      <Slideshow itemList={products} product={true} title="Our Products" description="Powerful ERP modules to streamline every aspect of your business" />
+      <ProductCarousel />
 
       {/* Advantages Section */}
       <section id="advantages" className="py-16 px-4 bg-muted/10">
