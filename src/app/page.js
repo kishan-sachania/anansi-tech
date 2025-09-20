@@ -27,10 +27,13 @@ import {
 } from "lucide-react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
-import { Services } from "@/components/services";
+import { Slideshow } from "@/components/slideshow";
 import { AnimatedMetric } from "@/components/animated-metric";
 import Typewriter from "typewriter-effect";
 import Link from "next/link";
+import { categoryWiseServices } from "@/components/schema/service";
+import Product from "@/components/product";
+import { products } from "@/components/schema/product";
 
 export default function ERPCompanyWebsite() {
   const [hoveredIndustry, setHoveredIndustry] = useState(null);
@@ -421,20 +424,39 @@ export default function ERPCompanyWebsite() {
           <h1 className="text-4xl md:text-6xl font-semibold mb-6 text-balance font-heading">
             Your business deserves more than tools
             <p className="text-primary"> it deserves a </p>
-            <p className="text-primary font-black text-4xl md:text-6xl">
+            <div className="text-primary font-black text-5xl md:text-7xl">
               <Typewriter
                 options={{
-                  strings: ['strategy','Foundation','companion.'],
                   autoStart: true,
-                  loop: false,
+                  loop: true,
                   delay: 150,
                   deleteSpeed: 50,
-                  cursor: '|',
-                  wrapperClassName: 'text-primary font-black text-5xl md:text-7xl',
-                  cursorClassName: 'text-primary font-black text-5xl md:text-7xl'
+                  cursor: "|",
+                  wrapperClassName:
+                    "text-primary font-black text-5xl md:text-7xl",
+                  cursorClassName:
+                    "text-primary font-black text-5xl md:text-7xl typewriter-cursor",
+                }}
+                onInit={(typewriter) => {
+                  typewriter
+                    .typeString("<span>strategy</span>")
+                    .pauseFor(1000)
+                    .deleteAll()
+
+                    .typeString("<span >Foundation</span>")
+                    .pauseFor(1000)
+                    .deleteAll()
+
+                    .typeString(
+                      '<span class="text-6xl md:text-8xl">companion.</span>'
+                    )
+                    .pauseFor(5000)
+                    .deleteAll()
+
+                    .start();
                 }}
               />
-            </p>
+            </div>
           </h1>
           <p className="text-xl text-muted-foreground mb-8 text-pretty max-w-2xl mx-auto font-body">
             Streamline operations, boost productivity, and drive growth with our
@@ -518,7 +540,7 @@ export default function ERPCompanyWebsite() {
       </section>
 
       {/* Services Section */}
-      <Services />
+      <Slideshow itemList={categoryWiseServices} title="Why Choose ERPFlow" description="Experience the advantages that set us apart from the competition" />
 
       {/* Industries Section
       <section id="industries" className="py-16 px-4 bg-muted/10">
@@ -564,389 +586,7 @@ export default function ERPCompanyWebsite() {
       </section> */}
 
       {/* Products Section */}
-      <section id="products" className="py-16 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-semibold mb-4">
-              Our Products
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Powerful ERP modules to streamline every aspect of your business
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                name: "Finance & Accounting",
-                description:
-                  "Streamline your financial operations with automated processes",
-                icon: CreditCard,
-                features: [
-                  {
-                    name: "Invoice processing time",
-                    oldValue: 7,
-                    newValue: 1,
-                    improvement: 85,
-                  },
-                  {
-                    name: "GST/TDS filing accuracy",
-                    oldValue: 75,
-                    newValue: 98,
-                    improvement: 23,
-                  },
-                  {
-                    name: "Bank reconciliation speed",
-                    oldValue: 40,
-                    newValue: 90,
-                    improvement: 50,
-                  },
-                  {
-                    name: "Monthly closing time reduced",
-                    oldValue: 15,
-                    newValue: 3,
-                    improvement: 80,
-                  },
-                  {
-                    name: "Expense tracking visibility",
-                    oldValue: 30,
-                    newValue: 95,
-                    improvement: 65,
-                  },
-                ],
-                hasMetrics: true,
-              },
-              {
-                name: "Sales & CRM",
-                description:
-                  "Boost your sales performance with intelligent customer management",
-                icon: UserCheck,
-                features: [
-                  {
-                    name: "Lead conversion growth",
-                    oldValue: 15,
-                    newValue: 43,
-                    improvement: 28,
-                  },
-                  {
-                    name: "Faster quotation turnaround",
-                    oldValue: 20,
-                    newValue: 80,
-                    improvement: 60,
-                  },
-                  {
-                    name: "Shorter sales cycle",
-                    oldValue: 45,
-                    newValue: 65,
-                    improvement: 20,
-                  },
-                  {
-                    name: "Faster customer response",
-                    oldValue: 30,
-                    newValue: 75,
-                    improvement: 45,
-                  },
-                  {
-                    name: "Lower customer acquisition cost",
-                    oldValue: 70,
-                    newValue: 85,
-                    improvement: 15,
-                  },
-                ],
-                hasMetrics: true,
-              },
-              {
-                name: "Manufacturing",
-                description:
-                  "Optimize production processes and quality control",
-                icon: HardHat,
-                features: [
-                  {
-                    name: "Production efficiency",
-                    oldValue: 65,
-                    newValue: 88,
-                    improvement: 23,
-                  },
-                  {
-                    name: "Work order completion",
-                    oldValue: 70,
-                    newValue: 95,
-                    improvement: 25,
-                  },
-                  {
-                    name: "Production planning accuracy",
-                    oldValue: 55,
-                    newValue: 85,
-                    improvement: 30,
-                  },
-                  {
-                    name: "Shop floor visibility",
-                    oldValue: 40,
-                    newValue: 90,
-                    improvement: 50,
-                  },
-                  {
-                    name: "Quality management score",
-                    oldValue: 75,
-                    newValue: 96,
-                    improvement: 21,
-                  },
-                ],
-                hasMetrics: true,
-              },
-              {
-                name: "Human Resources",
-                description:
-                  "Manage your workforce efficiently with automated HR processes",
-                icon: Users,
-                features: [
-                  {
-                    name: "Employee record accuracy",
-                    oldValue: 70,
-                    newValue: 98,
-                    improvement: 28,
-                  },
-                  {
-                    name: "Appraisal completion rate",
-                    oldValue: 60,
-                    newValue: 95,
-                    improvement: 35,
-                  },
-                  {
-                    name: "Employee satisfaction",
-                    oldValue: 65,
-                    newValue: 88,
-                    improvement: 23,
-                  },
-                  {
-                    name: "Leave approval speed",
-                    oldValue: 2,
-                    newValue: 48,
-                    improvement: 96,
-                  },
-                  {
-                    name: "Overtime cost reduction",
-                    oldValue: 25,
-                    newValue: 75,
-                    improvement: 50,
-                  },
-                ],
-                hasMetrics: true,
-              },
-              {
-                name: "Projects",
-                description:
-                  "Deliver projects on time with better resource management",
-                icon: ClipboardList,
-                features: [
-                  {
-                    name: "Project completion rate",
-                    oldValue: 70,
-                    newValue: 92,
-                    improvement: 22,
-                  },
-                  {
-                    name: "Resource allocation efficiency",
-                    oldValue: 55,
-                    newValue: 85,
-                    improvement: 30,
-                  },
-                  {
-                    name: "Project delivery timeline",
-                    oldValue: 60,
-                    newValue: 88,
-                    improvement: 28,
-                  },
-                  {
-                    name: "Resource utilization",
-                    oldValue: 65,
-                    newValue: 90,
-                    improvement: 25,
-                  },
-                  {
-                    name: "Budget adherence",
-                    oldValue: 75,
-                    newValue: 94,
-                    improvement: 19,
-                  },
-                ],
-                hasMetrics: true,
-              },
-              {
-                name: "Quality Control",
-                description:
-                  "Maintain high standards with comprehensive quality management",
-                icon: ShieldCheck,
-                features: [
-                  {
-                    name: "Rejection rate reduction",
-                    oldValue: 15,
-                    newValue: 3,
-                    improvement: 80,
-                  },
-                  {
-                    name: "Customer complaint reduction",
-                    oldValue: 25,
-                    newValue: 5,
-                    improvement: 80,
-                  },
-                  {
-                    name: "Inspection compliance",
-                    oldValue: 80,
-                    newValue: 98,
-                    improvement: 18,
-                  },
-                  {
-                    name: "NCR resolution speed",
-                    oldValue: 40,
-                    newValue: 85,
-                    improvement: 45,
-                  },
-                  {
-                    name: "Defect prevention",
-                    oldValue: 60,
-                    newValue: 92,
-                    improvement: 32,
-                  },
-                ],
-                hasMetrics: true,
-              },
-            ].map((product, index) => {
-              const IconComponent = product.icon;
-              return (
-                <Card
-                  key={index}
-                  className="group hover:shadow-lg transition-all duration-500 border border-primary/20 hover:border-primary hover:scale-105 bg-card/50 backdrop-blur overflow-hidden relative"
-                  onMouseEnter={() => setHoveredProduct(index)}
-                  onMouseLeave={() => setHoveredProduct(null)}
-                >
-                   <CardHeader className="pb-4">
-                     <div className="flex items-center space-x-3 mb-4">
-                       <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-500">
-                         <IconComponent className="h-6 w-6 text-gray-500 group-hover:text-primary transition-colors duration-500" />
-                       </div>
-                       <CardTitle className="text-xl font-semibold group-hover:text-primary transition-colors">
-                         {product.name}
-                       </CardTitle>
-                     </div>
-                     <p className="text-sm text-muted-foreground leading-relaxed">
-                       {product.description}
-                     </p>
-                   </CardHeader>
-                   <CardContent className="pt-0">
-                     {product.hasMetrics ? (
-                       <div className="space-y-4">
-                         {/* Mobile: Always show all details */}
-                         <div className="block md:hidden">
-                           {product.features.map((feature, featureIndex) => (
-                             <div key={featureIndex}>
-                               {typeof feature === "object" ? (
-                                 <AnimatedMetric
-                                   feature={feature}
-                                   isHovered={true}
-                                 />
-                               ) : (
-                                 <div className="flex items-center space-x-3">
-                                   <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
-                                   <span className="text-sm text-muted-foreground">
-                                     {feature}
-                                   </span>
-                                 </div>
-                               )}
-                             </div>
-                           ))}
-                         </div>
-
-                         {/* Desktop: Hover-based display */}
-                         <div className="hidden md:block relative min-h-[280px]">
-                           {/* Default state - simple features list */}
-                           <div className="absolute inset-0 opacity-100 group-hover:opacity-0 transition-opacity duration-300">
-                             <div className="space-y-3">
-                               {product.features
-                                 .slice(0, 5)
-                                 .map((feature, featureIndex) => (
-                                   <div
-                                     key={featureIndex}
-                                     className="flex items-center space-x-3"
-                                   >
-                                     <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
-                                     <span className="text-sm text-muted-foreground">
-                                       {typeof feature === "object"
-                                         ? feature.name
-                                         : feature}
-                                     </span>
-                                   </div>
-                                 ))}
-                               {product.features.length > 5 && (
-                                 <div className="text-xs text-muted-foreground/60 italic">
-                                   +{product.features.length - 5} more metrics...
-                                 </div>
-                               )}
-                             </div>
-                           </div>
-
-                           {/* Hover state - detailed metrics with animations and scroll */}
-                           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                             <div className="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent pr-2">
-                               <div className="space-y-4 pb-2">
-                                 {product.features.map((feature, featureIndex) => (
-                                   <div key={featureIndex}>
-                                     {typeof feature === "object" ? (
-                                       <AnimatedMetric
-                                         feature={feature}
-                                         isHovered={hoveredProduct === index}
-                                       />
-                                     ) : (
-                                       <div className="flex items-center space-x-3">
-                                         <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
-                                         <span className="text-sm text-muted-foreground">
-                                           {feature}
-                                         </span>
-                                       </div>
-                                     )}
-                                   </div>
-                                 ))}
-                               </div>
-                             </div>
-                           </div>
-                         </div>
-                       </div>
-                     ) : (
-                       <div className="space-y-3">
-                         {product.features.map((feature, featureIndex) => (
-                           <div
-                             key={featureIndex}
-                             className="flex items-center space-x-3"
-                           >
-                             <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
-                             <span className="text-sm text-muted-foreground">
-                               {typeof feature === "string"
-                                 ? feature
-                                 : feature.name}
-                             </span>
-                           </div>
-                         ))}
-                       </div>
-                     )}
-                   </CardContent>
-                </Card>
-              );
-            })}
-          </div>
-          <div className="text-center mt-12">
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="border-primary text-primary bg-tranhover:bg-primary  hover:text-white"
-            >
-              <Link href="/products">
-                Explore More
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+      <Slideshow itemList={products} product={true} title="Our Products" description="Powerful ERP modules to streamline every aspect of your business" />
 
       {/* Advantages Section */}
       <section id="advantages" className="py-16 px-4 bg-muted/10">

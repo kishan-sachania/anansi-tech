@@ -71,7 +71,12 @@ interface AnimatedMetricProps {
 }
 
 export function AnimatedMetric({ feature, isHovered }: AnimatedMetricProps) {
-  const { count: oldCount, ref: oldRef } = useCountUp(feature.oldValue, 0, 800, isHovered);
+  const { count: oldCount, ref: oldRef } = useCountUp(
+    feature.oldValue,
+    0,
+    800,
+    isHovered
+  );
   const { count: newCount, ref: newRef } = useCountUp(
     feature.newValue,
     feature.oldValue,
@@ -118,18 +123,38 @@ export function AnimatedMetric({ feature, isHovered }: AnimatedMetricProps) {
         <span className="text-sm font-medium text-foreground">
           {feature.name}
         </span>
-        <div className={`flex items-center space-x-1 text-xs font-bold ${oldCount < newCount ? "text-green-500" : "text-red-500"}`}>
-          {oldCount < newCount ? <ArrowUp className="h-3 w-3" /> : <ArrowDown className="h-3 w-3" />} <span>+{feature.improvement}%</span>
+        <div
+          className={`flex items-center space-x-1 text-xs font-bold ${
+            oldCount < newCount ? "text-green-500" : "text-red-500"
+          }`}
+        >
+          {oldCount < newCount ? (
+            <ArrowUp className="h-3 w-3" />
+          ) : (
+            <ArrowDown className="h-3 w-3" />
+          )}{" "}
+          <span>+{feature.improvement}%</span>
         </div>
       </div>
-      <div className="flex items-center justify-between text-xs">
-        <span className="text-muted-foreground">Others: <span ref={oldRef}>{oldCount}%</span></span>
-        <span className="font-semibold text-primary">Ours: <span ref={newRef}>{newCount}%</span></span>
+      <div className="flex items-center justify-between text-xs gap-2">
+        <Progress
+          value={progress}
+          className="h-2 transition-all duration-1000 ease-out"
+          progressbarClassName="bg-muted-foreground/40"
+        />
+        <span className="text-muted-foreground/80 flex">
+          Manual: <span ref={oldRef}>{oldCount}%</span>
+        </span>
       </div>
-      <Progress
-        value={progress}
-        className="h-2 transition-all duration-1000 ease-out"
-      />
+      <div className="flex items-center justify-between text-xs gap-2">
+        <Progress
+          value={progress}
+          className="h-2 transition-all duration-1000 ease-out"
+        />
+        <span className="font-semibold text-primary flex">
+          ERP: <span ref={newRef}>{newCount}%</span>
+        </span>
+      </div>
     </div>
   );
 }
