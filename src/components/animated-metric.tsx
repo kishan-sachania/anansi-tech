@@ -42,8 +42,8 @@ function useCountUp(
       if (!startTime) startTime = currentTime;
       const progress = Math.min((currentTime - startTime) / duration, 1);
 
-      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-      const currentCount = start + (end - start) * easeOutQuart;
+      const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+      const currentCount = start + (end - start) * easeOutCubic;
 
       setCount(Math.floor(currentCount));
 
@@ -74,13 +74,13 @@ export function AnimatedMetric({ feature, isHovered }: AnimatedMetricProps) {
   const { count: oldCount, ref: oldRef } = useCountUp(
     feature.oldValue,
     0,
-    800,
+    2000,
     isHovered
   );
   const { count: newCount, ref: newRef } = useCountUp(
     feature.newValue,
     feature.oldValue,
-    1000,
+    2500,
     isHovered
   );
   const [progress, setProgress] = useState(0);
@@ -112,7 +112,7 @@ export function AnimatedMetric({ feature, isHovered }: AnimatedMetricProps) {
 
     const timer = setTimeout(() => {
       setProgress(feature.newValue);
-    }, 200);
+    }, 500);
 
     return () => clearTimeout(timer);
   }, [feature.newValue, isHovered, isVisible]);
@@ -139,7 +139,7 @@ export function AnimatedMetric({ feature, isHovered }: AnimatedMetricProps) {
       <div className="flex items-center justify-between text-xs gap-2">
         <Progress
           value={progress}
-          className="h-2 transition-all duration-1000 ease-out"
+          className="h-2 transition-all duration-[3000ms] ease-out"
           progressbarClassName="bg-muted-foreground/40"
         />
         <span className="text-muted-foreground/80 flex">
@@ -149,7 +149,7 @@ export function AnimatedMetric({ feature, isHovered }: AnimatedMetricProps) {
       <div className="flex items-center justify-between text-xs gap-2">
         <Progress
           value={progress}
-          className="h-2 transition-all duration-1000 ease-out"
+          className="h-2 transition-all duration-[3000ms] ease-out"
         />
         <span className="font-semibold text-primary flex">
           ERP: <span ref={newRef}>{newCount}%</span>
