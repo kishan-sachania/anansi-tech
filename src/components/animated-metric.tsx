@@ -38,14 +38,27 @@ function useCountUp(
     }
 
     let startTime: number;
+    let lastUpdateTime = 0;
     const animate = (currentTime: number) => {
       if (!startTime) startTime = currentTime;
+
+      // Only update every 100ms to slow down the animation
+      if (currentTime - lastUpdateTime < 100) {
+        requestAnimationFrame(animate);
+        return;
+      }
+      lastUpdateTime = currentTime;
+
       const progress = Math.min((currentTime - startTime) / duration, 1);
 
-      const easeOutCubic = 1 - Math.pow(1 - progress, 3);
-      const currentCount = start + (end - start) * easeOutCubic;
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      const currentCount = start + (end - start) * easeOutQuart;
 
-      setCount(Math.floor(currentCount));
+      // Use smaller increments for smoother progression
+      const increment = Math.max(1, Math.floor((end - start) / 50)); // Divide into ~50 steps
+      const steppedCount = Math.floor(currentCount / increment) * increment;
+
+      setCount(Math.min(steppedCount, end));
 
       if (progress < 1) {
         requestAnimationFrame(animate);
@@ -71,22 +84,24 @@ interface AnimatedMetricProps {
 }
 
 export function AnimatedMetric({ feature, isHovered }: AnimatedMetricProps) {
+  const totalDuration = 3000;
   const { count: oldCount, ref: oldRef } = useCountUp(
     feature.oldValue,
     0,
-    3000,
+    totalDuration,
     isHovered
   );
+
   const { count: newCount, ref: newRef } = useCountUp(
     feature.newValue,
     feature.oldValue,
-    4000,
+    totalDuration,
     isHovered
   );
   const [progress, setProgress] = useState(0);
-  const [oldProgress, setOldProgress] = useState(0);
+  const [manualProgress, setManualProgress] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -109,60 +124,42 @@ export function AnimatedMetric({ feature, isHovered }: AnimatedMetricProps) {
   useEffect(() => {
     if (!isHovered || !isVisible) {
       setProgress(0);
-      setOldProgress(0);
-      setIsLoading(false);
+      setManualProgress(0);
+      setIsAnimating(false);
       return;
     }
 
-    // Start loading effect
-    setIsLoading(true);
+    setIsAnimating(true);
+    const startTime = performance.now();
+    const animate = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const ratio = Math.min(elapsed / totalDuration, 1);
 
-    // Smooth progress for both old and new values
-    let currentNewProgress = 0;
-    let currentOldProgress = 0;
-    const targetNewProgress = feature.newValue;
-    const targetOldProgress = feature.oldValue;
-    
-    const newIncrement = Math.max(1, Math.ceil(targetNewProgress / 50));
-    const oldIncrement = Math.max(1, Math.ceil(targetOldProgress / 50));
-    const intervalDelay = 100;
-
-    const progressInterval = setInterval(() => {
-      // Update new progress (ERP)
-      if (currentNewProgress < targetNewProgress) {
-        currentNewProgress += newIncrement;
-        if (currentNewProgress >= targetNewProgress) {
-          currentNewProgress = targetNewProgress;
-        }
-        setProgress(currentNewProgress);
-      }
+      // easeOutQuart
+      const eased = 1 - Math.pow(1 - ratio, 4);
       
-      // Update old progress (Manual)
-      if (currentOldProgress < targetOldProgress) {
-        currentOldProgress += oldIncrement;
-        if (currentOldProgress >= targetOldProgress) {
-          currentOldProgress = targetOldProgress;
-        }
-        setOldProgress(currentOldProgress);
-      }
-      
-      // Stop loading when both reach their targets
-      if (currentNewProgress >= targetNewProgress && currentOldProgress >= targetOldProgress) {
-        setIsLoading(false);
-        clearInterval(progressInterval);
-      }
-    }, intervalDelay);
+      // Both bars fill at the same visual speed
+      const erpCurrent = feature.newValue * eased;
+      const manualCurrent = feature.oldValue * eased;
 
-    return () => {
-      clearInterval(progressInterval);
-      setIsLoading(false);
+      setProgress(erpCurrent);
+      setManualProgress(manualCurrent);
+
+      if (ratio < 1) requestAnimationFrame(animate);
+      else {
+        setProgress(feature.newValue);
+        setManualProgress(feature.oldValue);
+        setIsAnimating(false);
+      }
     };
+
+    requestAnimationFrame(animate);
   }, [feature.newValue, feature.oldValue, isHovered, isVisible]);
 
   return (
     <div ref={containerRef} className="space-y-2">
       <div className="flex items-center justify-between">
-        <span className="text-sm font-medium text-foreground">
+        <span className="text-md font-medium text-foreground">
           {feature.name}
         </span>
         <div
@@ -178,39 +175,22 @@ export function AnimatedMetric({ feature, isHovered }: AnimatedMetricProps) {
           <span>+{feature.improvement}%</span>
         </div>
       </div>
-      <div className="flex items-center justify-between text-xs gap-2">
-        <div className="flex-1 relative">
-          <Progress
-            value={oldProgress}
-            className={`h-2 transition-all duration-300 ease-out ${
-              isLoading ? 'animate-pulse' : ''
-            }`}
-            progressbarClassName={`${
-              isLoading 
-                ? 'bg-muted-foreground/40 animate-pulse' 
-                : 'bg-muted-foreground/40'
-            }`}
-          />
-        </div>
-        <span className="text-muted-foreground/80 flex">
+      <div className="flex items-center justify-between text-sm gap-1">
+        <Progress
+          value={manualProgress}
+          className="h-2"
+          progressbarClassName="bg-muted-foreground/40"
+        />
+        <span className="text-muted-foreground/80  flex">
           Manual: <span ref={oldRef}>{oldCount}%</span>
         </span>
       </div>
-      <div className="flex items-center justify-between text-xs gap-2">
-        <div className="flex-1 relative">
-          <Progress
-            value={progress}
-            className={`h-2 transition-all duration-300 ease-out ${
-              isLoading ? 'animate-pulse' : ''
-            }`}
-            progressbarClassName={`${
-              isLoading 
-                ? 'bg-primary animate-pulse' 
-                : 'bg-primary'
-            }`}
-          />
-        </div>
-        <span className="font-semibold text-primary flex">
+      <div className="flex items-center justify-between text-sm gap-1">
+        <Progress 
+          value={progress} 
+          className="h-2"
+        />
+        <span className="font-semibold  text-primary flex">
           ERP: <span ref={newRef}>{newCount}%</span>
         </span>
       </div>

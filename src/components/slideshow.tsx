@@ -471,7 +471,7 @@ export function Slideshow<T>({ itemList, product = false, title, description }: 
 
         {/* Services Grid */}
         {!product ? (
-          <div className="relative overflow-hidden h-[780px]">
+          <div className="relative overflow-hidden">
             <Service
               activeCategory={activeCategory}
               animationPhase={animationPhase}

@@ -27,16 +27,15 @@ import {
 } from "lucide-react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
-import { Slideshow } from "@/components/slideshow";
 import { AnimatedMetric } from "@/components/animated-metric";
 import Typewriter from "typewriter-effect";
 import Link from "next/link";
 import { categoryWiseServices } from "@/components/schema/service";
-import ProductCarousel from "@/components/product-carousel";
+import { ProductGrid } from "@/components/product-grid";
+import { Slideshow } from "@/components/slideshow";
 
 export default function ERPCompanyWebsite() {
   const [hoveredIndustry, setHoveredIndustry] = useState(null);
-  const [hoveredProduct, setHoveredProduct] = useState(null);
   const { theme } = useTheme();
 
   // Memoized bubble colors based on theme
@@ -56,14 +55,6 @@ export default function ERPCompanyWebsite() {
     }
   }, [theme]);
 
-  // Hover handling functions for products - simplified like services
-  const handleProductMouseEnter = useCallback((index) => {
-    setHoveredProduct(index);
-  }, []);
-
-  const handleProductMouseLeave = useCallback(() => {
-    setHoveredProduct(null);
-  }, []);
 
   return (
     <div className="min-h-screen">
@@ -585,7 +576,7 @@ export default function ERPCompanyWebsite() {
       </section> */}
 
       {/* Products Section */}
-      <ProductCarousel />
+      <ProductGrid />
 
       {/* Advantages Section */}
       <section id="advantages" className="py-16 px-4 bg-muted/10">
