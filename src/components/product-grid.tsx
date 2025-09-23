@@ -19,8 +19,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 import {
   Dialog,
@@ -31,7 +29,6 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 
 export function ProductGrid() {
-  const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [hoverTimer, setHoverTimer] = useState<NodeJS.Timeout | null>(null);
@@ -40,6 +37,7 @@ export function ProductGrid() {
   const autoplayRef = useRef(
     Autoplay({ delay: 2000, stopOnInteraction: false })
   );
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [carouselApi, setCarouselApi] = useState<any>(null);
 
   const products = [
@@ -280,8 +278,6 @@ export function ProductGrid() {
   // Hover handling functions for products
   const handleProductMouseEnter = useCallback(
     (index: number) => {
-      setHoveredProduct(index);
-
       // Pause autoplay when hovering
       autoplayRef.current.stop();
 
@@ -302,8 +298,6 @@ export function ProductGrid() {
   );
 
   const handleProductMouseLeave = useCallback(() => {
-    setHoveredProduct(null);
-
     // Clear timer on mouse leave
     if (hoverTimer) {
       clearTimeout(hoverTimer);
