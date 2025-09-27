@@ -122,7 +122,7 @@ const addOns = [
 ];
 
 export default function PricingPage() {
-  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly');
+  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('yearly');
   const { theme } = useTheme();
 
   const toggleBillingPeriod = () => {
@@ -217,7 +217,7 @@ export default function PricingPage() {
                       {plan.description}
                     </CardDescription>
                     <div className="mt-6">
-                      <span className="text-4xl font-bold">${discountedPrice}</span>
+                      <span className="text-4xl font-bold">₹{discountedPrice}</span>
                       <span className="text-muted-foreground">/{periodText}</span>
                     </div>
                   </CardHeader>
@@ -285,7 +285,7 @@ export default function PricingPage() {
                   </CardHeader>
                   <CardContent className="text-center flex flex-col flex-grow">
                     <div className="text-2xl font-bold text-primary mb-4">
-                      ${addon.price}
+                      ₹{addon.price}
                       <span className="text-sm text-muted-foreground font-normal">
                         /{addon.period}
                       </span>

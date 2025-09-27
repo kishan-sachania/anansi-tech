@@ -21,6 +21,9 @@ export const metadata: Metadata = {
     shortcut: "/Anansi-logo.ico",
     apple: "/Anansi-logo.ico",
   },
+  other: {
+    "Content-Security-Policy": "script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; object-src 'none'; base-uri 'self'; frame-ancestors 'none';",
+  },
 };
 
 export const viewport = {

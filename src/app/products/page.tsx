@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -31,6 +31,12 @@ import { Footer } from "@/components/footer";
 import { AnimatedMetric } from "@/components/animated-metric";
 import Link from "next/link";
 import { useTheme } from "@/contexts/theme-context";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const products = [
   {
@@ -288,12 +294,55 @@ const categories = [
 export default function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<number | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [hoverTimer, setHoverTimer] = useState<NodeJS.Timeout | null>(null);
+  const modalContentRef = useRef<HTMLDivElement>(null);
   const { theme } = useTheme();
 
   const filteredProducts =
     selectedCategory === "All"
       ? products
       : products.filter((product) => product.category === selectedCategory);
+
+  // Hover handling functions for products
+  const handleProductMouseEnter = useCallback(
+    (index: number) => {
+      // Clear any existing timer
+      if (hoverTimer) {
+        clearTimeout(hoverTimer);
+      }
+
+      // Set new timer for 0.6s
+      const timer = setTimeout(() => {
+        setSelectedProduct(index);
+        setIsModalOpen(true);
+      }, 600);
+
+      setHoverTimer(timer);
+    },
+    [hoverTimer]
+  );
+
+  const handleProductMouseLeave = useCallback(() => {
+    // Clear timer on mouse leave
+    if (hoverTimer) {
+      clearTimeout(hoverTimer);
+      setHoverTimer(null);
+    }
+  }, [hoverTimer]);
+
+  const handleModalClose = useCallback(() => {
+    setIsModalOpen(false);
+    setSelectedProduct(null);
+  }, []);
+
+  // Auto-scroll to top when modal opens
+  useEffect(() => {
+    if (isModalOpen && modalContentRef.current) {
+      modalContentRef.current.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [isModalOpen]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -358,9 +407,9 @@ export default function ProductsPage() {
               return (
                 <Card
                   key={`${product.category}-${index}`}
-                  className="group hover:shadow-lg transition-all duration-500 border border-primary/20 hover:border-primary hover:scale-105 bg-card/50 backdrop-blur overflow-hidden relative"
-                  onMouseEnter={() => setHoveredCard(index)}
-                  onMouseLeave={() => setHoveredCard(null)}
+                  className="group hover:shadow-lg transition-all duration-500 border border-primary/20 hover:border-primary hover:scale-105 bg-card/50 backdrop-blur overflow-hidden relative cursor-pointer"
+                  onMouseEnter={() => handleProductMouseEnter(index)}
+                  onMouseLeave={handleProductMouseLeave}
                 >
                   <CardHeader className="pb-4">
                     <div className="flex items-center justify-between mb-4">
@@ -369,7 +418,7 @@ export default function ProductsPage() {
                       </div>
                       <Badge
                         variant="default"
-                        className="group-hover:bg-primary/20 text-white group-hover:text-primary transition-colors duration-500 "
+                        className="group-hover:bg-primary/20 text-white group-hover:text-primary transition-colors duration-500"
                       >
                         {product.category}
                       </Badge>
@@ -382,83 +431,21 @@ export default function ProductsPage() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="pt-0">
-                    {hasMetrics ? (
-                      <div className="space-y-4">
-                        {/* Mobile: Always show all details */}
-                        <div className="block md:hidden">
-                          {processedFeatures.map((feature, featureIndex) => (
-                            <div key={featureIndex}>
-                              {typeof feature === "object" ? (
-                                <AnimatedMetric
-                                  feature={feature}
-                                  isHovered={true}
-                                />
-                              ) : (
-                                <div className="flex items-center space-x-3">
-                                  <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
-                                  <span className="text-sm text-muted-foreground">
-                                    {feature}
-                                  </span>
-                                </div>
-                              )}
-                            </div>
-                          ))}
+                    <div className="space-y-3">
+                      {processedFeatures.slice(0, 6).map((feature, featureIndex) => (
+                        <div key={featureIndex} className="flex items-center space-x-3">
+                          <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
+                          <span className="text-sm text-muted-foreground">
+                            {typeof feature === "object" ? feature.name : feature}
+                          </span>
                         </div>
-
-                        {/* Desktop: Hover-based display */}
-                        <div className="hidden md:block relative min-h-[280px]">
-                          {/* Default state - simple features list */}
-                          <div className="absolute inset-0 opacity-100 group-hover:opacity-0 transition-opacity duration-300">
-                            <div className="space-y-3">
-                              {processedFeatures.slice(0, 8).map((feature, featureIndex) => (
-                                <div key={featureIndex} className="flex items-center space-x-3">
-                                  <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
-                                  <span className="text-sm text-muted-foreground">
-                                    {typeof feature === "object" ? feature.name : feature}
-                                  </span>
-                                </div>
-                              ))}
-                              {processedFeatures.length > 8 && (
-                                <div className="text-xs text-muted-foreground/60 italic">
-                                  +{processedFeatures.length - 8} more metrics...
-                                </div>
-                              )}
-                            </div>
-                          </div>
-
-                          {/* Hover state - detailed metrics with animations and scroll */}
-                          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                            <div className="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent pr-2">
-                              <div className="space-y-4 pb-2">
-                                {processedFeatures.map((feature, featureIndex) => (
-                                  <div key={featureIndex}>
-                                    {typeof feature === "object" ? (
-                                      <AnimatedMetric feature={feature} isHovered={hoveredCard === index} />
-                                    ) : (
-                                      <div className="flex items-center space-x-3">
-                                        <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
-                                        <span className="text-sm text-muted-foreground">{feature}</span>
-                                      </div>
-                                    )}
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
+                      ))}
+                      {processedFeatures.length > 6 && (
+                        <div className="text-xs text-muted-foreground/60 italic">
+                          +{processedFeatures.length - 6} more features...
                         </div>
-                      </div>
-                    ) : (
-                      <div className="space-y-3">
-                        {processedFeatures.map((feature, featureIndex) => (
-                          <div key={featureIndex} className="flex items-center space-x-3">
-                            <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
-                            <span className="text-sm text-muted-foreground">
-                              {typeof feature === "string" ? feature : feature.name}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </CardContent>
                 </Card>
               );
@@ -612,6 +599,63 @@ export default function ProductsPage() {
       </section>
 
       <Footer />
+
+      {/* Product Detail Modal */}
+      <Dialog open={isModalOpen} onOpenChange={handleModalClose}>
+        <DialogContent
+          ref={modalContentRef}
+          className="!w-[1400px] !max-w-[1400px] !h-[800px] !max-h-[800px] overflow-y-auto scroll-smooth custom-scrollbar"              
+        >
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-semibold">
+              {selectedProduct !== null && filteredProducts[selectedProduct]?.name}
+            </DialogTitle>
+          </DialogHeader>
+
+          {selectedProduct !== null && (
+            <div className="space-y-4">
+              <div className="flex items-center space-x-4">
+                <div className="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center">
+                  {(() => {
+                    const IconComponent = filteredProducts[selectedProduct].icon;
+                    return <IconComponent className="h-8 w-8 text-primary" />;
+                  })()}
+                </div>
+                <div>
+                  <Badge className="mb-2">
+                    {filteredProducts[selectedProduct].category}
+                  </Badge>
+                  <p className="text-lg text-muted-foreground">
+                    {filteredProducts[selectedProduct].description}
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-8">
+                <h3 className="text-xl font-semibold">Performance Metrics & Features</h3>
+                <div className="grid grid-cols-1 gap-2">
+                  {extractMetricsFromFeatures(filteredProducts[selectedProduct].features)
+                    .map((feature, index) => (
+                      <div
+                        key={index}
+                        className="p-3"
+                      >
+                        {typeof feature === "object" ? (
+                          <AnimatedMetric feature={feature} isHovered={true} />
+                        ) : (
+                          <div className="flex items-center space-x-3 p-2 rounded-lg bg-muted/30">
+                            <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
+                            <span className="text-sm text-muted-foreground">{feature}</span>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                </div>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
