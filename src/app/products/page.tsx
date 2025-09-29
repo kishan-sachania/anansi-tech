@@ -389,7 +389,7 @@ export default function ProductsPage() {
       </section>
 
       {/* Products Grid */}
-      <section className="py-16 px-4">
+      <section className="py-16 px-2 sm:px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="mb-8 text-center">
             <p className="text-muted-foreground">
@@ -398,7 +398,7 @@ export default function ProductsPage() {
               {selectedCategory !== "All" && ` in ${selectedCategory}`}
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {filteredProducts.map((product, index) => {
               const IconComponent = product.icon;
               const processedFeatures = extractMetricsFromFeatures(product.features);
@@ -604,7 +604,7 @@ export default function ProductsPage() {
       <Dialog open={isModalOpen} onOpenChange={handleModalClose}>
         <DialogContent
           ref={modalContentRef}
-          className="!w-[1400px] !max-w-[1400px] !h-[800px] !max-h-[800px] overflow-y-auto scroll-smooth custom-scrollbar"              
+          className="!w-[95vw] sm:!w-[90vw] md:!w-[600px] lg:!w-[1000px] xl:!w-[1400px] !max-w-[95vw] sm:!max-w-[90vw] md:!max-w-[600px] lg:!max-w-[1000px] xl:!max-w-[1400px] !h-[90vh] sm:!h-[85vh] md:!h-[700px] !max-h-[90vh] sm:!max-h-[85vh] md:!max-h-[700px] overflow-y-auto scroll-smooth custom-scrollbar "              
         >
           <DialogHeader>
             <DialogTitle className="text-2xl font-semibold">
@@ -613,37 +613,37 @@ export default function ProductsPage() {
           </DialogHeader>
 
           {selectedProduct !== null && (
-            <div className="space-y-4">
-              <div className="flex items-center space-x-4">
-                <div className="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center">
+            <div className="space-y-6">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0 sm:space-x-6">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
                   {(() => {
                     const IconComponent = filteredProducts[selectedProduct].icon;
-                    return <IconComponent className="h-8 w-8 text-primary" />;
+                    return <IconComponent className="h-8 w-8 sm:h-10 sm:w-10 text-primary" />;
                   })()}
                 </div>
-                <div>
-                  <Badge className="mb-2">
+                <div className="flex-1">
+                  <Badge className="mb-3 text-sm sm:text-base">
                     {filteredProducts[selectedProduct].category}
                   </Badge>
-                  <p className="text-lg text-muted-foreground">
+                  <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
                     {filteredProducts[selectedProduct].description}
                   </p>
                 </div>
               </div>
 
-              <div className="space-y-8">
-                <h3 className="text-xl font-semibold">Performance Metrics & Features</h3>
-                <div className="grid grid-cols-1 gap-2">
+              <div className="space-y-6">
+                <h3 className="text-xl sm:text-2xl font-semibold text-center">Performance Metrics & Features</h3>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                   {extractMetricsFromFeatures(filteredProducts[selectedProduct].features)
                     .map((feature, index) => (
                       <div
                         key={index}
-                        className="p-3"
+                        className="p-4"
                       >
                         {typeof feature === "object" ? (
                           <AnimatedMetric feature={feature} isHovered={true} />
                         ) : (
-                          <div className="flex items-center space-x-3 p-2 rounded-lg bg-muted/30">
+                          <div className="flex items-center space-x-3 p-3 rounded-lg bg-muted/30">
                             <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
                             <span className="text-sm text-muted-foreground">{feature}</span>
                           </div>

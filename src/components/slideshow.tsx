@@ -458,7 +458,7 @@ export function Slideshow<T>({ itemList, product = false, title, description }: 
   }, []);
 
   return (
-    <section id="services" className="pb-16 px-6">
+    <section id="services" className="pb-0 md:pb-16 px-6">
       <div className="container mx-auto max-w-6xl px-6">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
@@ -471,7 +471,7 @@ export function Slideshow<T>({ itemList, product = false, title, description }: 
 
         {/* Services Grid */}
         {!product ? (
-          <div className="relative overflow-hidden h-[780px]">
+          <div className="relative overflow-hidden h-auto md:h-[780px]">
             <Service
               activeCategory={activeCategory}
               animationPhase={animationPhase}

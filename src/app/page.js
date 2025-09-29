@@ -438,7 +438,7 @@ export default function ERPCompanyWebsite() {
                     .deleteAll()
 
                     .typeString(
-                      '<span class="text-6xl md:text-8xl">companion.</span>'
+                      '<span class="text-6xl md:text-8xl">Companion.</span>'
                     )
                     .pauseFor(5000)
                     .deleteAll()

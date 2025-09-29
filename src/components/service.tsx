@@ -1,7 +1,8 @@
-import React, { memo, useEffect } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Service as ServiceInterface } from "./slideshow";
 import { Button } from "./ui/button";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import { categoryWiseServices } from "./schema/service";
 import { useTheme } from "@/contexts/theme-context";
 
@@ -22,7 +23,48 @@ interface ServiceProps {
   setManualSwitch: (manualSwitch: boolean) => void;
   setAnimationPhase: (animationPhase: string) => void;
 }
-// Memoized ServiceCard component to prevent unnecessary re-renders
+// Memoized ServiceAccordionItem component
+const ServiceAccordionItem = memo(({ service, index }: ServiceCardProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const IconComponent = service.icon;
+
+  return (
+    <Card className="mb-4 border-border/50 hover:shadow-lg transition-all duration-150">
+      <CardHeader 
+        className="cursor-pointer hover:bg-muted/30 transition-colors duration-200"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <CardTitle className="flex items-center justify-between text-lg">
+          <span className="flex items-center gap-3">
+            <div className="p-2 rounded-lg bg-primary/10">
+              <IconComponent className="h-5 w-5 text-primary" />
+            </div>
+            <span className="text-foreground font-semibold">
+              {service.title}
+            </span>
+          </span>
+          {isOpen ? (
+            <ChevronUp className="h-5 w-5 text-muted-foreground" />
+          ) : (
+            <ChevronDown className="h-5 w-5 text-muted-foreground" />
+          )}
+        </CardTitle>
+      </CardHeader>
+      
+      {isOpen && (
+        <CardContent className="pt-0">
+          <p className="text-muted-foreground leading-relaxed">
+            {service.desc}
+          </p>
+        </CardContent>
+      )}
+    </Card>
+  );
+});
+
+ServiceAccordionItem.displayName = "ServiceAccordionItem";
+
+// Memoized ServiceCard component for desktop
 const ServiceCard = memo(({ service, index, isHovered }: ServiceCardProps) => {
   const IconComponent = service.icon;
   return (
@@ -107,7 +149,34 @@ const Service = ({
           </Button>
         ))}
       </div>
-      <div className="mb-12">
+      {/* Mobile Accordion View - Only on sm screens */}
+      <div className="block sm:block md:hidden mb-12">
+        <div className="relative px-4">
+          <div
+            key={activeCategory}
+            className={`space-y-4 ${
+              animationPhase === "out"
+                ? "animate-slide-out-left"
+                : animationPhase === "in"
+                ? "animate-slide-in-right"
+                : ""
+            }`}
+          >
+            {currentCategoryCards?.map(
+              (service: ServiceInterface, idx: number) => (
+                <ServiceAccordionItem
+                  key={`${activeCategory}-${idx}`}
+                  service={service}
+                  index={idx}
+                />
+              )
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop Card View - md screens and above */}
+      <div className="hidden md:block mb-12">
         <div className="relative px-8 py-4">
           <div
             key={activeCategory}

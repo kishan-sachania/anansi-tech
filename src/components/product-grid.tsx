@@ -459,7 +459,7 @@ export function ProductGrid() {
       <Dialog open={isModalOpen} onOpenChange={handleModalClose}>
         <DialogContent
           ref={modalContentRef}
-          className="!w-[1200px] !max-w-[1200px] max-h-[95vh] overflow-y-auto scroll-smooth"              
+          className="!w-[95vw] sm:!w-[90vw] md:!w-[700px] lg:!w-[1000px] xl:!w-[1400px] !max-w-[95vw] sm:!max-w-[90vw] md:!max-w-[700px] lg:!max-w-[1000px] xl:!max-w-[1400px] !h-[90vh] sm:!h-[85vh] md:!h-[700px] !max-h-[90vh] sm:!max-h-[85vh] md:!max-h-[800px] overflow-y-auto scroll-smooth custom-scrollbar lg:mx-4"              
         >
           <DialogHeader>
             <DialogTitle className="text-2xl font-semibold">
@@ -468,31 +468,31 @@ export function ProductGrid() {
           </DialogHeader>
 
           {selectedProduct !== null && (
-            <div className="space-y-8">
-              <div className="flex items-center space-x-4">
-                <div className="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center">
+            <div className="space-y-6">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0 sm:space-x-6">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
                   {(() => {
                     const IconComponent = products[selectedProduct].icon;
-                    return <IconComponent className="h-8 w-8 text-primary" />;
+                    return <IconComponent className="h-8 w-8 sm:h-10 sm:w-10 text-primary" />;
                   })()}
                 </div>
-                <div>
-                  <p className="text-lg text-muted-foreground">
+                <div className="flex-1">
+                  <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
                     {products[selectedProduct].description}
                   </p>
                 </div>
               </div>
 
               {products[selectedProduct].hasMetrics && (
-                <div className="space-y-8">
-                  <h3 className="text-xl font-semibold">Performance Metrics</h3>
-                  <div className="grid grid-cols-1 gap-2">
+                <div className="space-y-6">
+                  <h3 className="text-xl sm:text-2xl font-semibold text-center">Performance Metrics</h3>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                     {products[selectedProduct].features
                       .filter((feature) => typeof feature === "object")
                       .map((feature, index) => (
                         <div
                           key={index}
-                          className="p-2"
+                          className="p-4"
                         >
                           <AnimatedMetric feature={feature} isHovered={true} />
                         </div>
