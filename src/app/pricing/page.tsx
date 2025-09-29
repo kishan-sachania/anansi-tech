@@ -16,6 +16,22 @@ import { Footer } from "@/components/footer";
 import Link from "next/link";
 import { useTheme } from "@/contexts/theme-context";
 
+interface PricingPlan {
+  name: string;
+  description: string;
+  price: number;
+  yearlyPrice: number;
+  users: number | string;
+  dataLimit: string;
+  period: string;
+  icon: React.ComponentType<{ className?: string }>;
+  popular: boolean;
+  features: string[];
+  limitations: string[];
+  cta: string;
+  color: string;
+}
+
 const pricingPlans = [
   {
     name: "Free",
@@ -261,7 +277,7 @@ export default function PricingPage() {
     setBillingPeriod((prev) => (prev === "monthly" ? "yearly" : "monthly"));
   };
 
-  const getDiscountedPrice = (plan: any) => {
+  const getDiscountedPrice = (plan: PricingPlan) => {
     return billingPeriod === "yearly" ? plan.yearlyPrice : plan.price;
   };
 
@@ -269,7 +285,7 @@ export default function PricingPage() {
     return billingPeriod === "yearly" ? "year" : period;
   };
 
-  const getSavingsPercentage = (plan: any) => {
+  const getSavingsPercentage = (plan: PricingPlan) => {
     if (plan.price === 0) return 0;
     const savings = ((plan.price - plan.yearlyPrice) / plan.price) * 100;
     return Math.round(savings);
@@ -520,8 +536,8 @@ export default function PricingPage() {
                     </h4>
                     <p>
                       Annual price revision shall not exceed 50% of the previous
-                      year's price until 31st March 2027. Prices may also be
-                      reduced below the previous year's level.
+                      year&apos;s price until 31st March 2027. Prices may also be
+                      reduced below the previous year&apos;s level.
                     </p>
                   </div>
                   <div>
@@ -557,12 +573,12 @@ export default function PricingPage() {
                       </li>
                       <li>
                         • If payment remains outstanding after the last day of
-                        the month, the Client's access to the Services will be
+                        the month, the Client&apos;s access to the Services will be
                         revoked effective immediately.
                       </li>
                       <li>
                         • If the invoice remains unpaid for more than 90 days
-                        from its due date, the Client's data may be permanently
+                        from its due date, the Client&apos;s data may be permanently
                         erased from the systems, with no liability for data
                         recovery.
                       </li>

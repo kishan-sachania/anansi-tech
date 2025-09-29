@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Service as ServiceInterface } from "./slideshow";
 import { Button } from "./ui/button";
@@ -24,7 +24,7 @@ interface ServiceProps {
   setAnimationPhase: (animationPhase: string) => void;
 }
 // Memoized ServiceAccordionItem component
-const ServiceAccordionItem = memo(({ service, index }: ServiceCardProps) => {
+const ServiceAccordionItem = memo(({ service }: ServiceCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const IconComponent = service.icon;
 

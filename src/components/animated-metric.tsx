@@ -2,7 +2,7 @@
 
 import { Progress } from "@/components/ui/progress";
 import { ArrowDown, ArrowUp } from "lucide-react";
-import { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 
 function useCountUp(
   end: number,
@@ -13,7 +13,7 @@ function useCountUp(
   const [count, setCount] = useState(start);
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | undefined>(undefined);
   const lastUpdateRef = useRef<number>(0);
 
   useEffect(() => {
@@ -113,7 +113,7 @@ export function AnimatedMetric({ feature, isHovered }: AnimatedMetricProps) {
   const [manualProgress, setManualProgress] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | undefined>(undefined);
   const lastUpdateRef = useRef<number>(0);
 
   useEffect(() => {

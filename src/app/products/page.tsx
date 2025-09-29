@@ -604,7 +604,7 @@ export default function ProductsPage() {
       <Dialog open={isModalOpen} onOpenChange={handleModalClose}>
         <DialogContent
           ref={modalContentRef}
-          className="!w-[95vw] sm:!w-[90vw] md:!w-[600px] lg:!w-[1000px] xl:!w-[1400px] !max-w-[95vw] sm:!max-w-[90vw] md:!max-w-[600px] lg:!max-w-[1000px] xl:!max-w-[1400px] !h-[90vh] sm:!h-[85vh] md:!h-[700px] !max-h-[90vh] sm:!max-h-[85vh] md:!max-h-[700px] overflow-y-auto scroll-smooth custom-scrollbar "              
+          className="!w-[95vw] sm:!w-[90vw] md:!w-[600px] lg:!w-[1000px] xl:!w-[1400px] !max-w-[95vw] sm:!max-w-[90vw] md:!max-w-[600px] lg:!max-w-[1000px] xl:!max-w-[1400px] !h-[90vh] sm:!h-[85vh] md:!h-[700px] !max-h-[90vh] sm:!max-h-[85vh] md:!max-h-[700px] overflow-y-auto scroll-smooth custom-scrollbar"              
         >
           <DialogHeader>
             <DialogTitle className="text-2xl font-semibold">
