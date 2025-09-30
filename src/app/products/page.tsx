@@ -261,19 +261,19 @@ const products = [
 
 // Function to extract percentage and calculate metrics
 const extractMetricsFromFeatures = (features: string[]) => {
-  return features.map(feature => {
+  return features.map((feature) => {
     // Extract percentage from feature text
     const percentageMatch = feature.match(/(\d+)%/);
     if (percentageMatch) {
       const newValue = parseInt(percentageMatch[1]);
       const oldValue = Math.round(newValue * (0.5 + Math.random() * 0.1)); // 50-60% of new value
       const improvement = Math.round(((newValue - oldValue) / oldValue) * 100);
-      
+
       return {
-        name: feature.replace(/\s*\d+%/, '').trim(),
+        name: feature.replace(/\s*\d+%/, "").trim(),
         oldValue,
         newValue,
-        improvement: Math.max(improvement, 1) // Ensure positive growth
+        improvement: Math.max(improvement, 1), // Ensure positive growth
       };
     }
     return feature; // Return as string if no percentage found
@@ -299,6 +299,26 @@ export default function ProductsPage() {
   const [hoverTimer, setHoverTimer] = useState<NodeJS.Timeout | null>(null);
   const modalContentRef = useRef<HTMLDivElement>(null);
   const { theme } = useTheme();
+
+  // Add CSS animation for progress bars
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fillProgress {
+        from {
+          width: 0%;
+        }
+        to {
+          width: var(--target-width);
+        }
+      }
+    `;
+    document.head.appendChild(style);
+    
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
 
   const filteredProducts =
     selectedCategory === "All"
@@ -401,8 +421,12 @@ export default function ProductsPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {filteredProducts.map((product, index) => {
               const IconComponent = product.icon;
-              const processedFeatures = extractMetricsFromFeatures(product.features);
-              const hasMetrics = processedFeatures.some(feature => typeof feature === 'object');
+              const processedFeatures = extractMetricsFromFeatures(
+                product.features
+              );
+              const hasMetrics = processedFeatures.some(
+                (feature) => typeof feature === "object"
+              );
 
               return (
                 <Card
@@ -432,14 +456,21 @@ export default function ProductsPage() {
                   </CardHeader>
                   <CardContent className="pt-0">
                     <div className="space-y-3">
-                      {processedFeatures.slice(0, 6).map((feature, featureIndex) => (
-                        <div key={featureIndex} className="flex items-center space-x-3">
-                          <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
-                          <span className="text-sm text-muted-foreground">
-                            {typeof feature === "object" ? feature.name : feature}
-                          </span>
-                        </div>
-                      ))}
+                       {processedFeatures
+                         .slice(0, 6)
+                         .map((feature, featureIndex) => (
+                           <div
+                             key={featureIndex}
+                             className="flex items-center space-x-3"
+                           >
+                             <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
+                             <span className="text-sm text-muted-foreground">
+                               {typeof feature === "object"
+                                 ? feature.name
+                                 : feature}
+                             </span>
+                           </div>
+                         ))}
                       {processedFeatures.length > 6 && (
                         <div className="text-xs text-muted-foreground/60 italic">
                           +{processedFeatures.length - 6} more features...
@@ -604,11 +635,17 @@ export default function ProductsPage() {
       <Dialog open={isModalOpen} onOpenChange={handleModalClose}>
         <DialogContent
           ref={modalContentRef}
-          className="!w-[95vw] sm:!w-[90vw] md:!w-[600px] lg:!w-[1000px] xl:!w-[1400px] !max-w-[95vw] sm:!max-w-[90vw] md:!max-w-[600px] lg:!max-w-[1000px] xl:!max-w-[1400px] !h-[90vh] sm:!h-[85vh] md:!h-[700px] !max-h-[90vh] sm:!max-h-[85vh] md:!max-h-[700px] overflow-y-auto scroll-smooth custom-scrollbar"              
+          className="grid grid-rows-[auto_1fr] 
+             !w-[95vw] sm:!w-[90vw] md:!w-[600px] lg:!w-[1000px] xl:!w-[1400px] 
+             !max-w-[95vw] sm:!max-w-[90vw] md:!max-w-[600px] lg:!max-w-[1000px] xl:!max-w-[1400px] 
+             !h-[90vh] sm:!h-[85vh] md:!h-[700px] 
+             !max-h-[90vh] sm:!max-h-[85vh] md:!max-h-[700px] 
+             overflow-y-auto scroll-smooth custom-scrollbar"  
         >
-          <DialogHeader>
-            <DialogTitle className="text-2xl font-semibold">
-              {selectedProduct !== null && filteredProducts[selectedProduct]?.name}
+          <DialogHeader className="block p-0 m-0 h-min ">
+            <DialogTitle className="text-2xl font-semibold ">
+              {selectedProduct !== null &&
+                filteredProducts[selectedProduct]?.name}
             </DialogTitle>
           </DialogHeader>
 
@@ -617,12 +654,15 @@ export default function ProductsPage() {
               <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0 sm:space-x-6">
                 <div className="w-16 h-16 sm:w-20 sm:h-20 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
                   {(() => {
-                    const IconComponent = filteredProducts[selectedProduct].icon;
-                    return <IconComponent className="h-8 w-8 sm:h-10 sm:w-10 text-primary" />;
+                    const IconComponent =
+                      filteredProducts[selectedProduct].icon;
+                    return (
+                      <IconComponent className="h-8 w-8 sm:h-10 sm:w-10 text-primary" />
+                    );
                   })()}
                 </div>
                 <div className="flex-1">
-                  <Badge className="mb-3 text-sm sm:text-base">
+                  <Badge className="mb-3 text-sm sm:text-base text-white">
                     {filteredProducts[selectedProduct].category}
                   </Badge>
                   <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
@@ -632,24 +672,58 @@ export default function ProductsPage() {
               </div>
 
               <div className="space-y-6">
-                <h3 className="text-xl sm:text-2xl font-semibold text-center">Performance Metrics & Features</h3>
+                <h3 className="text-xl sm:text-2xl font-semibold text-center">
+                  Performance Metrics & Features
+                </h3>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  {extractMetricsFromFeatures(filteredProducts[selectedProduct].features)
-                    .map((feature, index) => (
-                      <div
-                        key={index}
-                        className="p-4"
-                      >
-                        {typeof feature === "object" ? (
-                          <AnimatedMetric feature={feature} isHovered={true} />
-                        ) : (
-                          <div className="flex items-center space-x-3 p-3 rounded-lg bg-muted/30">
-                            <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
-                            <span className="text-sm text-muted-foreground">{feature}</span>
-                          </div>
-                        )}
-                      </div>
-                    ))}
+                   {extractMetricsFromFeatures(
+                     filteredProducts[selectedProduct].features
+                   ).map((feature, index) => (
+                     <div key={index} className="p-4">
+                       {typeof feature === "object" ? (
+                         <AnimatedMetric feature={feature} isHovered={true} />
+                       ) : (
+                         <div className="p-3 rounded-lg bg-muted/30">
+                           <div className="flex items-center space-x-3 mb-3">
+                             <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
+                             <span className="text-sm text-muted-foreground">
+                               {feature}
+                             </span>
+                           </div>
+                           {index < 4 && (
+                             <div className="mt-2">
+                               <div className="flex justify-between text-xs text-muted-foreground mb-2">
+                                 <span>Manual</span>
+                                 <span>ERP</span>
+                               </div>
+                               <div className="flex space-x-3">
+                                 <div className="flex-1 bg-muted/50 rounded-full h-3 overflow-hidden">
+                                   <div 
+                                     className="bg-primary/40 rounded-full h-3"
+                                     style={{ 
+                                       '--target-width': `${Math.floor(Math.random() * 30) + 20}%`,
+                                       width: '0%',
+                                       animation: 'fillProgress 2s ease-out forwards'
+                                     } as React.CSSProperties}
+                                   />
+                                 </div>
+                                 <div className="flex-1 bg-muted/50 rounded-full h-3 overflow-hidden">
+                                   <div 
+                                     className="bg-primary rounded-full h-3"
+                                     style={{ 
+                                       '--target-width': `${Math.floor(Math.random() * 30) + 60}%`,
+                                       width: '0%',
+                                       animation: 'fillProgress 2s ease-out forwards'
+                                     } as React.CSSProperties}
+                                   />
+                                 </div>
+                               </div>
+                             </div>
+                           )}
+                         </div>
+                       )}
+                     </div>
+                   ))}
                 </div>
               </div>
             </div>

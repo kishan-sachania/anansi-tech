@@ -10,7 +10,15 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, ArrowRight, Star, Zap, Crown, Users, User } from "lucide-react";
+import {
+  CheckCircle,
+  ArrowRight,
+  Star,
+  Zap,
+  Crown,
+  Users,
+  User,
+} from "lucide-react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import Link from "next/link";
@@ -107,7 +115,7 @@ const pricingPlans = [
     ],
     limitations: [],
     cta: "Start Free Trial",
-    color: "border-primary/50",
+    color: "border-border/50",
   },
   {
     name: "Business",
@@ -339,22 +347,14 @@ export default function PricingPage() {
             >
               Yearly
             </span>
-            {billingPeriod === "yearly" && (
-              <Badge
-                variant="secondary"
-                className="ml-2 bg-green-100 text-green-800 border-green-200"
-              >
-                Save 20%
-              </Badge>
-            )}
           </div>
         </div>
       </section>
 
       {/* Pricing Cards */}
-      <section className="py-16 px-2 sm:px-4">
+      <section className="pb-16 px-2 sm:px-4">
         <div className="container mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 md:gap-4">
             {pricingPlans.map((plan, index) => {
               const IconComponent = plan.icon;
               const discountedPrice = getDiscountedPrice(plan);
@@ -364,7 +364,7 @@ export default function PricingPage() {
               return (
                 <Card
                   key={plan.name}
-                  className={`relative border-2 transition-all duration-300 hover:shadow-xl hover:scale-105 flex flex-col h-full ${
+                  className={`relative border-2 transition-all duration-300 hover:shadow-xl hover:scale-105 hover:border-primary flex flex-col h-full ${
                     plan.popular
                       ? "border-primary shadow-lg ring-2 ring-primary/20"
                       : plan.color
@@ -378,51 +378,71 @@ export default function PricingPage() {
                     </div>
                   )}
 
-                  {billingPeriod === "yearly" && savingsPercentage > 0 && (
+                  {/* {billingPeriod === "yearly" && savingsPercentage > 0 && (
                     <div className="absolute -top-4 right-4">
                       <Badge className="bg-green-100 text-green-800 border-green-200 px-3 py-1">
                         Save {savingsPercentage}%
                       </Badge>
                     </div>
-                  )}
+                  )} */}
 
-                  <CardHeader className="text-center pb-6">
+                  <CardHeader className="text-center">
                     <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                       <IconComponent className="h-8 w-8 text-primary" />
                     </div>
                     <CardTitle className="text-2xl font-bold">
-                      {plan.name}
+                      {index !== 0 ? "plan" + " " + index : plan.name}
                     </CardTitle>
-                    <CardDescription className="text-sm mt-2">
+                    <CardDescription className="text-sm mt-2 h-10">
                       {plan.description}
                     </CardDescription>
                     <div className="mt-4">
-                      <div className="text-3xl font-bold">
-                        {plan.price === 0
-                          ? "Free"
-                          : `₹${discountedPrice.toLocaleString()}`}
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        {plan.price === 0 ? "Forever" : `/${periodText}`}
-                      </div>
-                      <div className="text-xs text-muted-foreground mt-1">
-                        {plan.users} users • {plan.dataLimit} data
+                      <div className="flex items-baseline justify-center gap-2 flex-wrap">
+                        <div className="text-3xl font-bold">
+                          {plan.price === 0
+                            ? "Free"
+                            : billingPeriod === "yearly"
+                            ? `₹${plan.yearlyPrice}`
+                            : `₹${discountedPrice.toLocaleString()}`}
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          {plan.price === 0
+                            ? ""
+                            : billingPeriod === "yearly"
+                            ? "/month"
+                            : `/${periodText}`}
+                        </div>
+                        {billingPeriod === "yearly" && plan.price > 0 && (
+                          <>
+                            <div className="text-sm text-muted-foreground line-through">
+                              ₹{plan.price.toLocaleString()} /month
+                            </div>
+                            <div className="text-sm font-semibold text-primary/65">
+                              ₹{(plan.yearlyPrice * 12).toLocaleString()} total/year
+                            </div>
+                          </>
+                        )}
                       </div>
                     </div>
                   </CardHeader>
 
-                  <CardContent className="pt-0 flex flex-col flex-grow">
-                    <Button
-                      className={`w-full mt-auto ${
-                        plan.popular
-                          ? "bg-primary hover:bg-primary/90 text-white"
-                          : "bg-secondary hover:bg-secondary/90 text-white"
-                      }`}
-                      size="lg"
-                    >
-                      {plan.cta}
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
+                  <CardContent className="pt-0 flex flex-col flex-grow ">
+                    <div className="flex flex-col gap-4 mt-auto ">
+                      <div className="w-52 text-sm font-semibold text-primary bg-primary/10  border border-primary/20 px-2 -mx-2 py-1 rounded-full text-center">
+                        {plan.users} users • {plan.dataLimit} data
+                      </div>
+                        <Button
+                          className={`w-full border-2 ${
+                            plan.popular
+                              ? `bg-transparent border-primary/10  text-primary/40 hover:bg-primary/10  ${theme === "dark" ? "text-white/70" : "text-primary/80"}`
+                              : `bg-transparent border-secondary/10 hover:bg-secondary/10  text-secondary/40 ${theme === "dark" ? "text-white/70" : "text-secondary/80"}`
+                          }`}
+                          size="lg"
+                      >
+                        {plan.cta}
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
               );
@@ -480,6 +500,7 @@ export default function PricingPage() {
         <div className="container mx-auto max-w-4xl">
           <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
             Commercial Terms & Conditions
+            <span className="text-red-500 text-4xl font-bold">*</span>
           </h2>
 
           <div className="space-y-6">
@@ -514,11 +535,6 @@ export default function PricingPage() {
             </Card>
 
             <Card className="border-border/50">
-              <CardHeader>
-                <CardTitle className="text-xl">
-                  Commercial Terms & Conditions
-                </CardTitle>
-              </CardHeader>
               <CardContent>
                 <div className="space-y-4 text-sm text-muted-foreground">
                   <div>
@@ -536,8 +552,8 @@ export default function PricingPage() {
                     </h4>
                     <p>
                       Annual price revision shall not exceed 50% of the previous
-                      year&apos;s price until 31st March 2027. Prices may also be
-                      reduced below the previous year&apos;s level.
+                      year&apos;s price until 31st March 2027. Prices may also
+                      be reduced below the previous year&apos;s level.
                     </p>
                   </div>
                   <div>
@@ -573,14 +589,14 @@ export default function PricingPage() {
                       </li>
                       <li>
                         • If payment remains outstanding after the last day of
-                        the month, the Client&apos;s access to the Services will be
-                        revoked effective immediately.
+                        the month, the Client&apos;s access to the Services will
+                        be revoked effective immediately.
                       </li>
                       <li>
                         • If the invoice remains unpaid for more than 90 days
-                        from its due date, the Client&apos;s data may be permanently
-                        erased from the systems, with no liability for data
-                        recovery.
+                        from its due date, the Client&apos;s data may be
+                        permanently erased from the systems, with no liability
+                        for data recovery.
                       </li>
                     </ul>
                   </div>
