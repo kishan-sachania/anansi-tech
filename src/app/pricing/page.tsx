@@ -98,7 +98,7 @@ const pricingPlans = [
     dataLimit: "60 GB",
     period: "month",
     icon: Zap,
-    popular: false,
+    popular: true,
     features: [
       "Up to 30 users",
       "60 GB data limit",
@@ -155,7 +155,7 @@ const pricingPlans = [
     dataLimit: "1 TB",
     period: "month",
     icon: Crown,
-    popular: true,
+    popular: false,
     features: [
       "Up to 100 users",
       "1 TB data limit",
@@ -275,15 +275,9 @@ const addOns = [
   },
 ];
 
-export default function PricingPage() {
-  const [billingPeriod, setBillingPeriod] = useState<"monthly" | "yearly">(
-    "yearly"
-  );
+function PricingCard({ plans, billingPeriod, setBillingPeriod }: { plans: PricingPlan[], billingPeriod: "monthly" | "yearly", setBillingPeriod: (period: "monthly" | "yearly") => void }) {
   const { theme } = useTheme();
-
-  const toggleBillingPeriod = () => {
-    setBillingPeriod((prev) => (prev === "monthly" ? "yearly" : "monthly"));
-  };
+  
 
   const getDiscountedPrice = (plan: PricingPlan) => {
     return billingPeriod === "yearly" ? plan.yearlyPrice : plan.price;
@@ -297,6 +291,123 @@ export default function PricingPage() {
     if (plan.price === 0) return 0;
     const savings = ((plan.price - plan.yearlyPrice) / plan.price) * 100;
     return Math.round(savings);
+  };
+
+  return (
+    <>
+      {plans.map((plan, index) => {
+        const IconComponent = plan.icon;
+        const discountedPrice = getDiscountedPrice(plan);
+        const periodText = getPeriodText(plan.period);
+        const savingsPercentage = getSavingsPercentage(plan);
+
+        return (
+          <Card
+            key={plan.name}
+            className={`relative w-64 border-2 transition-all duration-300 hover:shadow-xl hover:scale-105 hover:border-primary flex flex-col h-full ${
+              plan.popular
+                ? "border-primary shadow-lg ring-2 ring-primary/20"
+                : plan.color
+            }`}
+          >
+            {plan.popular && (
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <Badge className="bg-primary text-white/80  px-4 py-1">
+                  Most Popular
+                </Badge>
+              </div>
+            )}
+
+            {/* {billingPeriod === "yearly" && savingsPercentage > 0 && (
+                    <div className="absolute -top-4 right-4">
+                      <Badge className="bg-green-100 text-green-800 border-green-200 px-3 py-1">
+                        Save {savingsPercentage}%
+                      </Badge>
+                    </div>
+                  )} */}
+
+            <CardHeader className="text-center">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <IconComponent className="h-8 w-8 text-primary" />
+              </div>
+              <CardTitle className="text-2xl font-bold">
+                {plan.name !== 'Free' ? "Plan" + " " + (pricingPlans.findIndex(p => p.name === plan.name)) : plan.name}
+              </CardTitle>
+              <CardDescription className="text-sm mt-2 h-10">
+                {plan.description}
+              </CardDescription>
+              <div className="mt-4">
+                <div className="flex items-baseline justify-center gap-2 flex-wrap">
+                  <div className="text-3xl font-bold">
+                    {plan.price === 0
+                      ? "Free"
+                      : billingPeriod === "yearly"
+                      ? `₹${plan.yearlyPrice}`
+                      : `₹${discountedPrice.toLocaleString()}`}
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    {plan.price === 0
+                      ? ""
+                      : billingPeriod === "yearly"
+                      ? "/month"
+                      : `/${periodText}`}
+                    {plan.price !== 0 && (
+                      <span className="text-red-500 pl-1 text-xl font-semibold">
+                        *
+                      </span>
+                    )}
+                  </div>
+                  {billingPeriod === "yearly" && plan.price > 0 && (
+                    <>
+                      <div className="text-sm text-muted-foreground line-through">
+                        ₹{plan.price.toLocaleString()} /month
+                      </div>
+                      <div className="text-sm font-semibold text-primary/65">
+                        ₹{(plan.yearlyPrice * 12).toLocaleString()} total/year
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+            </CardHeader>
+
+            <CardContent className="pt-0 flex flex-col flex-grow ">
+              <div className="flex flex-col gap-4 mt-auto ">
+                <div className="w-full min-w-56 text-md font-semibold text-secondary/90 bg-primary/10  border border-primary/20 px-2 -mx-2 py-1 rounded-full text-center">
+                  {plan.users} users • {plan.dataLimit} data
+                </div>
+                <Button
+                  className={`w-full border-2 ${
+                    plan.popular
+                      ? `bg-transparent border-primary/10  text-primary/40 hover:bg-primary/10  ${
+                          theme === "dark" ? "text-white/70" : "text-primary/80"
+                        }`
+                      : `bg-transparent border-secondary/10 hover:bg-secondary/10  text-secondary/40 ${
+                          theme === "dark"
+                            ? "text-white/70"
+                            : "text-secondary/80"
+                        }`
+                  }`}
+                  size="lg"
+                >
+                  {plan.cta}
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        );
+      })}
+    </>
+  );
+}
+
+export default function PricingPage() {
+  const [billingPeriod, setBillingPeriod] = useState<"monthly" | "yearly">(
+    "yearly"
+  );
+  const toggleBillingPeriod = () => {
+    setBillingPeriod(billingPeriod === "monthly" ? "yearly" : "monthly");
   };
 
   return (
@@ -353,100 +464,13 @@ export default function PricingPage() {
 
       {/* Pricing Cards */}
       <section className="pb-16 px-2 sm:px-4">
-        <div className="container mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 md:gap-4">
-            {pricingPlans.map((plan, index) => {
-              const IconComponent = plan.icon;
-              const discountedPrice = getDiscountedPrice(plan);
-              const periodText = getPeriodText(plan.period);
-              const savingsPercentage = getSavingsPercentage(plan);
-
-              return (
-                <Card
-                  key={plan.name}
-                  className={`relative border-2 transition-all duration-300 hover:shadow-xl hover:scale-105 hover:border-primary flex flex-col h-full ${
-                    plan.popular
-                      ? "border-primary shadow-lg ring-2 ring-primary/20"
-                      : plan.color
-                  }`}
-                >
-                  {plan.popular && (
-                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                      <Badge className="bg-primary text-primary-foreground px-4 py-1">
-                        Most Popular
-                      </Badge>
-                    </div>
-                  )}
-
-                  {/* {billingPeriod === "yearly" && savingsPercentage > 0 && (
-                    <div className="absolute -top-4 right-4">
-                      <Badge className="bg-green-100 text-green-800 border-green-200 px-3 py-1">
-                        Save {savingsPercentage}%
-                      </Badge>
-                    </div>
-                  )} */}
-
-                  <CardHeader className="text-center">
-                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <IconComponent className="h-8 w-8 text-primary" />
-                    </div>
-                    <CardTitle className="text-2xl font-bold">
-                      {index !== 0 ? "plan" + " " + index : plan.name}
-                    </CardTitle>
-                    <CardDescription className="text-sm mt-2 h-10">
-                      {plan.description}
-                    </CardDescription>
-                    <div className="mt-4">
-                      <div className="flex items-baseline justify-center gap-2 flex-wrap">
-                        <div className="text-3xl font-bold">
-                          {plan.price === 0
-                            ? "Free"
-                            : billingPeriod === "yearly"
-                            ? `₹${plan.yearlyPrice}`
-                            : `₹${discountedPrice.toLocaleString()}`}
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          {plan.price === 0
-                            ? ""
-                            : billingPeriod === "yearly"
-                            ? "/month"
-                            : `/${periodText}`}
-                        </div>
-                        {billingPeriod === "yearly" && plan.price > 0 && (
-                          <>
-                            <div className="text-sm text-muted-foreground line-through">
-                              ₹{plan.price.toLocaleString()} /month
-                            </div>
-                            <div className="text-sm font-semibold text-primary/65">
-                              ₹{(plan.yearlyPrice * 12).toLocaleString()} total/year
-                            </div>
-                          </>
-                        )}
-                      </div>
-                    </div>
-                  </CardHeader>
-
-                  <CardContent className="pt-0 flex flex-col flex-grow ">
-                    <div className="flex flex-col gap-4 mt-auto ">
-                      <div className="w-52 text-sm font-semibold text-primary bg-primary/10  border border-primary/20 px-2 -mx-2 py-1 rounded-full text-center">
-                        {plan.users} users • {plan.dataLimit} data
-                      </div>
-                        <Button
-                          className={`w-full border-2 ${
-                            plan.popular
-                              ? `bg-transparent border-primary/10  text-primary/40 hover:bg-primary/10  ${theme === "dark" ? "text-white/70" : "text-primary/80"}`
-                              : `bg-transparent border-secondary/10 hover:bg-secondary/10  text-secondary/40 ${theme === "dark" ? "text-white/70" : "text-secondary/80"}`
-                          }`}
-                          size="lg"
-                      >
-                        {plan.cta}
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              );
-            })}
+        <div className="container mx-auto max-w-[73vw]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 ">
+            <PricingCard plans={pricingPlans.slice(0,5)} billingPeriod={billingPeriod} setBillingPeriod={setBillingPeriod} />
+          </div>
+          {/* center card for Enterprise and Unlimited plan */}
+          <div className="flex justify-center mt-5 gap-6">
+            <PricingCard plans={pricingPlans.slice(5)} billingPeriod={billingPeriod} setBillingPeriod={setBillingPeriod} />
           </div>
         </div>
       </section>
@@ -498,15 +522,15 @@ export default function PricingPage() {
       {/* Terms and Conditions Section */}
       <section className="py-16 px-4 bg-muted/30">
         <div className="container mx-auto max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
-            Commercial Terms & Conditions
+          <h2 className="text-3xl md:text-4xl font-semibold mb-8 text-center">
             <span className="text-red-500 text-4xl font-bold">*</span>
+            Commercial Terms & Conditions
           </h2>
 
           <div className="space-y-6">
             <Card className="border-border/50">
               <CardContent className="pt-6">
-                <ul className="space-y-4 text-sm text-muted-foreground">
+                <ul className="space-y-4 text-md text-muted-foreground">
                   <li className="flex items-start">
                     <span className="text-primary mr-3 font-bold">•</span>
                     <span>
@@ -536,20 +560,16 @@ export default function PricingPage() {
 
             <Card className="border-border/50">
               <CardContent>
-                <div className="space-y-4 text-sm text-muted-foreground">
+                <div className="space-y-4 text-md text-muted-foreground">
                   <div>
-                    <h4 className="font-semibold text-foreground mb-2">
-                      1. Price Revision
-                    </h4>
+                    <h4 className=" text-foreground mb-2">1. Price Revision</h4>
                     <p>
                       Prices shall be revised annually on every year 1st of
                       April.
                     </p>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground mb-2">
-                      2. Revision Cap
-                    </h4>
+                    <h4 className=" text-foreground mb-2">2. Revision Cap</h4>
                     <p>
                       Annual price revision shall not exceed 50% of the previous
                       year&apos;s price until 31st March 2027. Prices may also
@@ -557,7 +577,7 @@ export default function PricingPage() {
                     </p>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground mb-2">
+                    <h4 className=" text-foreground mb-2">
                       3. Price Reset Impact
                     </h4>
                     <p>
@@ -566,7 +586,7 @@ export default function PricingPage() {
                     </p>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground mb-2">
+                    <h4 className=" text-foreground mb-2">
                       4. Billing Date and Payment
                     </h4>
                     <ul className="space-y-2 ml-4">
